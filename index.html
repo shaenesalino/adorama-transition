@@ -1248,6 +1248,22 @@
 
     .gen-contact-pill.merchant .role { color: rgba(10, 122, 135, 0.7); }
 
+    /* Contact buckets within Contacts section */
+    .gen-bucket {
+      margin-bottom: 12px;
+    }
+
+    .gen-bucket:last-child { margin-bottom: 0; }
+
+    .gen-bucket-title {
+      margin: 0 0 6px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--medium-gray);
+    }
+
     /* Suggested Segments */
     .gen-segments {
       display: flex;
@@ -3610,7 +3626,7 @@
           label: 'Promo: Mystery Sale',
           contacts: [{ name: 'Robert Zlotogorsky', role: 'Marketing Ops' }],
           requiresSKUs: false, locked: true, design: 'AW',
-          notes: ['Heather Nichols & Zoriana Kos \u2014 request updating of landing page (Mystery Sale) GLP and products. Products will be dynamically pulled if not enough SKUs.'],
+          notes: [{ text: 'Heather Nichols & Zoriana Kos \u2014 request updating of landing page (Mystery Sale) GLP and products. Products will be dynamically pulled if not enough SKUs.', role: 'Landing page update' }],
           jira: { id: 'MKT-99009', label: 'Adorama Emails 2026', url: 'https://jira.adorama.com/browse/MKT-99009' },
           jiraNote: 'You can also create directly in ClickUp if the designer is AW.',
           recommendedFormat: 'postcard',
@@ -3633,7 +3649,7 @@
           label: 'Promo: Flash Sale',
           contacts: [{ name: 'Robert Zlotogorsky', role: 'Marketing Ops' }],
           requiresSKUs: true, locked: true, design: 'AW',
-          notes: ['Heather Nichols & Zoriana Kos \u2014 request updating of landing page (Flash Sale) GLP and products.'],
+          notes: [{ text: 'Heather Nichols & Zoriana Kos \u2014 request updating of landing page (Flash Sale) GLP and products.', role: 'Landing page update' }],
           jira: { id: 'MKT-99009', label: 'Adorama Emails 2026', url: 'https://jira.adorama.com/browse/MKT-99009' },
           jiraNote: 'You can also create directly in ClickUp if the designer is AW.',
           recommendedFormat: 'postcard',
@@ -3734,7 +3750,7 @@
           label: "Newsletter: Creators' Huddle",
           contacts: [{ name: 'Daniel Norton', role: 'Editorial' }, { name: 'Cristina Santelises', role: 'Content' }],
           requiresSKUs: false, locked: true, design: 'ADR',
-          notes: ['Content and email brief from Daniel Norton & Cristina Santelises.'],
+          notes: [{ text: 'Content and email brief from Daniel Norton & Cristina Santelises.', role: 'Content brief' }],
           jira: { id: 'MKT-67859', label: "Creator's Huddle Weekly Templates", url: 'https://jira.adorama.com/browse/MKT-67859' },
           recommendedFormat: 'postcard',
           routeTo: 'Daniel Norton, Cristina Santelises',
@@ -3745,7 +3761,7 @@
           label: 'Newsletter: Photo (In Focus)',
           contacts: [{ name: 'Josh Lefkowits', role: 'Photo Merchant' }, { name: 'Arthur Hershkovitz', role: 'Photo Merchant' }],
           requiresSKUs: true, locked: true, design: 'AW',
-          notes: ['If With Brands format, get from Robert Zlotogorsky.'],
+          notes: [{ text: 'If With Brands format, get from Robert Zlotogorsky.', role: 'Get brand promos' }],
           jira: { id: 'MKT-93582', label: 'Photo-Video Emails & Newsletters', url: 'https://jira.adorama.com/browse/MKT-93582' },
           jiraNote: 'You can also create directly in ClickUp if the designer is AW.',
           recommendedFormat: 'static-products',
@@ -3768,7 +3784,7 @@
           label: 'Newsletter: Private Brands',
           contacts: [{ name: 'Daniel Norton', role: 'Editorial' }, { name: 'Cristina Santelises', role: 'Content' }, { name: 'Susan', role: 'Private Brands' }, { name: 'Solomon Leifer', role: 'Private Brands Merchant' }, { name: 'Usher Sperber', role: 'Private Brands Merchant' }],
           requiresSKUs: true, locked: true, design: 'ADR',
-          notes: ['If With Brands format, confirm with Heather Nichols the % OFF to use.'],
+          notes: [{ text: 'If With Brands format, confirm with Heather Nichols the % OFF to use.', role: 'Confirm % offer' }],
           jira: { id: 'MKT-98683', label: 'Private Brands Emails 2026', url: 'https://jira.adorama.com/browse/MKT-98683' },
           recommendedFormat: 'static-products',
           routeTo: 'Solomon Leifer, Usher Sperber',
@@ -3780,7 +3796,7 @@
           label: 'Events',
           contacts: [{ name: 'Theresa Raffetto', role: 'Content Producer (Events)' }, { name: 'Joshua Carl Pardi\u00f1ez', role: 'Backup' }, { name: 'Krizha Anne Tubera', role: 'Backup' }],
           requiresSKUs: false, locked: true, design: 'AW',
-          notes: ['Check the Events tab in the Marketing Submissions sheet.'],
+          notes: [{ text: 'Check the Events tab in the Marketing Submissions sheet.', role: 'Reference' }],
           jira: { id: 'MKT-93596', label: 'Adorama Events Emails', url: 'https://jira.adorama.com/browse/MKT-93596' },
           jiraNote: 'You can also create directly in ClickUp if the designer is AW.',
           recommendedFormat: 'postcard',
@@ -3804,7 +3820,7 @@
           label: 'Loyalty / VIP',
           contacts: [{ name: 'Julio', role: 'Loyalty / Finance' }],
           requiresSKUs: false, locked: true, design: 'ADR',
-          notes: ['Julio creates the Jira ticket + copy brief, then assigns to designer. Once design is complete, ready for build.'],
+          notes: [{ text: 'Julio creates the Jira ticket + copy brief, then assigns to designer. Once design is complete, ready for build.', role: 'Get ticket' }],
           jira: null,
           jiraNote: 'Jira ticket will be provided by Julio Carrillo.',
           recommendedFormat: 'postcard',
@@ -4117,24 +4133,21 @@
         if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
       });
 
-      // ----- Cadence change updates locked state + hint -----
+      // ----- Cadence change updates hints (Campaign Type stays enabled in all cases) -----
       cadenceSelect.addEventListener('change', function () {
         var key = cadenceSelect.value;
         if (!key) {
           cadenceHint.textContent = 'Drives contact routing and design rules.';
-          campaignTypeSelect.disabled = false;
           campaignTypeHint.textContent = 'Determines design routing for non-locked cadences.';
           updateFormatHint();
           return;
         }
         var cadence = EMAIL_CADENCES[key];
         if (cadence.locked) {
-          campaignTypeSelect.disabled = true;
           var lockedLabel = cadence.design === 'ADR' ? 'Adorama Design Team' : 'Alchemy Workx Designer';
-          cadenceHint.textContent = 'Design routing is locked \u2192 ' + lockedLabel + '.';
-          campaignTypeHint.textContent = 'Locked \u2014 this cadence always routes to ' + cadence.design + '.';
+          cadenceHint.textContent = 'Design routing typically \u2192 ' + lockedLabel + '.';
+          campaignTypeHint.textContent = 'This cadence usually routes to ' + cadence.design + ', but you can override.';
         } else {
-          campaignTypeSelect.disabled = false;
           cadenceHint.textContent = cadence.designNote || 'Design routing depends on Format + Campaign Type.';
           campaignTypeHint.textContent = 'Global \u2192 Adorama Design \u2022 Email-Exclusive \u2192 AW Designer.';
         }
@@ -4155,7 +4168,7 @@
         var format = EMAIL_FORMATS[key];
         var campaignType = campaignTypeSelect.value;
         var formatNeedsSKUs = (key === 'static-products' || key === 'dynamic-products');
-        var postcardEE = (key === 'postcard' && campaignType === 'email-exclusive' && !campaignTypeSelect.disabled);
+        var postcardEE = (key === 'postcard' && campaignType === 'email-exclusive');
 
         var skuTag;
         if (formatNeedsSKUs) {
@@ -4199,7 +4212,6 @@
         formatSelect.value = '';
         categorySelect.value = '';
         campaignTypeSelect.value = 'global';
-        campaignTypeSelect.disabled = false;
         dateInput.value = '';
         cadenceHint.textContent = 'Drives contact routing and design rules.';
         formatHint.textContent = 'Layout style \u2014 see Section 04 for live samples.';
@@ -4303,19 +4315,91 @@
         });
         html += '</div></div>';
 
-        // Contacts
-        html += '<div class="gen-section"><h4>Contacts</h4><div class="gen-contacts">';
-        contacts.forEach(function (c) {
-          html += '<span class="gen-contact-pill">' + escapeHtml(c.name) + '<span class="role">\u00b7 ' + escapeHtml(c.role) + '</span></span>';
-        });
-        html += '<span class="gen-contact-pill approver">Heather Nichols<span class="role">\u00b7 Link approval</span></span>';
-        html += '<span class="gen-contact-pill approver">Gerber<span class="role">\u00b7 Segment approval</span></span>';
-        if (requiresSKUs && category && category.merchants.length) {
-          category.merchants.forEach(function (m) {
-            html += '<span class="gen-contact-pill merchant">' + escapeHtml(m.name) + '<span class="role">\u00b7 ' + escapeHtml(category.label) + ' merchant</span></span>';
+        // Contacts — split into 3 buckets
+        // Helper: parse a comma-separated names string into [{name, role}]
+        function parseNamesString(str, defaultRole) {
+          if (!str) return [];
+          return str.split(',').map(function (n) {
+            return { name: n.trim(), role: defaultRole };
+          }).filter(function (x) { return x.name.length > 0; });
+        }
+
+        // Helper: extract names from notes text (looks for common name patterns)
+        function extractNamesFromNotes(notesArr) {
+          if (!notesArr || !notesArr.length) return [];
+          // Known full names from EMAIL_CADENCES + Email Reference table — these are the
+          // people who realistically appear in any cadence note
+          var knownNames = [
+            'Robert Zlotogorsky', 'Heather Nichols', 'Zoriana Kos', 'Alla Igolnikova',
+            'Solomon Leifer', 'Usher Sperber', 'Daniel Norton', 'Cristina Santelises',
+            'Theresa Raffetto', 'Joshua Carl Pardi\u00f1ez', 'Krizha Anne Tubera',
+            'Keith McCord', 'Mary Yam-Wong', 'Niranee Shoba Chattergoon',
+            'Josh Lefkowits', 'Arthur Hershkovitz', 'Israel Herschkowit', 'Sarah Ryan', 'Aron Grossman',
+            'Julio Carrillo', 'Julio', 'Susan'
+          ];
+          var found = [];
+          var seen = {};
+          notesArr.forEach(function (note) {
+            // Notes can be plain strings (legacy) or { text, role } objects
+            var noteText = typeof note === 'string' ? note : note.text;
+            var noteRole = typeof note === 'string' ? 'mentioned in notes' : (note.role || 'mentioned in notes');
+            knownNames.forEach(function (n) {
+              if (noteText.indexOf(n) !== -1 && !seen[n]) {
+                found.push({ name: n, role: noteRole });
+                seen[n] = true;
+              }
+            });
+          });
+          return found;
+        }
+
+        // Build SKUs bucket: category merchants + cadence-level merchant contacts
+        var skusBucket = [];
+        if (requiresSKUs) {
+          if (category && category.merchants.length) {
+            category.merchants.forEach(function (m) {
+              skusBucket.push({ name: m.name, role: category.label + ' merchant' });
+            });
+          }
+          // Add any cadence contacts whose role explicitly mentions "Merchant"
+          contacts.forEach(function (c) {
+            if (/merchant/i.test(c.role)) {
+              skusBucket.push({ name: c.name, role: c.role });
+            }
           });
         }
-        html += '</div></div>';
+
+        // Build Approval bucket: cadence.approvers + always-on Heather (links) and Gerber (segments)
+        // Heather is filtered from cadence approvers since she always shows as "Link approval" below.
+        var approvalBucket = parseNamesString(cadence.approvers, 'Approver').filter(function (p) {
+          return p.name !== 'Heather Nichols';
+        });
+        approvalBucket.push({ name: 'Heather Nichols', role: 'Link approval' });
+        approvalBucket.push({ name: 'Gerber', role: 'Segment approval' });
+
+        // Build Other bucket: people mentioned in notes + cadence non-merchant contacts
+        var otherBucket = extractNamesFromNotes(cadence.notes);
+        contacts.forEach(function (c) {
+          if (!/merchant/i.test(c.role)) {
+            otherBucket.push({ name: c.name, role: c.role });
+          }
+        });
+
+        function renderBucket(label, items, pillClass) {
+          if (!items.length) return '';
+          var out = '<div class="gen-bucket"><h5 class="gen-bucket-title">' + escapeHtml(label) + '</h5><div class="gen-contacts">';
+          items.forEach(function (p) {
+            out += '<span class="gen-contact-pill ' + pillClass + '">' + escapeHtml(p.name) + '<span class="role">\u00b7 ' + escapeHtml(p.role) + '</span></span>';
+          });
+          out += '</div></div>';
+          return out;
+        }
+
+        html += '<div class="gen-section"><h4>Contacts</h4>';
+        html += renderBucket('SKUs From', skusBucket, 'merchant');
+        html += renderBucket('Approval', approvalBucket, 'approver');
+        html += renderBucket('Other', otherBucket, '');
+        html += '</div>';
 
         // Suggested Segments
         if ((cadence.suggestedSegments && cadence.suggestedSegments.length) || cadence.segmentNote) {
@@ -4427,13 +4511,68 @@
 
         lines.push('');
         lines.push('\u2501\u2501\u2501 CONTACTS \u2501\u2501\u2501');
-        contacts.forEach(function (c) { lines.push('\u2022 ' + c.name + ' (' + c.role + ')'); });
-        lines.push('\u2022 Heather Nichols (Link approval)');
-        lines.push('\u2022 Gerber (Segment approval)');
-        if (requiresSKUs && category && category.merchants.length) {
-          category.merchants.forEach(function (m) {
-            lines.push('\u2022 ' + m.name + ' \u2014 ' + m.email + ' (' + category.label + ' merchant)');
+
+        // SKUs From bucket
+        var skuLines = [];
+        if (requiresSKUs) {
+          if (category && category.merchants.length) {
+            category.merchants.forEach(function (m) {
+              skuLines.push('\u2022 ' + m.name + ' \u2014 ' + m.email + ' (' + category.label + ' merchant)');
+            });
+          }
+          contacts.forEach(function (c) {
+            if (/merchant/i.test(c.role)) {
+              skuLines.push('\u2022 ' + c.name + ' (' + c.role + ')');
+            }
           });
+        }
+        if (skuLines.length) {
+          lines.push('SKUs From:');
+          skuLines.forEach(function (l) { lines.push('  ' + l); });
+        }
+
+        // Approval bucket
+        lines.push('Approval:');
+        if (cadence.approvers) {
+          cadence.approvers.split(',').forEach(function (n) {
+            var name = n.trim();
+            // Skip Heather here since she's always shown below as "Link approval"
+            if (name && name !== 'Heather Nichols') lines.push('  \u2022 ' + name + ' (Approver)');
+          });
+        }
+        lines.push('  \u2022 Heather Nichols (Link approval)');
+        lines.push('  \u2022 Gerber (Segment approval)');
+
+        // Other bucket
+        var otherLines = [];
+        var seenOther = {};
+        if (cadence.notes && cadence.notes.length) {
+          var knownNamesPT = ['Robert Zlotogorsky', 'Heather Nichols', 'Zoriana Kos', 'Alla Igolnikova',
+            'Solomon Leifer', 'Usher Sperber', 'Daniel Norton', 'Cristina Santelises',
+            'Theresa Raffetto', 'Joshua Carl Pardi\u00f1ez', 'Krizha Anne Tubera',
+            'Keith McCord', 'Mary Yam-Wong', 'Niranee Shoba Chattergoon',
+            'Josh Lefkowits', 'Arthur Hershkovitz', 'Israel Herschkowit', 'Sarah Ryan', 'Aron Grossman',
+            'Julio Carrillo', 'Julio', 'Susan'];
+          cadence.notes.forEach(function (note) {
+            // Notes can be plain strings (legacy) or { text, role } objects
+            var noteText = typeof note === 'string' ? note : note.text;
+            var noteRole = typeof note === 'string' ? 'mentioned in notes' : (note.role || 'mentioned in notes');
+            knownNamesPT.forEach(function (n) {
+              if (noteText.indexOf(n) !== -1 && !seenOther[n]) {
+                otherLines.push('  \u2022 ' + n + ' (' + noteRole + ')');
+                seenOther[n] = true;
+              }
+            });
+          });
+        }
+        contacts.forEach(function (c) {
+          if (!/merchant/i.test(c.role)) {
+            otherLines.push('  \u2022 ' + c.name + ' (' + c.role + ')');
+          }
+        });
+        if (otherLines.length) {
+          lines.push('Other:');
+          otherLines.forEach(function (l) { lines.push(l); });
         }
 
         if ((cadence.suggestedSegments && cadence.suggestedSegments.length) || cadence.segmentNote) {
