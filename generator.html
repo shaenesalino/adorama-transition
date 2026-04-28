@@ -2061,39 +2061,64 @@
     .gen-page-bar button {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding: 8px 14px;
+      gap: 8px;
+      padding: 9px 16px;
       background: var(--white);
-      color: var(--adorama-blue);
+      color: var(--dark-gray);
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: 9px;
       font-size: 13px;
       font-weight: 700;
+      letter-spacing: 0.01em;
       text-decoration: none;
       cursor: pointer;
       font-family: inherit;
-      transition: all 0.15s ease;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+      transition: transform 0.12s ease, box-shadow 0.15s ease, background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
     }
 
-    .gen-page-bar a:hover,
-    .gen-page-bar button:hover {
+    .gen-page-bar a svg,
+    .gen-page-bar button svg {
+      flex: 0 0 auto;
+      width: 14px;
+      height: 14px;
+      stroke-width: 2.4;
+    }
+
+    /* Primary action — See Full Guide (filled blue) */
+    .gen-page-bar a.primary {
       background: var(--adorama-blue);
       color: var(--white);
       border-color: var(--adorama-blue);
+      box-shadow: 0 2px 6px rgba(0, 67, 135, 0.18);
+    }
+
+    .gen-page-bar a.primary:hover {
+      background: var(--link-blue);
+      border-color: var(--link-blue);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 67, 135, 0.25);
+      color: var(--white);
       text-decoration: none;
     }
 
-    .gen-page-bar a.primary,
-    .gen-page-bar button.primary {
-      background: var(--adorama-blue);
-      color: var(--white);
-      border-color: var(--adorama-blue);
+    .gen-page-bar a.primary:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 6px rgba(0, 67, 135, 0.18);
     }
 
-    .gen-page-bar a.primary:hover,
-    .gen-page-bar button.primary:hover {
-      background: var(--link-blue);
-      border-color: var(--link-blue);
+    /* Secondary action — Close Tab (outline, danger tint on hover) */
+    .gen-page-bar button.ghost:hover {
+      background: #FFF6F4;
+      color: var(--highlight);
+      border-color: rgba(237, 81, 50, 0.45);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(237, 81, 50, 0.15);
+    }
+
+    .gen-page-bar button.ghost:active {
+      transform: translateY(0);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
     }
 
     /* Page-level container — full width with comfortable horizontal padding */
@@ -2164,8 +2189,21 @@
       <span>Campaign Process Generator</span>
     </div>
     <div class="gen-page-bar-actions">
-      <a href="adorama_transition_doc_v3.html" target="_blank" rel="noopener">&rarr; See Full Guide</a>
-      <button type="button" id="closeTabBtn">&times; Close Tab</button>
+      <a href="adorama_transition_doc_v3.html" target="_blank" rel="noopener" class="primary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M14 3h7v7"></path>
+          <path d="M21 3l-9 9"></path>
+          <path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"></path>
+        </svg>
+        See Full Guide
+      </a>
+      <button type="button" id="closeTabBtn" class="ghost">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M18 6L6 18"></path>
+          <path d="M6 6l12 12"></path>
+        </svg>
+        Close Tab
+      </button>
     </div>
   </header>
 
