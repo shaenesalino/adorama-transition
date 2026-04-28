@@ -516,6 +516,28 @@
       line-height: 1.6;
     }
 
+    .details-body code {
+      background: rgba(0, 67, 135, 0.08);
+      color: var(--adorama-blue);
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-family: "SF Mono", Consolas, monospace;
+      font-size: 12.5px;
+    }
+
+    .issues-subhead {
+      margin: 24px 0 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--adorama-blue);
+    }
+
+    .issues-subhead:first-of-type { margin-top: 4px; }
+
     table {
       width: 100%;
       border-collapse: collapse;
@@ -843,7 +865,11 @@
       font-family: inherit;
       white-space: nowrap;
       text-transform: uppercase;
+      display: inline-block;
+      text-decoration: none;
     }
+
+    a.btn-primary:hover { text-decoration: none; color: var(--white); }
 
     .btn-primary:hover {
       background: #d8431f;
@@ -1608,6 +1634,253 @@
       color: var(--rich-black);
     }
 
+    /* Jira Tickets card (Tools section) */
+    .jira-tickets-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px;
+      margin-bottom: 22px;
+    }
+
+    .jira-tickets-head h4 {
+      margin: 0 0 6px;
+      font-size: 16px;
+      color: var(--rich-black);
+    }
+
+    .jira-tickets-head p {
+      margin: 0 0 16px;
+      font-size: 13px;
+      color: var(--medium-gray);
+      line-height: 1.5;
+    }
+
+    .jira-tickets-head p strong {
+      color: var(--rich-black);
+    }
+
+    .jira-tickets-subhead {
+      margin: 18px 0 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--adorama-blue);
+    }
+
+    /* Group Chats categorized */
+    .chat-group {
+      margin-bottom: 22px;
+    }
+
+    .chat-group:last-child { margin-bottom: 0; }
+
+    .chat-group-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .chat-group-header h4 {
+      margin: 0;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--adorama-blue);
+    }
+
+    .chat-group-header .chat-group-badge {
+      flex: 0 0 auto;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .chat-group.cat-core .chat-group-badge {
+      background: rgba(0, 67, 135, 0.12);
+      color: var(--adorama-blue);
+    }
+
+    .chat-group.cat-merchants .chat-group-badge {
+      background: rgba(19, 176, 194, 0.15);
+      color: #0a7a87;
+    }
+
+    .chat-group.cat-newsletters .chat-group-badge {
+      background: rgba(237, 81, 50, 0.12);
+      color: var(--highlight);
+    }
+
+    .chat-group.cat-npa .chat-group-badge {
+      background: rgba(107, 79, 191, 0.15);
+      color: #6B4FBF;
+    }
+
+    .chat-group.cat-other .chat-group-badge {
+      background: rgba(88, 92, 95, 0.15);
+      color: var(--dark-gray);
+    }
+
+    .chat-group-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* Glossary */
+    .glossary-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .glossary-group h4 {
+      margin: 0 0 12px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--adorama-blue);
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .glossary-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .glossary-item {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 14px;
+      align-items: baseline;
+      padding: 6px 0;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .glossary-term {
+      font-weight: 700;
+      color: var(--rich-black);
+      font-family: "SF Mono", Consolas, monospace;
+      font-size: 12.5px;
+    }
+
+    .glossary-def {
+      color: var(--dark-gray);
+    }
+
+    .glossary-def strong { color: var(--rich-black); }
+
+    @media (max-width: 760px) {
+      .glossary-grid { grid-template-columns: 1fr; }
+      .glossary-item { grid-template-columns: 80px 1fr; gap: 10px; }
+    }
+
+    .jira-tickets-subhead:first-of-type { margin-top: 0; }
+
+    .jira-tickets-subhead-note {
+      color: var(--medium-gray);
+      font-weight: 500;
+      letter-spacing: 0;
+      text-transform: none;
+      margin-left: 6px;
+    }
+
+    .jira-ticket.secondary {
+      border-left-color: var(--teal);
+    }
+
+    .jira-ticket.secondary .jira-ticket-id {
+      color: #0a7a87;
+    }
+
+    .jira-ticket.secondary:hover {
+      border-left-color: #0c92a0;
+    }
+
+    .jira-ticket.archive {
+      border-left-color: var(--medium-gray);
+      opacity: 0.78;
+    }
+
+    .jira-ticket.archive .jira-ticket-id {
+      color: var(--medium-gray);
+    }
+
+    .jira-ticket.archive:hover {
+      opacity: 1;
+      border-left-color: var(--dark-gray);
+    }
+
+    .jira-tickets-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .jira-ticket {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 12px 14px;
+      background: #FBFCFD;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--adorama-blue);
+      border-radius: 10px;
+      text-decoration: none;
+      transition: all 0.15s ease;
+    }
+
+    .jira-ticket:hover {
+      background: rgba(0, 67, 135, 0.04);
+      border-left-color: var(--link-blue);
+      transform: translateX(2px);
+      text-decoration: none;
+    }
+
+    .jira-ticket-id {
+      font-family: "SF Mono", Consolas, monospace;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--adorama-blue);
+      letter-spacing: 0.02em;
+    }
+
+    .jira-ticket-label {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--rich-black);
+      line-height: 1.3;
+    }
+
+    .jira-ticket-cadences {
+      font-size: 11.5px;
+      color: var(--medium-gray);
+      line-height: 1.5;
+      margin-top: 2px;
+    }
+
+    @media (max-width: 1100px) {
+      .jira-tickets-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 760px) {
+      .jira-tickets-grid { grid-template-columns: 1fr; }
+    }
+
     .ref-people {
       display: flex;
       flex-direction: column;
@@ -1756,7 +2029,8 @@
       <a class="nav-link" href="#chats" data-target="chats">Group Chats</a>
       <a class="nav-link" href="#tools" data-target="tools">Tools &amp; Documents</a>
       <a class="nav-link" href="#test-sms" data-target="test-sms">Test SMS Recipients</a>
-      <a class="nav-link" href="#issues" data-target="issues">Common Issues</a>
+      <a class="nav-link" href="#issues" data-target="issues">When Things Go Wrong</a>
+      <a class="nav-link" href="#glossary" data-target="glossary">Glossary</a>
     </aside>
 
     <main>
@@ -1770,7 +2044,7 @@
           <div class="hero-cta-text">
             <strong>Need a quick reference for an upcoming campaign?</strong> Use the Campaign Process Generator to auto-build the timeline, contact list, design assignment, and a copyable checklist based on your send date.
           </div>
-          <button id="genOpenBtn" class="btn-primary" type="button">⚡ Generate Process</button>
+          <a href="generator.html" target="_blank" rel="noopener" id="genOpenBtn" class="btn-primary">⚡ Generate Process</a>
         </div>
       </div>
 
@@ -1954,13 +2228,24 @@
           <div>
             <div class="section-kicker">02 / Email Workflow</div>
             <h3>General Email Process</h3>
-            <p class="section-desc">End-to-end process from briefing to post-send. Follow these 12 steps in sequence — the timing pills indicate how far in advance each step should begin relative to the send date. <strong>Business days</strong> count Monday–Friday only.</p>
+            <p class="section-desc">End-to-end process from briefing to post-send, ordered by when each step should begin relative to the send date. Earliest start is Step 1 (SKUs, T-10), latest is post-send. <strong>Business days</strong> count Monday–Friday only.</p>
           </div>
         </div>
 
-        <div class="process-timeline">
-          <div class="process-step">
+        <div class="process-timeline" id="email-timeline">
+          <div class="process-step" data-step="1" data-lead="10">
             <div class="step-number">1</div>
+            <div class="card">
+              <div class="step-header">
+                <h4>SKUs</h4>
+                <span class="timing-pill calm">10+ business days before</span>
+              </div>
+              <p>Request SKUs and complete product details from Merchants. Ensure all required information (pricing, links, images) is accurate and complete.</p>
+            </div>
+          </div>
+
+          <div class="process-step" data-step="2" data-lead="7">
+            <div class="step-number">2</div>
             <div class="card">
               <div class="step-header">
                 <h4>Source / UTM Codes</h4>
@@ -1970,8 +2255,8 @@
             </div>
           </div>
 
-          <div class="process-step">
-            <div class="step-number">2</div>
+          <div class="process-step" data-step="3" data-lead="7">
+            <div class="step-number">3</div>
             <div class="card">
               <div class="step-header">
                 <h4>Subject Line (SL), Preheader (PH) &amp; Email Brief</h4>
@@ -1981,8 +2266,8 @@
             </div>
           </div>
 
-          <div class="process-step">
-            <div class="step-number">3</div>
+          <div class="process-step" data-step="4" data-lead="7">
+            <div class="step-number">4</div>
             <div class="card">
               <div class="step-header">
                 <h4>Jira &amp; ClickUp Tickets</h4>
@@ -1998,18 +2283,7 @@
             </div>
           </div>
 
-          <div class="process-step">
-            <div class="step-number">4</div>
-            <div class="card">
-              <div class="step-header">
-                <h4>SKUs</h4>
-                <span class="timing-pill calm">10+ business days before</span>
-              </div>
-              <p>Request SKUs and complete product details from Merchants. Ensure all required information (pricing, links, images) is accurate and complete.</p>
-            </div>
-          </div>
-
-          <div class="process-step">
+          <div class="process-step" data-step="5" data-lead="3">
             <div class="step-number">5</div>
             <div class="card">
               <div class="step-header">
@@ -2020,8 +2294,19 @@
             </div>
           </div>
 
-          <div class="process-step">
+          <div class="process-step" data-step="6" data-lead="2.5">
             <div class="step-number">6</div>
+            <div class="card">
+              <div class="step-header">
+                <h4>Segments</h4>
+                <span class="timing-pill urgent">2–3 business days before</span>
+              </div>
+              <p>Propose audience segments to <strong>Gerber</strong> and secure approval. Prepare segments as early as possible to avoid delays.</p>
+            </div>
+          </div>
+
+          <div class="process-step" data-step="7" data-lead="2">
+            <div class="step-number">7</div>
             <div class="card">
               <div class="step-header">
                 <h4>Build</h4>
@@ -2034,24 +2319,7 @@
             </div>
           </div>
 
-          <div class="process-step">
-            <div class="step-number">7</div>
-            <div class="card">
-              <div class="step-header">
-                <h4>QA — End-to-End</h4>
-                <span class="timing-pill calm">Continuous</span>
-              </div>
-              <p style="margin-bottom: 8px;">Perform thorough QA across all stages:</p>
-              <ul>
-                <li>Email brief (copy, links, pricing)</li>
-                <li>Design (layout, branding, accuracy)</li>
-                <li>Email proof (rendering, links, personalization)</li>
-                <li>Final campaign setup (segments, scheduling, tracking)</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="process-step">
+          <div class="process-step" data-step="8" data-lead="1.5">
             <div class="step-number">8</div>
             <div class="card">
               <div class="step-header">
@@ -2062,7 +2330,7 @@
             </div>
           </div>
 
-          <div class="process-step">
+          <div class="process-step" data-step="9" data-lead="1.5">
             <div class="step-number">9</div>
             <div class="card">
               <div class="step-header">
@@ -2073,19 +2341,8 @@
             </div>
           </div>
 
-          <div class="process-step">
+          <div class="process-step" data-step="10" data-lead="1">
             <div class="step-number">10</div>
-            <div class="card">
-              <div class="step-header">
-                <h4>Segments</h4>
-                <span class="timing-pill urgent">2–3 business days before</span>
-              </div>
-              <p>Propose audience segments to <strong>Gerber</strong> and secure approval. Prepare segments as early as possible to avoid delays.</p>
-            </div>
-          </div>
-
-          <div class="process-step">
-            <div class="step-number">11</div>
             <div class="card">
               <div class="step-header">
                 <h4>Scheduling</h4>
@@ -2104,7 +2361,24 @@
             </div>
           </div>
 
-          <div class="process-step">
+          <div class="process-step" data-step="11" data-lead="0">
+            <div class="step-number">11</div>
+            <div class="card">
+              <div class="step-header">
+                <h4>QA — End-to-End</h4>
+                <span class="timing-pill calm">Continuous</span>
+              </div>
+              <p style="margin-bottom: 8px;">Perform thorough QA across all stages:</p>
+              <ul>
+                <li>Email brief (copy, links, pricing)</li>
+                <li>Design (layout, branding, accuracy)</li>
+                <li>Email proof (rendering, links, personalization)</li>
+                <li>Final campaign setup (segments, scheduling, tracking)</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="process-step" data-step="12" data-lead="0">
             <div class="step-number">12</div>
             <div class="card">
               <div class="step-header">
@@ -2126,47 +2400,67 @@
           <div>
             <div class="section-kicker">03 / SMS</div>
             <h3>SMS Process</h3>
-            <p class="section-desc">Seven-step process from copy creation to post-send confirmation. Default send time is <strong>11am local</strong> unless otherwise specified.</p>
+            <p class="section-desc">Seven-step process from copy creation to post-send confirmation, ordered by when each step should begin relative to the send date. Default send time is <strong>11am local</strong> unless otherwise specified. <strong>Business days</strong> count Monday–Friday only.</p>
           </div>
           <span class="badge">Keep concise</span>
         </div>
 
-        <div class="process-timeline">
-          <div class="process-step">
+        <div class="process-timeline" id="sms-timeline">
+          <div class="process-step" data-step="1" data-lead="3">
             <div class="step-number">1</div>
             <div class="card">
               <div class="step-header">
                 <h4>Copy Creation</h4>
+                <span class="timing-pill calm">3+ business days before</span>
+              
               </div>
               <p>Create <strong>3 SMS copy options</strong>, ensuring each message fits within one SMS segment (≤160 characters).</p>
             </div>
           </div>
 
-          <div class="process-step">
+          <div class="process-step" data-step="2" data-lead="3">
             <div class="step-number">2</div>
             <div class="card">
               <div class="step-header">
+                <h4>Segmentation</h4>
+                <span class="timing-pill urgent">3+ business days before</span>
+              
+              </div>
+              <p>Propose the target audience segment and secure approval from <strong>Gerber</strong>.</p>
+            </div>
+          </div>
+
+          <div class="process-step" data-step="3" data-lead="2">
+            <div class="step-number">3</div>
+            <div class="card">
+              <div class="step-header">
                 <h4>Copy Review &amp; Selection</h4>
+                <span class="timing-pill calm">2+ business days before</span>
+              
               </div>
               <p>Share the copy options with the <strong>Email Team</strong> and <strong>Marketing Ops</strong> for review and selection.</p>
             </div>
           </div>
 
-          <div class="process-step">
-            <div class="step-number">3</div>
+          <div class="process-step" data-step="4" data-lead="1">
+            <div class="step-number">4</div>
             <div class="card">
               <div class="step-header">
                 <h4>Test Send</h4>
+                <span class="timing-pill urgent">1+ business day before</span>
+              
               </div>
               <p>Send a test SMS using the selected copy to validate formatting, links, and overall message clarity.</p>
             </div>
           </div>
 
-          <div class="process-step">
-            <div class="step-number">4</div>
+          <div class="process-step" data-step="5" data-lead="1">
+            <div class="step-number">5</div>
             <div class="card">
               <div class="step-header">
                 <h4>Link Approval</h4>
+                <span class="timing-pill">1+ business day before</span>
+              
               </div>
               <p>Confirm with the <strong>Site Merchandiser</strong> that the landing page link is correct and approved.</p>
               <p style="margin-top: 10px; padding: 10px 12px; background: #FFF8F6; border-left: 3px solid var(--highlight); border-radius: 6px; font-size: 13px; color: var(--rich-black);">
@@ -2175,31 +2469,25 @@
             </div>
           </div>
 
-          <div class="process-step">
-            <div class="step-number">5</div>
-            <div class="card">
-              <div class="step-header">
-                <h4>Segmentation</h4>
-              </div>
-              <p>Propose the target audience segment and secure approval from <strong>Gerber</strong>.</p>
-            </div>
-          </div>
-
-          <div class="process-step">
+          <div class="process-step" data-step="6" data-lead="1">
             <div class="step-number">6</div>
             <div class="card">
               <div class="step-header">
                 <h4>Scheduling</h4>
+                <span class="timing-pill">1+ business day before</span>
+              
               </div>
               <p>Schedule the SMS campaign in <strong>Attentive</strong>, ensuring correct timing, audience, and campaign setup.</p>
             </div>
           </div>
 
-          <div class="process-step">
+          <div class="process-step" data-step="7" data-lead="0">
             <div class="step-number">7</div>
             <div class="card">
               <div class="step-header">
                 <h4>Post-Send Check</h4>
+                <span class="timing-pill">Day of send</span>
+              
               </div>
               <p>Confirm the SMS was sent successfully to the expected audience at the scheduled time, and check initial performance.</p>
             </div>
@@ -2974,7 +3262,7 @@
           <div>
             <div class="section-kicker">09 / QA</div>
             <h3>QA Checklist</h3>
-            <p class="section-desc">Use this before proofs are approved and again before final scheduling. Click items to check them off as you go.</p>
+            <p class="section-desc">Use this before proofs are approved and again before final scheduling. Click items to check them off as you go. For the official live version, see the <a href="https://docs.google.com/spreadsheets/d/1it40opa59lKkNL6-Yoz3S3xh4r4TBU0l2TR4Xoi9Jek/edit?gid=1891637750#gid=1891637750" target="_blank" rel="noopener noreferrer">Adorama &times; AW QA Sheet</a>.</p>
           </div>
         </div>
 
@@ -3160,35 +3448,49 @@
           </div>
         </div>
 
-        <table>
-          <thead>
-            <tr>
-              <th>Category</th>
-              <th>Merchant</th>
-              <th>Email</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td class="cat" rowspan="2">Photo</td><td>Josh Lefkowits</td><td><span class="cell-with-copy"><a href="mailto:joshl@adorama.com">joshl@adorama.com</a> <button class="copy-btn" data-copy="joshl@adorama.com">Copy</button></span></td></tr>
-            <tr><td>Arthur Hershkovitz</td><td><span class="cell-with-copy"><a href="mailto:arthurh@adorama.com">arthurh@adorama.com</a> <button class="copy-btn" data-copy="arthurh@adorama.com">Copy</button></span></td></tr>
-            <tr><td class="cat" rowspan="3">Video &amp; some photo accessories</td><td>Israel Herschkowit</td><td><span class="cell-with-copy"><a href="mailto:israelh@adorama.com">israelh@adorama.com</a> <button class="copy-btn" data-copy="israelh@adorama.com">Copy</button></span></td></tr>
-            <tr><td>Sarah Ryan</td><td><span class="cell-with-copy"><a href="mailto:sryan@adorama.com">sryan@adorama.com</a> <button class="copy-btn" data-copy="sryan@adorama.com">Copy</button></span></td></tr>
-            <tr><td>Aron Grossman</td><td><span class="cell-with-copy"><a href="mailto:arong@adorama.com">arong@adorama.com</a> <button class="copy-btn" data-copy="arong@adorama.com">Copy</button></span></td></tr>
-            <tr><td class="cat">Memory, Storage, Home Office, Printers</td><td>Shloimy Singer</td><td><span class="cell-with-copy"><a href="mailto:shloimys@adorama.com">shloimys@adorama.com</a> <button class="copy-btn" data-copy="shloimys@adorama.com">Copy</button></span></td></tr>
-            <tr><td class="cat" rowspan="2">Lighting (not Flashpoint/Godox)</td><td>Tovi Paskes</td><td><span class="cell-with-copy"><a href="mailto:tovip@adorama.com">tovip@adorama.com</a> <button class="copy-btn" data-copy="tovip@adorama.com">Copy</button></span></td></tr>
-            <tr><td>Lekeisha Wharton</td><td><span class="cell-with-copy"><a href="mailto:lekeishaw@adorama.com">lekeishaw@adorama.com</a> <button class="copy-btn" data-copy="lekeishaw@adorama.com">Copy</button></span></td></tr>
-            <tr><td class="cat">Computers &amp; Gaming</td><td>Jeff Frank</td><td><span class="cell-with-copy"><a href="mailto:jfrank@adorama.com">jfrank@adorama.com</a> <button class="copy-btn" data-copy="jfrank@adorama.com">Copy</button></span></td></tr>
-            <tr><td class="cat">Apple</td><td>Abraham Gancz</td><td><span class="cell-with-copy"><a href="mailto:abrahamg@adorama.com">abrahamg@adorama.com</a> <button class="copy-btn" data-copy="abrahamg@adorama.com">Copy</button></span></td></tr>
-            <tr><td class="cat" rowspan="2">Musical Instruments, Headphones, Speakers, Consumer Audio</td><td>Andy Pollak</td><td><span class="cell-with-copy"><a href="mailto:andyp@adorama.com">andyp@adorama.com</a> <button class="copy-btn" data-copy="andyp@adorama.com">Copy</button></span></td></tr>
-            <tr><td>Ana Rogelisa Dizon</td><td><span class="cell-with-copy"><a href="mailto:adizon@adorama.com">adizon@adorama.com</a> <button class="copy-btn" data-copy="adizon@adorama.com">Copy</button></span></td></tr>
-            <tr><td class="cat">Professional Audio</td><td>Moshe Hirsch</td><td><span class="cell-with-copy"><a href="mailto:mosheh@adorama.com">mosheh@adorama.com</a> <button class="copy-btn" data-copy="mosheh@adorama.com">Copy</button></span></td></tr>
-            <tr><td class="cat" rowspan="2">Drones, GoPro, DJI, Action Cams</td><td>Sol Steif</td><td><span class="cell-with-copy"><a href="mailto:ssteif@adorama.com">ssteif@adorama.com</a> <button class="copy-btn" data-copy="ssteif@adorama.com">Copy</button></span></td></tr>
-            <tr><td>Ivy Krisha Fajardo</td><td><span class="cell-with-copy"><a href="mailto:ivykf@adorama.com">ivykf@adorama.com</a> <button class="copy-btn" data-copy="ivykf@adorama.com">Copy</button></span></td></tr>
-            <tr><td class="cat" rowspan="2">Adorama Brands (Flashpoint, Godox, Glow, Clar, Green Extreme, 3pod, Turnstile Audio, H&amp;A, Slinger)</td><td>Solomon Leifer</td><td><span class="cell-with-copy"><a href="mailto:solomonl@adorama.com">solomonl@adorama.com</a> <button class="copy-btn" data-copy="solomonl@adorama.com">Copy</button></span></td></tr>
-            <tr><td>Usher Sperber</td><td><span class="cell-with-copy"><a href="mailto:ushers@adorama.com">ushers@adorama.com</a> <button class="copy-btn" data-copy="ushers@adorama.com">Copy</button></span></td></tr>
-            <tr><td class="cat">All Merchants Mailing List</td><td>—</td><td><span class="cell-with-copy"><a href="mailto:ml-merchantsltd@adorama.com">ml-merchantsltd@adorama.com</a> <button class="copy-btn" data-copy="ml-merchantsltd@adorama.com">Copy</button></span></td></tr>
-          </tbody>
-        </table>
+        <div class="grid two">
+          <table>
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th>Merchant</th>
+                <th>Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="cat" rowspan="2">Photo</td><td>Josh Lefkowits</td><td><span class="cell-with-copy"><a href="mailto:joshl@adorama.com">joshl@adorama.com</a> <button class="copy-btn" data-copy="joshl@adorama.com">Copy</button></span></td></tr>
+              <tr><td>Arthur Hershkovitz</td><td><span class="cell-with-copy"><a href="mailto:arthurh@adorama.com">arthurh@adorama.com</a> <button class="copy-btn" data-copy="arthurh@adorama.com">Copy</button></span></td></tr>
+              <tr><td class="cat" rowspan="3">Video &amp; some photo accessories</td><td>Israel Herschkowit</td><td><span class="cell-with-copy"><a href="mailto:israelh@adorama.com">israelh@adorama.com</a> <button class="copy-btn" data-copy="israelh@adorama.com">Copy</button></span></td></tr>
+              <tr><td>Sarah Ryan</td><td><span class="cell-with-copy"><a href="mailto:sryan@adorama.com">sryan@adorama.com</a> <button class="copy-btn" data-copy="sryan@adorama.com">Copy</button></span></td></tr>
+              <tr><td>Aron Grossman</td><td><span class="cell-with-copy"><a href="mailto:arong@adorama.com">arong@adorama.com</a> <button class="copy-btn" data-copy="arong@adorama.com">Copy</button></span></td></tr>
+              <tr><td class="cat">Memory, Storage, Home Office, Printers</td><td>Shloimy Singer</td><td><span class="cell-with-copy"><a href="mailto:shloimys@adorama.com">shloimys@adorama.com</a> <button class="copy-btn" data-copy="shloimys@adorama.com">Copy</button></span></td></tr>
+              <tr><td class="cat" rowspan="2">Lighting (not Flashpoint/Godox)</td><td>Tovi Paskes</td><td><span class="cell-with-copy"><a href="mailto:tovip@adorama.com">tovip@adorama.com</a> <button class="copy-btn" data-copy="tovip@adorama.com">Copy</button></span></td></tr>
+              <tr><td>Lekeisha Wharton</td><td><span class="cell-with-copy"><a href="mailto:lekeishaw@adorama.com">lekeishaw@adorama.com</a> <button class="copy-btn" data-copy="lekeishaw@adorama.com">Copy</button></span></td></tr>
+            </tbody>
+          </table>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th>Merchant</th>
+                <th>Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="cat">Computers &amp; Gaming</td><td>Jeff Frank</td><td><span class="cell-with-copy"><a href="mailto:jfrank@adorama.com">jfrank@adorama.com</a> <button class="copy-btn" data-copy="jfrank@adorama.com">Copy</button></span></td></tr>
+              <tr><td class="cat">Apple</td><td>Abraham Gancz</td><td><span class="cell-with-copy"><a href="mailto:abrahamg@adorama.com">abrahamg@adorama.com</a> <button class="copy-btn" data-copy="abrahamg@adorama.com">Copy</button></span></td></tr>
+              <tr><td class="cat" rowspan="2">Musical Instruments, Headphones, Speakers, Consumer Audio</td><td>Andy Pollak</td><td><span class="cell-with-copy"><a href="mailto:andyp@adorama.com">andyp@adorama.com</a> <button class="copy-btn" data-copy="andyp@adorama.com">Copy</button></span></td></tr>
+              <tr><td>Ana Rogelisa Dizon</td><td><span class="cell-with-copy"><a href="mailto:adizon@adorama.com">adizon@adorama.com</a> <button class="copy-btn" data-copy="adizon@adorama.com">Copy</button></span></td></tr>
+              <tr><td class="cat">Professional Audio</td><td>Moshe Hirsch</td><td><span class="cell-with-copy"><a href="mailto:mosheh@adorama.com">mosheh@adorama.com</a> <button class="copy-btn" data-copy="mosheh@adorama.com">Copy</button></span></td></tr>
+              <tr><td class="cat" rowspan="2">Drones, GoPro, DJI, Action Cams</td><td>Sol Steif</td><td><span class="cell-with-copy"><a href="mailto:ssteif@adorama.com">ssteif@adorama.com</a> <button class="copy-btn" data-copy="ssteif@adorama.com">Copy</button></span></td></tr>
+              <tr><td>Ivy Krisha Fajardo</td><td><span class="cell-with-copy"><a href="mailto:ivykf@adorama.com">ivykf@adorama.com</a> <button class="copy-btn" data-copy="ivykf@adorama.com">Copy</button></span></td></tr>
+              <tr><td class="cat" rowspan="2">Adorama Brands<br><span style="font-weight: 500; color: var(--medium-gray); font-size: 11px;">Flashpoint, Godox, Glow, Clar, Green Extreme, 3pod, Turnstile Audio, H&amp;A, Slinger</span></td><td>Solomon Leifer</td><td><span class="cell-with-copy"><a href="mailto:solomonl@adorama.com">solomonl@adorama.com</a> <button class="copy-btn" data-copy="solomonl@adorama.com">Copy</button></span></td></tr>
+              <tr><td>Usher Sperber</td><td><span class="cell-with-copy"><a href="mailto:ushers@adorama.com">ushers@adorama.com</a> <button class="copy-btn" data-copy="ushers@adorama.com">Copy</button></span></td></tr>
+              <tr><td class="cat">All Merchants Mailing List</td><td>&mdash;</td><td><span class="cell-with-copy"><a href="mailto:ml-merchantsltd@adorama.com">ml-merchantsltd@adorama.com</a> <button class="copy-btn" data-copy="ml-merchantsltd@adorama.com">Copy</button></span></td></tr>
+            </tbody>
+          </table>
+        </div>
       </section>
 
       <section id="chats">
@@ -3200,62 +3502,109 @@
           </div>
         </div>
 
-        <div class="grid two">
-          <div class="card">
-            <h4>Marketing Ops + E-mail Team</h4>
-            <p>Day-to-day chat with the Marketing Ops team.</p>
+        <div class="chat-group cat-core">
+          <div class="chat-group-header">
+            <span class="chat-group-badge">1</span>
+            <h4>Core</h4>
+            <div class="chat-group-line"></div>
           </div>
-          <div class="card">
-            <h4>Design Team + Email Marketing Team</h4>
-            <p>Chat with the Design team for assets, briefs, and revisions.</p>
+          <div class="grid">
+            <div class="card">
+              <h4>Marketing Ops + E-mail Team</h4>
+              <p>Day-to-day chat with the Marketing Ops team.</p>
+            </div>
+            <div class="card">
+              <h4>Adorama SMS</h4>
+              <p>Marketing Ops + Finance for all SMS-related approvals and routing. <strong>This is where you post the 3 SMS copy options.</strong></p>
+            </div>
+            <div class="card">
+              <h4>Design Team + Email Marketing Team</h4>
+              <p>Chat with the Design team for assets, briefs, and revisions.</p>
+            </div>
           </div>
-          <div class="card">
-            <h4>Adorama SMS</h4>
-            <p>Marketing Ops + Finance for all SMS-related approvals and routing. <strong>This is where you post the 3 SMS copy options.</strong></p>
+        </div>
+
+        <div class="chat-group cat-merchants">
+          <div class="chat-group-header">
+            <span class="chat-group-badge">2</span>
+            <h4>Merchants</h4>
+            <div class="chat-group-line"></div>
           </div>
-          <div class="card">
-            <h4>Financing/Loyalty + Email Planning Weekly Touch Base</h4>
-            <p>Chat with Julio &amp; Diana for PLCC and Loyalty emails.</p>
+          <div class="grid">
+            <div class="card">
+              <h4>Private Brands + Email Team</h4>
+              <p>Direct chat with Private Brands merchants &mdash; Solomon &amp; Usher.</p>
+            </div>
+            <div class="card">
+              <h4>Photo + Email Team</h4>
+              <p>Marketing Ops + Photo Merchants (Josh &amp; Arthur).</p>
+            </div>
           </div>
-          <div class="card">
-            <h4>NPA &amp; Promotional Marketing Chat</h4>
-            <p>NPA announcements.</p>
+        </div>
+
+        <div class="chat-group cat-newsletters">
+          <div class="chat-group-header">
+            <span class="chat-group-badge">3</span>
+            <h4>Newsletters</h4>
+            <div class="chat-group-line"></div>
           </div>
-          <div class="card">
-            <h4>Surprise NPA Chat</h4>
-            <p>NPA announcements (separate stream).</p>
+          <div class="grid">
+            <div class="card">
+              <h4>Creator&rsquo;s Huddle</h4>
+              <p>Content team &mdash; Daniel &amp; Cristina &mdash; for the Creators&rsquo; Huddle Newsletter and any article/video content requests.</p>
+            </div>
+            <div class="card">
+              <h4>Private Brands Newsletter</h4>
+              <p>Daniel, Cristina, Susan, Design team for Private Brands Newsletter.</p>
+            </div>
+            <div class="card">
+              <h4>Photo Newsletter</h4>
+              <p>Marketing Ops, Design (Mary), Content (Daniel &amp; Cristina).</p>
+            </div>
+            <div class="card">
+              <h4>Store Newsletter 2026</h4>
+              <p>Marketing Ops, Store team, Design team for the Store Newsletter.</p>
+            </div>
           </div>
-          <div class="card">
-            <h4>Sales Team — Announcements Only</h4>
-            <p>One-way announcements channel.</p>
+        </div>
+
+        <div class="chat-group cat-npa">
+          <div class="chat-group-header">
+            <span class="chat-group-badge">4</span>
+            <h4>NPAs / Promo Announcements</h4>
+            <div class="chat-group-line"></div>
           </div>
-          <div class="card">
-            <h4>Creator's Huddle</h4>
-            <p>Content team — Daniel &amp; Cristina — for the Creators' Huddle Newsletter and any article/video content requests.</p>
+          <div class="grid">
+            <div class="card">
+              <h4>NPA &amp; Promotional Marketing Chat</h4>
+              <p>NPA announcements.</p>
+            </div>
+            <div class="card">
+              <h4>Surprise NPA Chat</h4>
+              <p>NPA announcements (separate stream).</p>
+            </div>
+            <div class="card">
+              <h4>Sales Team &mdash; Announcements Only</h4>
+              <p>One-way announcements channel.</p>
+            </div>
           </div>
-          <div class="card">
-            <h4>Store Newsletter 2026</h4>
-            <p>Marketing Ops, Store team, Design team for the Store Newsletter.</p>
+        </div>
+
+        <div class="chat-group cat-other">
+          <div class="chat-group-header">
+            <span class="chat-group-badge">5</span>
+            <h4>Other</h4>
+            <div class="chat-group-line"></div>
           </div>
-          <div class="card">
-            <h4>Private Brands Newsletter</h4>
-            <p>Daniel, Cristina, Susan, Design team for Private Brands Newsletter.</p>
-          </div>
-          <div class="card">
-            <h4>Private Brands + Email Team</h4>
-            <p>Direct chat with Private Brands merchants — Solomon &amp; Usher.</p>
-          </div>
-          <div class="card">
-            <h4>Photo Newsletter</h4>
-            <p>Marketing Ops, Design (Mary), Content (Daniel &amp; Cristina).</p>
-          </div>
-          <div class="card">
-            <h4>Photo + Email Team</h4>
-            <p>Marketing Ops + Photo Merchants (Josh &amp; Arthur).</p>
-          </div>
-          <div class="card">
-            <h4>Events x Email Team</h4>
-            <p>Events team — Theresa, Joshua, Krizha — and Design (Mary). Landing page: <a href="https://www.adorama.com/g/events" target="_blank" rel="noopener noreferrer">adorama.com/g/events</a>.</p>
+          <div class="grid">
+            <div class="card">
+              <h4>Financing/Loyalty + Email Planning Weekly Touch Base</h4>
+              <p>Chat with Julio &amp; Diana for PLCC and Loyalty emails.</p>
+            </div>
+            <div class="card">
+              <h4>Events x Email Team</h4>
+              <p>Events team &mdash; Theresa, Joshua, Krizha &mdash; and Design (Mary). Landing page: <a href="https://www.adorama.com/g/events" target="_blank" rel="noopener noreferrer">adorama.com/g/events</a>.</p>
+            </div>
           </div>
         </div>
       </section>
@@ -3292,6 +3641,105 @@
               <li>Segments → Gerber for approval. Links → Heather for approval.</li>
               <li>For SMS: always convert to short link before scheduling.</li>
             </ul>
+          </div>
+        </div>
+
+        <div class="jira-tickets-card">
+          <div class="jira-tickets-head">
+            <h4>Jira Tickets</h4>
+            <p>All Jira tickets active for 2026 plus reference links to last year. Each 2026 ticket holds a series of campaigns of that type for the year. <strong>Loyalty/PLCC and NPA tickets are provided per-campaign by the cadence owner.</strong></p>
+          </div>
+
+          <h5 class="jira-tickets-subhead">2026 Main Tickets</h5>
+          <div class="jira-tickets-grid">
+            <a href="https://jira.adorama.com/browse/MKT-99009" target="_blank" rel="noopener noreferrer" class="jira-ticket">
+              <span class="jira-ticket-id">MKT-99009</span>
+              <span class="jira-ticket-label">Adorama Emails 2026</span>
+              <span class="jira-ticket-cadences">Mystery Sale &middot; Weekend Deals &middot; Flash Sale &middot; Top Deals &middot; Open Box &middot; NPA Recap</span>
+            </a>
+            <a href="https://jira.adorama.com/browse/MKT-93582" target="_blank" rel="noopener noreferrer" class="jira-ticket">
+              <span class="jira-ticket-id">MKT-93582</span>
+              <span class="jira-ticket-label">Photo-Video Emails &amp; Newsletters</span>
+              <span class="jira-ticket-cadences">Photo Rebates &middot; Photo Newsletter &middot; Video Newsletter</span>
+            </a>
+            <a href="https://jira.adorama.com/browse/MKT-99006?filter=-2" target="_blank" rel="noopener noreferrer" class="jira-ticket">
+              <span class="jira-ticket-id">MKT-99006</span>
+              <span class="jira-ticket-label">Trade &amp; Used 2026</span>
+              <span class="jira-ticket-cadences">Trade &middot; Used</span>
+            </a>
+            <a href="https://jira.adorama.com/browse/MKT-99173" target="_blank" rel="noopener noreferrer" class="jira-ticket">
+              <span class="jira-ticket-id">MKT-99173</span>
+              <span class="jira-ticket-label">EDU / Classroom Connect 2026</span>
+              <span class="jira-ticket-cadences">EDU</span>
+            </a>
+            <a href="https://jira.adorama.com/browse/MKT-98683" target="_blank" rel="noopener noreferrer" class="jira-ticket">
+              <span class="jira-ticket-id">MKT-98683</span>
+              <span class="jira-ticket-label">Private Brands Emails 2026</span>
+              <span class="jira-ticket-cadences">Services PB &middot; Newsletter PB</span>
+            </a>
+            <a href="https://jira.adorama.com/browse/MKT-67859" target="_blank" rel="noopener noreferrer" class="jira-ticket">
+              <span class="jira-ticket-id">MKT-67859</span>
+              <span class="jira-ticket-label">Creator&rsquo;s Huddle Weekly Templates</span>
+              <span class="jira-ticket-cadences">Creators&rsquo; Huddle</span>
+            </a>
+            <a href="https://jira.adorama.com/browse/MKT-93596" target="_blank" rel="noopener noreferrer" class="jira-ticket">
+              <span class="jira-ticket-id">MKT-93596</span>
+              <span class="jira-ticket-label">Adorama Events Emails</span>
+              <span class="jira-ticket-cadences">Events</span>
+            </a>
+            <a href="https://jira.adorama.com/browse/MKT-98993" target="_blank" rel="noopener noreferrer" class="jira-ticket">
+              <span class="jira-ticket-id">MKT-98993</span>
+              <span class="jira-ticket-label">Store Email Newsletter 2026 Series</span>
+              <span class="jira-ticket-cadences">Store Newsletter</span>
+            </a>
+            <a href="https://jira.adorama.com/browse/MKT-101473" target="_blank" rel="noopener noreferrer" class="jira-ticket">
+              <span class="jira-ticket-id">MKT-101473</span>
+              <span class="jira-ticket-label">Emails: Musical Instruments, Consumer &amp; Pro-Audio</span>
+              <span class="jira-ticket-cadences">Category-specific newsletters</span>
+            </a>
+            <a href="https://jira.adorama.com/browse/MKT-90136" target="_blank" rel="noopener noreferrer" class="jira-ticket">
+              <span class="jira-ticket-id">MKT-90136</span>
+              <span class="jira-ticket-label">Adorama x (Printique | ABS | ARC)</span>
+              <span class="jira-ticket-cadences">Printique &middot; ABS &middot; ARC partnerships</span>
+            </a>
+            <a href="https://jira.adorama.com/browse/MKT-87089" target="_blank" rel="noopener noreferrer" class="jira-ticket">
+              <span class="jira-ticket-id">MKT-87089</span>
+              <span class="jira-ticket-label">Call Center: Call &amp; Save</span>
+              <span class="jira-ticket-cadences">Call Center campaigns</span>
+            </a>
+          </div>
+
+          <h5 class="jira-tickets-subhead">Other Active Tickets</h5>
+          <div class="jira-tickets-grid">
+            <a href="https://jira.adorama.com/browse/MKT-92862" target="_blank" rel="noopener noreferrer" class="jira-ticket secondary">
+              <span class="jira-ticket-id">MKT-92862</span>
+              <span class="jira-ticket-label">2025 Loyalty &amp; Finance &mdash; Email Recipients</span>
+              <span class="jira-ticket-cadences">Loyalty &middot; PLCC (legacy ticket; new tickets provided by Julio)</span>
+            </a>
+            <a href="https://jira.adorama.com/browse/MKT-89499" target="_blank" rel="noopener noreferrer" class="jira-ticket secondary">
+              <span class="jira-ticket-id">MKT-89499</span>
+              <span class="jira-ticket-label">2025 BAU Feature Banners</span>
+              <span class="jira-ticket-cadences">42 West &middot; AdoramaTV &middot; Events &middot; Social</span>
+            </a>
+            <a href="https://jira.adorama.com/browse/MKT-66480" target="_blank" rel="noopener noreferrer" class="jira-ticket secondary">
+              <span class="jira-ticket-id">MKT-66480</span>
+              <span class="jira-ticket-label">Facebook Email Leads</span>
+              <span class="jira-ticket-cadences">Facebook lead capture campaigns</span>
+            </a>
+          </div>
+
+          <h5 class="jira-tickets-subhead">Last Year&rsquo;s Tickets <span class="jira-tickets-subhead-note">(Reference Only)</span></h5>
+          <div class="jira-tickets-grid">
+            <a href="https://jira.adorama.com/browse/MKT-89153" target="_blank" rel="noopener noreferrer" class="jira-ticket archive">
+              <span class="jira-ticket-id">MKT-89153</span>
+              <span class="jira-ticket-label">Adorama Emails 2025</span>
+              <span class="jira-ticket-cadences">2025 archive &mdash; Promo / Open Box / NPA Recap</span>
+            </a>
+            <a href="https://jira.adorama.com/browse/MKT-88618" target="_blank" rel="noopener noreferrer" class="jira-ticket archive">
+              <span class="jira-ticket-id">MKT-88618</span>
+              <span class="jira-ticket-label">Trade &amp; Used 2025</span>
+              <span class="jira-ticket-cadences">2025 archive &mdash; Trade / Used</span>
+            </a>
           </div>
         </div>
 
@@ -3369,46 +3817,6 @@
           </div>
         </div>
 
-        <details style="margin-top:16px;" open>
-          <summary>Main Jira Tickets (2026)</summary>
-          <div class="details-body">
-            <ul>
-              <li><a href="https://jira.adorama.com/browse/MKT-99009" target="_blank" rel="noopener noreferrer">MKT-99009</a> — Adorama Emails 2026</li>
-              <li><a href="https://jira.adorama.com/browse/MKT-93582" target="_blank" rel="noopener noreferrer">MKT-93582</a> — Photo-Video Emails &amp; Newsletters</li>
-              <li><a href="https://jira.adorama.com/browse/MKT-99006?filter=-2" target="_blank" rel="noopener noreferrer">MKT-99006</a> — Trade &amp; Used 2026</li>
-              <li><a href="https://jira.adorama.com/browse/MKT-98683" target="_blank" rel="noopener noreferrer">MKT-98683</a> — Private Brands Emails 2026</li>
-              <li><a href="https://jira.adorama.com/browse/MKT-99173" target="_blank" rel="noopener noreferrer">MKT-99173</a> — EDU / Classroom Connect 2026</li>
-              <li><a href="https://jira.adorama.com/browse/MKT-101473" target="_blank" rel="noopener noreferrer">MKT-101473</a> — Emails: Musical Instruments, Consumer &amp; Pro-Audio</li>
-              <li><a href="https://jira.adorama.com/browse/MKT-93596" target="_blank" rel="noopener noreferrer">MKT-93596</a> — Adorama Events Emails</li>
-              <li><a href="https://jira.adorama.com/browse/MKT-98993" target="_blank" rel="noopener noreferrer">MKT-98993</a> — Store Email Newsletter 2026 Series</li>
-              <li><a href="https://jira.adorama.com/browse/MKT-67859" target="_blank" rel="noopener noreferrer">MKT-67859</a> — Creator's Huddle Weekly Templates</li>
-              <li><a href="https://jira.adorama.com/browse/MKT-90136" target="_blank" rel="noopener noreferrer">MKT-90136</a> — Adorama x (Printique | ABS | ARC)</li>
-              <li><a href="https://jira.adorama.com/browse/MKT-87089" target="_blank" rel="noopener noreferrer">MKT-87089</a> — Call Center: Call &amp; Save</li>
-            </ul>
-          </div>
-        </details>
-
-        <details>
-          <summary>Other Active Jira Tickets</summary>
-          <div class="details-body">
-            <ul>
-              <li><a href="https://jira.adorama.com/browse/MKT-92862" target="_blank" rel="noopener noreferrer">MKT-92862</a> — 2025 Loyalty &amp; Finance — Email Recipients</li>
-              <li><a href="https://jira.adorama.com/browse/MKT-89499" target="_blank" rel="noopener noreferrer">MKT-89499</a> — 2025 BAU Feature Banners (42 West, AdoramaTV, Events, Social)</li>
-              <li><a href="https://jira.adorama.com/browse/MKT-66480" target="_blank" rel="noopener noreferrer">MKT-66480</a> — Facebook Email Leads</li>
-            </ul>
-          </div>
-        </details>
-
-        <details>
-          <summary>Last Year's Jiras (Reference Only)</summary>
-          <div class="details-body">
-            <ul>
-              <li><a href="https://jira.adorama.com/browse/MKT-89153" target="_blank" rel="noopener noreferrer">MKT-89153</a> — Adorama Emails 2025</li>
-              <li><a href="https://jira.adorama.com/browse/MKT-88618" target="_blank" rel="noopener noreferrer">MKT-88618</a> — Trade &amp; Used 2025</li>
-            </ul>
-          </div>
-        </details>
-
         <details>
           <summary>Looker Dashboards</summary>
           <div class="details-body">
@@ -3434,7 +3842,7 @@
           <span class="badge">Confidential</span>
         </div>
 
-        <div class="grid two">
+        <div class="grid three">
           <div>
             <h4 style="margin: 0 0 10px; color: var(--rich-black); font-size: 16px;">Email Team</h4>
             <table>
@@ -3509,17 +3917,107 @@
         <div class="section-header">
           <div>
             <div class="section-kicker">16 / Troubleshooting</div>
-            <h3>Common Issues &amp; Fixes</h3>
-            <p class="section-desc">Recurring issues that may come up during builds, approvals, or reporting.</p>
+            <h3>When Things Go Wrong</h3>
+            <p class="section-desc">Recurring issues that may come up during builds, approvals, or sends &mdash; with the playbook for each.</p>
           </div>
         </div>
 
-        <details open><summary>Email audience is lower than expected</summary><div class="details-body">Check frequency cap, suppression logic, segment exclusions, engagement filters, and whether Bluecore classified the campaign as lower value.</div></details>
-        <details><summary>HTML or email proof looks clipped</summary><div class="details-body">Review total email file size, simplify heavy modules, reduce unnecessary copy, and keep unsubscribe/legal content visible before clipping. Adding a countdown timer can also push you over — test before adding.</div></details>
-        <details><summary>Pricing or savings do not match</summary><div class="details-body">Check the latest product feed, product page, merchant sheet, and any manual override in the build. Use Time Machine to confirm the live price.</div></details>
+        <h4 class="issues-subhead">SKUs &amp; Merchants</h4>
+        <details><summary>Merchant hasn&rsquo;t sent SKUs by deadline</summary><div class="details-body">Send a same-day reminder via the email thread. If still no response, escalate to the merchant mailing list and ping <strong>Robert</strong> or the relevant category contact (<strong>Alla</strong> for Trade/Used/EDU, etc.).</div></details>
+        <details><summary>Merchant sends wrong SKUs (out of stock, mispriced, wrong category)</summary><div class="details-body">First, confirm what&rsquo;s actually live on the website using <strong>Time Machine</strong>. You can also try appending <code>?emailprice=t</code> to the product URL to surface the email-specific price. If the SKU is still wrong, reach out to the merchant to confirm which price should be followed &mdash; or whether the SKU needs to be replaced.</div></details>
+        <details><summary>Merchant only partially fills the SKU request</summary><div class="details-body">Inform <strong>Gerber</strong> of how many SKUs you received. Ask <strong>Heather</strong> / Marketing Ops to supplement the remaining SKUs.</div></details>
+        <details><summary>Merchant sends SKUs after the deadline</summary><div class="details-body">Check whether there&rsquo;s still time to update the email. If not, let the merchant know the SKU will be included in the next suitable email.</div></details>
+
+        <h4 class="issues-subhead">Design &amp; Build</h4>
+        <details><summary>ADR designer is at capacity (1&ndash;2/day cap maxed)</summary><div class="details-body">Send the request to <strong>AW</strong> instead. If there&rsquo;s an existing global asset, provide the PSD so AW can match the design system.</div></details>
+        <details><summary>AW designer is at capacity (3&ndash;4/week, 1/day cap maxed)</summary><div class="details-body">If <em>both</em> ADR and AW are at full capacity, push the design due date back &mdash; making sure the new date still fits within the overall send timeline.</div></details>
+        <details><summary>Design comes back wrong</summary><div class="details-body">If it&rsquo;s a <strong>major change</strong>, ask the designer to update. If it&rsquo;s a <strong>minor change</strong> you can edit yourself, do it for faster turnaround.</div></details>
+        <details><summary>Email exceeds 100KB / clips in Gmail</summary><div class="details-body">For <strong>Newsletters, Events, Store Newsletter, and similar long-form emails</strong>: remove the PFU. For other email types: switch to the shorter Value Proposition footer, or remove it completely if needed.</div></details>
+        <details><summary>HTML or email proof looks clipped</summary><div class="details-body">Review total email file size, simplify heavy modules, reduce unnecessary copy, and keep unsubscribe/legal content visible before the clipping point. Adding a countdown timer can also push you over &mdash; test before including one.</div></details>
+        <details><summary>Pricing or savings do not match</summary><div class="details-body">Check the latest product feed, product page, merchant sheet, and any manual override in the build. Use <strong>Time Machine</strong> to confirm the live price for the scheduled send time.</div></details>
         <details><summary>Dynamic product block is not showing correctly</summary><div class="details-body">Confirm SKU eligibility, feed status, inventory availability, template conditions, and category logic.</div></details>
-        <details><summary>SMS short link not working</summary><div class="details-body">Confirm the link was converted to a short link in Attentive before scheduling. If not, the long URL eats character count and may break parsing.</div></details>
-        <details><summary>Merchant hasn't sent SKUs by deadline</summary><div class="details-body">Send a same-day reminder via the email thread. If still no response, escalate to the merchant mailing list and ping Robert or the relevant category contact (Alla for Trade/Used/EDU, etc.).</div></details>
+        <details><summary>Product feed broken / dynamic block empty on send day</summary><div class="details-body">Let <strong>Gerber</strong> know immediately. Reach out to <strong>Bluecore chat support</strong> and submit a support ticket right away.</div></details>
+
+        <h4 class="issues-subhead">Audience &amp; Send</h4>
+        <details><summary>Email audience is lower than expected</summary><div class="details-body">Check frequency cap, suppression logic, segment exclusions, engagement filters, and whether Bluecore classified the campaign as lower value.</div></details>
+        <details><summary>Frequency cap blocks the send</summary><div class="details-body">For <strong>Promo emails</strong>, override frequency capping when scheduling.</div></details>
+
+        <h4 class="issues-subhead">SMS</h4>
+        <details><summary>SMS short link not working</summary><div class="details-body">Confirm the link was converted to a short link in <strong>Attentive</strong> before scheduling. If not, the long URL eats into the character count and may break parsing.</div></details>
+      </section>
+
+      <section id="glossary">
+        <div class="section-header">
+          <div>
+            <div class="section-kicker">17 / Reference</div>
+            <h3>Glossary &amp; Acronyms</h3>
+            <p class="section-desc">Quick reference for the abbreviations, jargon, and team names used throughout this guide.</p>
+          </div>
+        </div>
+
+        <div class="glossary-grid">
+          <div class="glossary-group">
+            <h4>Teams &amp; Companies</h4>
+            <div class="glossary-list">
+              <div class="glossary-item"><span class="glossary-term">ADR</span><span class="glossary-def"><strong>Adorama Design Team</strong> &mdash; internal design team for ADR-routed campaigns.</span></div>
+              <div class="glossary-item"><span class="glossary-term">AW</span><span class="glossary-def"><strong>Alchemy Workx</strong> &mdash; external agency for email build, design, copywriting, QA, and scheduling. Routed via ClickUp.</span></div>
+              <div class="glossary-item"><span class="glossary-term">PB</span><span class="glossary-def"><strong>Private Brands</strong> &mdash; Adorama-owned brands like Flashpoint, Godox, Glow, Clar, etc.</span></div>
+              <div class="glossary-item"><span class="glossary-term">EDU</span><span class="glossary-def"><strong>Education / Classroom Connect</strong> &mdash; Adorama&rsquo;s education / institutional segment.</span></div>
+            </div>
+          </div>
+
+          <div class="glossary-group">
+            <h4>Email Cadences &amp; Types</h4>
+            <div class="glossary-list">
+              <div class="glossary-item"><span class="glossary-term">NPA</span><span class="glossary-def"><strong>New Product Announcement</strong> &mdash; emails sent when a brand launches a new product.</span></div>
+              <div class="glossary-item"><span class="glossary-term">PLCC</span><span class="glossary-def"><strong>Private Label Credit Card</strong> &mdash; Adorama&rsquo;s store credit card; campaigns about financing, statement credit, applications.</span></div>
+              <div class="glossary-item"><span class="glossary-term">VIP</span><span class="glossary-def"><strong>Loyalty / VIP Rewards</strong> &mdash; high-value customer program emails.</span></div>
+              <div class="glossary-item"><span class="glossary-term">BAU</span><span class="glossary-def"><strong>Business as Usual</strong> &mdash; recurring/regular campaign type (e.g., BAU Feature Banners ticket).</span></div>
+              <div class="glossary-item"><span class="glossary-term">BFCM</span><span class="glossary-def"><strong>Black Friday / Cyber Monday</strong> &mdash; the seasonal Q4 segment set used during peak holiday.</span></div>
+            </div>
+          </div>
+
+          <div class="glossary-group">
+            <h4>Email Components</h4>
+            <div class="glossary-list">
+              <div class="glossary-item"><span class="glossary-term">SL</span><span class="glossary-def"><strong>Subject Line</strong> &mdash; the email&rsquo;s headline shown in the inbox.</span></div>
+              <div class="glossary-item"><span class="glossary-term">PH</span><span class="glossary-def"><strong>Preheader</strong> &mdash; the preview text shown after the subject line.</span></div>
+              <div class="glossary-item"><span class="glossary-term">CTA</span><span class="glossary-def"><strong>Call to Action</strong> &mdash; the button or link that drives the click.</span></div>
+              <div class="glossary-item"><span class="glossary-term">SKU</span><span class="glossary-def"><strong>Stock Keeping Unit</strong> &mdash; a product&rsquo;s unique identifier; emails frequently feature SKUs from merchants.</span></div>
+              <div class="glossary-item"><span class="glossary-term">UTM</span><span class="glossary-def"><strong>Urchin Tracking Module</strong> &mdash; URL parameters used to track campaign performance in analytics.</span></div>
+            </div>
+          </div>
+
+          <div class="glossary-group">
+            <h4>Pages &amp; Layouts</h4>
+            <div class="glossary-list">
+              <div class="glossary-item"><span class="glossary-term">LP</span><span class="glossary-def"><strong>Landing Page</strong> &mdash; the destination page when someone clicks through.</span></div>
+              <div class="glossary-item"><span class="glossary-term">GLP</span><span class="glossary-def"><strong>Generic Landing Page</strong> &mdash; the evergreen Adorama landing page (e.g., adorama.com/g/mystery-sale) reused across campaigns.</span></div>
+            </div>
+          </div>
+
+          <div class="glossary-group">
+            <h4>Reporting &amp; Metrics</h4>
+            <div class="glossary-list">
+              <div class="glossary-item"><span class="glossary-term">MTD</span><span class="glossary-def"><strong>Month-to-Date</strong> &mdash; performance from the 1st of the month through today.</span></div>
+              <div class="glossary-item"><span class="glossary-term">YTD</span><span class="glossary-def"><strong>Year-to-Date</strong> &mdash; performance from January 1st through today.</span></div>
+              <div class="glossary-item"><span class="glossary-term">PCLV</span><span class="glossary-def"><strong>Predicted Customer Lifetime Value</strong> &mdash; Bluecore&rsquo;s estimate of total customer worth (e.g., PCLV_25 = $25+ predicted lifetime value).</span></div>
+            </div>
+          </div>
+
+          <div class="glossary-group">
+            <h4>Tools &amp; Platforms</h4>
+            <div class="glossary-list">
+              <div class="glossary-item"><span class="glossary-term">Bluecore</span><span class="glossary-def">Email platform &mdash; building, segmenting, scheduling, and sending campaigns.</span></div>
+              <div class="glossary-item"><span class="glossary-term">Attentive</span><span class="glossary-def">SMS platform &mdash; SMS campaign creation, testing, scheduling.</span></div>
+              <div class="glossary-item"><span class="glossary-term">Jira</span><span class="glossary-def">Ticket system for the Internal Design Team. One main ticket per email cadence per year.</span></div>
+              <div class="glossary-item"><span class="glossary-term">ClickUp</span><span class="glossary-def">Task system for routing requests to Alchemy Workx (build, design, copy).</span></div>
+              <div class="glossary-item"><span class="glossary-term">Looker</span><span class="glossary-def">Reporting/BI tool &mdash; dashboards for campaign performance, audience trends.</span></div>
+              <div class="glossary-item"><span class="glossary-term">BLC</span><span class="glossary-def"><strong>Bluecore</strong> (abbreviated in segment names like _42West-Browsed-45D-BLC-NonMSFT).</span></div>
+              <div class="glossary-item"><span class="glossary-term">MSFT</span><span class="glossary-def"><strong>Microsoft</strong> &mdash; appears in segment names (e.g., NonMSFT = excluding Microsoft email domains).</span></div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <div class="footer">Adorama Email Marketing Transition Guide • Internal handover document</div>
@@ -3551,6 +4049,66 @@
           }
         });
       });
+
+      // Scroll-spy: highlight the nav link of whichever section is currently in view.
+      // Uses IntersectionObserver with a top-biased rootMargin so a section becomes
+      // active when its top crosses the upper third of the viewport.
+      (function () {
+        var sections = [];
+        navLinks.forEach(function (link) {
+          var id = link.getAttribute('data-target');
+          var sec = document.getElementById(id);
+          if (sec) sections.push({ id: id, el: sec, link: link });
+        });
+        if (!sections.length || typeof IntersectionObserver === 'undefined') return;
+
+        // Track which sections are currently intersecting
+        var intersecting = {};
+
+        function setActive(id) {
+          navLinks.forEach(function (l) { l.classList.remove('active'); });
+          var match = sections.find(function (s) { return s.id === id; });
+          if (match) match.link.classList.add('active');
+        }
+
+        function pickClosestToTop() {
+          // From the set of currently-intersecting sections, pick the one whose
+          // top is highest on screen (smallest top distance from rootMargin top edge).
+          var candidates = Object.keys(intersecting).filter(function (k) { return intersecting[k]; });
+          if (!candidates.length) return;
+          var best = null;
+          var bestTop = Infinity;
+          candidates.forEach(function (id) {
+            var sec = sections.find(function (s) { return s.id === id; });
+            if (!sec) return;
+            var top = sec.el.getBoundingClientRect().top;
+            // Prefer sections whose top is at or above the trigger zone
+            // but if all are below, pick the one closest to the trigger zone.
+            var dist = Math.abs(top - 100); // 100px = approx trigger band
+            if (dist < bestTop) {
+              bestTop = dist;
+              best = id;
+            }
+          });
+          if (best) setActive(best);
+        }
+
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            var id = entry.target.id;
+            intersecting[id] = entry.isIntersecting;
+          });
+          pickClosestToTop();
+        }, {
+          // Trigger zone: top 100px of viewport down to 60% mark
+          // Translates to: a section is considered active while its top is somewhere
+          // between just-below-the-top (100px) and 40% from bottom.
+          rootMargin: '-100px 0px -40% 0px',
+          threshold: 0
+        });
+
+        sections.forEach(function (s) { observer.observe(s.el); });
+      })();
 
       // Copy buttons - event delegation on document
       function showCopied(btn) {
@@ -4107,6 +4665,10 @@
 
       var todayStr = new Date().toISOString().split('T')[0];
       dateInput.min = todayStr;
+
+      // If openBtn is an anchor (standalone link), skip all modal wiring — let the
+      // browser's default navigation open the generator in a new tab instead.
+      if (openBtn && openBtn.tagName === 'A') return;
 
       // ----- Modal open/close -----
       function openModal() {

@@ -1,0 +1,3216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Campaign Process Generator — Adorama Email Marketing</title>
+
+  <style>
+
+    :root {
+      --adorama-blue: #004387;
+      --link-blue: #0066CC;
+      --rich-black: #222222;
+      --highlight: #ED5132;
+      --teal: #13B0C2;
+      --dark-gray: #585C5F;
+      --medium-gray: #8B949B;
+      --light-gray: #F3F3F3;
+      --white: #FFFFFF;
+      --border: #DDE3E8;
+      --shadow: 0 14px 34px rgba(34, 34, 34, 0.08);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--rich-black);
+      background: linear-gradient(135deg, #F7FAFC 0%, var(--light-gray) 100%);
+    }
+
+    .layout {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      width: 288px;
+      background: var(--adorama-blue);
+      color: var(--white);
+      padding: 28px 22px;
+      position: fixed;
+      inset: 0 auto 0 0;
+      overflow-y: auto;
+      box-shadow: 8px 0 24px rgba(0, 67, 135, 0.16);
+      z-index: 10;
+    }
+
+    .brand { margin-bottom: 24px; }
+
+    .brand-tag {
+      display: inline-block;
+      background: rgba(19, 176, 194, 0.18);
+      color: #DDFBFF;
+      border: 1px solid rgba(19, 176, 194, 0.35);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .brand h1 {
+      font-size: 22px;
+      line-height: 1.18;
+      margin: 0 0 10px;
+    }
+
+    .brand p {
+      margin: 0;
+      color: #D6E7F7;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .nav-label {
+      color: #BFD7EF;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin: 22px 0 8px;
+    }
+
+    .nav-link {
+      display: block;
+      width: 100%;
+      color: var(--white);
+      text-decoration: none;
+      padding: 10px 12px;
+      margin: 2px 0;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 13.5px;
+      line-height: 1.25;
+      transition: background 0.18s ease, transform 0.18s ease;
+    }
+
+    .nav-link:hover,
+    .nav-link:focus {
+      background: rgba(255, 255, 255, 0.13);
+      outline: none;
+      transform: translateX(2px);
+      text-decoration: none;
+    }
+
+    .nav-link.active {
+      background: var(--teal);
+      color: var(--rich-black);
+      font-weight: 700;
+    }
+
+    main {
+      margin-left: 288px;
+      width: calc(100% - 288px);
+      padding: 34px;
+    }
+
+    .hero {
+      background: var(--white);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      margin-bottom: 26px;
+      scroll-margin-top: 24px;
+    }
+
+    .hero-top {
+      background: linear-gradient(135deg, var(--adorama-blue), var(--link-blue));
+      color: var(--white);
+      padding: 34px;
+      position: relative;
+    }
+
+    .hero-top:after {
+      content: "";
+      position: absolute;
+      right: -48px;
+      top: -62px;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(19,176,194,.55), rgba(19,176,194,0) 68%);
+    }
+
+    .hero-logo {
+      position: absolute;
+      top: 26px;
+      right: 30px;
+      width: 84px;
+      height: 84px;
+      filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.18));
+      z-index: 2;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 999px;
+      padding: 7px 12px;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .hero h2 {
+      font-size: 36px;
+      line-height: 1.08;
+      max-width: 780px;
+      margin: 0 0 12px;
+    }
+
+    .hero p {
+      max-width: 820px;
+      margin: 0;
+      color: #EAF5FF;
+      line-height: 1.6;
+      font-size: 15px;
+    }
+
+    .hero-meta {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1px;
+      background: var(--border);
+    }
+
+    .meta-card {
+      background: var(--white);
+      padding: 18px 20px;
+    }
+
+    .meta-label {
+      display: block;
+      color: var(--medium-gray);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 7px;
+    }
+
+    .meta-value {
+      font-weight: 700;
+      color: var(--rich-black);
+    }
+
+    .alert-banner {
+      background: #FFF8F6;
+      border: 1px solid rgba(237, 81, 50, 0.35);
+      border-left: 5px solid var(--highlight);
+      border-radius: 14px;
+      padding: 14px 18px;
+      margin-bottom: 22px;
+      color: var(--rich-black);
+      font-size: 13.5px;
+      line-height: 1.55;
+    }
+
+    .alert-banner strong { color: var(--highlight); }
+
+    section {
+      scroll-margin-top: 24px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 26px;
+      margin-bottom: 22px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .section-kicker {
+      color: var(--teal);
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    h3 {
+      font-size: 24px;
+      margin: 0;
+      color: var(--adorama-blue);
+    }
+
+    .section-desc {
+      color: var(--dark-gray);
+      line-height: 1.6;
+      margin: 8px 0 0;
+      max-width: 860px;
+    }
+
+    .badge {
+      flex: 0 0 auto;
+      background: rgba(237, 81, 50, 0.1);
+      color: var(--highlight);
+      border: 1px solid rgba(237, 81, 50, 0.25);
+      border-radius: 999px;
+      padding: 7px 12px;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .badge.teal {
+      background: rgba(19, 176, 194, 0.12);
+      color: #0a7a87;
+      border-color: rgba(19, 176, 194, 0.3);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+    .card {
+      background: #FBFCFD;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px;
+    }
+
+    .card h4 {
+      margin: 0 0 10px;
+      color: var(--rich-black);
+      font-size: 16px;
+    }
+
+    .card p,
+    .card li {
+      color: var(--dark-gray);
+      line-height: 1.55;
+      font-size: 14px;
+    }
+
+    .card p { margin: 0; }
+
+    .card .meta-line {
+      font-size: 12px;
+      color: var(--medium-gray);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 4px;
+    }
+
+    ul, ol {
+      margin: 0;
+      padding-left: 19px;
+    }
+
+    li { margin: 7px 0; }
+
+    .accent-left { border-left: 5px solid var(--teal); }
+
+    .warning {
+      border-left: 5px solid var(--highlight);
+      background: #FFF8F6;
+    }
+
+    .checklist {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .check-item {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      background: #FBFCFD;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 13px 14px;
+      color: var(--dark-gray);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .check {
+      flex: 0 0 auto;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--teal);
+      margin-top: 1px;
+      position: relative;
+    }
+
+    .check:after {
+      content: "";
+      position: absolute;
+      left: 6px;
+      top: 3px;
+      width: 4px;
+      height: 8px;
+      border: solid var(--white);
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+
+    /* Grouped QA Checklist */
+    .qa-grid {
+      column-count: 2;
+      column-gap: 14px;
+    }
+
+    .qa-group {
+      background: #FBFCFD;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px 20px;
+      margin-bottom: 14px;
+      break-inside: avoid;
+      -webkit-column-break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .qa-group-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .qa-group-num {
+      flex: 0 0 auto;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--adorama-blue);
+      color: var(--white);
+      font-weight: 700;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .qa-group-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--adorama-blue);
+      margin: 0;
+    }
+
+    .qa-group-title .conditional {
+      color: var(--medium-gray);
+      font-weight: 500;
+      font-size: 13px;
+      margin-left: 4px;
+    }
+
+    .qa-group-items {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .qa-check {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 8px 10px;
+      border-radius: 8px;
+      font-size: 13.5px;
+      color: var(--rich-black);
+      cursor: pointer;
+      transition: background 0.15s ease;
+      line-height: 1.45;
+    }
+
+    .qa-check:hover { background: rgba(19, 176, 194, 0.06); }
+
+    .qa-check input[type="checkbox"] {
+      flex: 0 0 auto;
+      margin: 2px 0 0 0;
+      cursor: pointer;
+      accent-color: var(--teal);
+      width: 15px;
+      height: 15px;
+    }
+
+    .qa-check.is-checked { color: var(--medium-gray); }
+    .qa-check.is-checked .qa-label { text-decoration: line-through; }
+
+    .qa-footer-note {
+      margin-top: 18px;
+      padding: 12px 14px;
+      background: #F0FBFD;
+      border: 1px solid rgba(19, 176, 194, 0.3);
+      border-left: 4px solid var(--teal);
+      border-radius: 10px;
+      font-size: 13px;
+      color: var(--rich-black);
+      line-height: 1.55;
+    }
+
+    .qa-footer-note strong { color: #0a7a87; }
+
+    @media (max-width: 760px) {
+      .qa-grid { column-count: 1; }
+    }
+
+    details {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 0;
+      background: #FBFCFD;
+      margin: 12px 0;
+      overflow: hidden;
+    }
+
+    summary {
+      cursor: pointer;
+      padding: 15px 16px;
+      font-weight: 700;
+      color: var(--adorama-blue);
+      list-style: none;
+    }
+
+    summary::-webkit-details-marker { display: none; }
+
+    summary:after {
+      content: "+";
+      float: right;
+      color: var(--highlight);
+      font-weight: 800;
+      font-size: 18px;
+    }
+
+    details[open] summary:after { content: "\2013"; }
+
+    .details-body {
+      padding: 0 16px 16px;
+      color: var(--dark-gray);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .details-body code {
+      background: rgba(0, 67, 135, 0.08);
+      color: var(--adorama-blue);
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-family: "SF Mono", Consolas, monospace;
+      font-size: 12.5px;
+    }
+
+    .issues-subhead {
+      margin: 24px 0 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--adorama-blue);
+    }
+
+    .issues-subhead:first-of-type { margin-top: 4px; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: var(--white);
+    }
+
+    th {
+      background: var(--adorama-blue);
+      color: var(--white);
+      text-align: left;
+      padding: 13px;
+      font-size: 13px;
+    }
+
+    td {
+      padding: 13px;
+      border-top: 1px solid var(--border);
+      color: var(--dark-gray);
+      font-size: 14px;
+      vertical-align: top;
+    }
+
+    td.cat { font-weight: 700; color: var(--rich-black); width: 32%; }
+
+    a {
+      color: var(--link-blue);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    a:hover { text-decoration: underline; }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .pill {
+      background: rgba(0, 67, 135, 0.06);
+      color: var(--adorama-blue);
+      border: 1px solid rgba(0, 67, 135, 0.18);
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 11.5px;
+      font-weight: 700;
+      font-family: "SF Mono", Consolas, monospace;
+    }
+
+    .pill .count {
+      color: var(--medium-gray);
+      font-weight: 500;
+      margin-left: 6px;
+    }
+
+    .seg-card-eyebrow {
+      display: block;
+      font-weight: 700;
+      font-size: 10.5px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 4px;
+    }
+
+    .seg-card-count {
+      font-weight: 400;
+      font-size: 12px;
+      color: var(--medium-gray);
+      margin-left: 6px;
+    }
+
+    .seg-card-note {
+      font-size: 12px;
+      color: var(--medium-gray);
+      margin-top: 12px;
+      line-height: 1.5;
+      font-style: italic;
+    }
+
+    .seg-card-note strong {
+      color: var(--rich-black);
+      font-style: normal;
+    }
+
+    /* Vertical pill list (instead of wrapping pill-row) */
+    .pill-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      align-items: flex-start;
+    }
+
+    .pill-list .pill {
+      display: inline-block;
+      max-width: 100%;
+      word-break: break-all;
+    }
+
+    /* Segment cards */
+    .seg-card {
+      background: #FBFCFD;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .seg-card-head {
+      background: var(--adorama-blue);
+      color: var(--white);
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .seg-card-head h4 {
+      margin: 0;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    /* Color-coded header by category — uses class on the head */
+    .seg-card-head.cat-general    { background: linear-gradient(135deg, #004387, #0066CC); }
+    .seg-card-head.cat-seasonal   { background: linear-gradient(135deg, #6B4FBF, #9B7BD4); }
+    .seg-card-head.cat-services   { background: linear-gradient(135deg, #0a7a87, #13B0C2); }
+    .seg-card-head.cat-newsletter { background: linear-gradient(135deg, #C7421F, #ED5132); }
+    .seg-card-head.cat-npa        { background: linear-gradient(135deg, #585C5F, #8B949B); }
+    .seg-card-head.cat-category   { background: linear-gradient(135deg, #2C5F2D, #4A8B4F); }
+
+    .seg-card-total-pill {
+      flex: 0 0 auto;
+      background: rgba(255, 255, 255, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: var(--white);
+      border-radius: 999px;
+      padding: 3px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      white-space: nowrap;
+      letter-spacing: 0.04em;
+    }
+
+    .seg-card-total-pill .total-value { letter-spacing: 0; }
+
+    .seg-card-body {
+      padding: 16px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    @media (max-width: 980px) {
+      .seg-card-head { padding: 10px 14px; }
+      .seg-card-head h4 { font-size: 12px; }
+    }
+
+    /* Process timeline */
+    .process-timeline {
+      position: relative;
+      padding-left: 56px;
+    }
+
+    .process-timeline:before {
+      content: "";
+      position: absolute;
+      left: 19px;
+      top: 14px;
+      bottom: 14px;
+      width: 2px;
+      background: var(--border);
+    }
+
+    .process-step {
+      position: relative;
+      margin-bottom: 14px;
+    }
+
+    .process-step:last-child { margin-bottom: 0; }
+
+    .step-number {
+      position: absolute;
+      left: -56px;
+      top: 14px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--adorama-blue);
+      color: var(--white);
+      font-weight: 700;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 3px solid var(--white);
+      box-shadow: 0 0 0 2px var(--border);
+      z-index: 2;
+    }
+
+    .step-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+
+    .step-header h4 {
+      margin: 0;
+      color: var(--rich-black);
+      font-size: 16px;
+    }
+
+    .timing-pill {
+      flex: 0 0 auto;
+      background: rgba(237, 81, 50, 0.1);
+      color: var(--highlight);
+      border: 1px solid rgba(237, 81, 50, 0.25);
+      border-radius: 999px;
+      padding: 4px 11px;
+      font-size: 11.5px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .timing-pill.calm {
+      background: rgba(19, 176, 194, 0.1);
+      color: #0a7a87;
+      border-color: rgba(19, 176, 194, 0.3);
+    }
+
+    .timing-pill.urgent {
+      background: rgba(0, 67, 135, 0.08);
+      color: var(--adorama-blue);
+      border-color: rgba(0, 67, 135, 0.25);
+    }
+
+    .process-step .card { margin: 0; }
+
+    .process-step .card p,
+    .process-step .card ul { font-size: 14px; }
+
+    /* Copy button */
+    .cell-with-copy {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .copy-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: var(--white);
+      color: var(--adorama-blue);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 3px 9px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.15s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+
+    .copy-btn:hover {
+      background: var(--adorama-blue);
+      color: var(--white);
+      border-color: var(--adorama-blue);
+    }
+
+    .copy-btn.copied {
+      background: var(--teal);
+      color: var(--rich-black);
+      border-color: var(--teal);
+    }
+
+    /* ============= CAMPAIGN PROCESS GENERATOR ============= */
+    .hero-cta {
+      background: var(--white);
+      padding: 22px 26px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .hero-cta-text {
+      flex: 1 1 380px;
+      color: var(--dark-gray);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .hero-cta-text strong { color: var(--rich-black); }
+
+    .btn-primary {
+      background: var(--highlight);
+      color: var(--white);
+      border: none;
+      border-radius: 10px;
+      padding: 14px 22px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      letter-spacing: 0.04em;
+      transition: all 0.15s ease;
+      font-family: inherit;
+      white-space: nowrap;
+      text-transform: uppercase;
+      display: inline-block;
+      text-decoration: none;
+    }
+
+    a.btn-primary:hover { text-decoration: none; color: var(--white); }
+
+    .btn-primary:hover {
+      background: #d8431f;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(237, 81, 50, 0.3);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .generator-panel {
+      display: none;
+    }
+
+    /* Modal */
+    body.modal-open { overflow: hidden; }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 25, 40, 0.6);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      z-index: 1000;
+      display: none;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 40px 16px;
+      overflow-y: auto;
+    }
+
+    .modal-backdrop.is-open { display: flex; }
+
+    .modal-dialog {
+      background: var(--white);
+      border-radius: var(--radius);
+      width: 100%;
+      max-width: 920px;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+      animation: modal-pop 0.2s ease;
+      margin: auto 0;
+    }
+
+    @keyframes modal-pop {
+      from { opacity: 0; transform: translateY(8px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .modal-header {
+      background: linear-gradient(135deg, var(--adorama-blue), var(--link-blue));
+      color: var(--white);
+      padding: 22px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .modal-header h3 {
+      margin: 0 0 4px;
+      font-size: 20px;
+      color: var(--white);
+    }
+
+    .modal-header p {
+      margin: 0;
+      font-size: 13px;
+      color: #DDEBFA;
+      line-height: 1.5;
+    }
+
+    .modal-close-x {
+      flex: 0 0 auto;
+      background: rgba(255, 255, 255, 0.15);
+      color: var(--white);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 8px;
+      padding: 7px 13px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .modal-close-x:hover { background: rgba(255, 255, 255, 0.25); }
+
+    .modal-body {
+      padding: 26px 28px 30px;
+      max-height: calc(100vh - 160px);
+      overflow-y: auto;
+    }
+
+    .generator-form {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .form-field { display: flex; flex-direction: column; }
+
+    .form-field.full { grid-column: 1 / -1; }
+
+    .form-field label {
+      font-size: 11.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      font-weight: 700;
+      color: var(--medium-gray);
+      margin-bottom: 6px;
+    }
+
+    .form-field select,
+    .form-field input {
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: inherit;
+      background: var(--white);
+      color: var(--rich-black);
+      transition: border 0.15s ease;
+    }
+
+    .form-field select:focus,
+    .form-field input:focus {
+      outline: none;
+      border-color: var(--adorama-blue);
+    }
+
+    .form-field select:disabled,
+    .form-field input:disabled {
+      background: var(--light-gray);
+      color: var(--medium-gray);
+      cursor: not-allowed;
+    }
+
+    .form-hint {
+      font-size: 11.5px;
+      color: var(--medium-gray);
+      margin-top: 5px;
+      line-height: 1.4;
+      min-height: 16px;
+    }
+
+    .form-hint.suggest {
+      color: #0a7a87;
+      font-weight: 600;
+    }
+
+    .form-actions {
+      grid-column: 1 / -1;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-top: 4px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .gen-output {
+      display: none;
+      margin-top: 26px;
+      padding-top: 22px;
+      border-top: 1px solid var(--border);
+    }
+
+    .gen-output.is-shown { display: block; }
+
+    .gen-summary {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 18px;
+    }
+
+    .gen-summary-cell {
+      background: #FBFCFD;
+      padding: 14px 16px;
+    }
+
+    .gen-summary-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--medium-gray);
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .gen-summary-value {
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--rich-black);
+    }
+
+    .design-tag-adr,
+    .design-tag-aw {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .design-tag-adr {
+      background: rgba(19, 176, 194, 0.12);
+      color: #0a7a87;
+      border: 1px solid rgba(19, 176, 194, 0.3);
+    }
+
+    .design-tag-aw {
+      background: rgba(237, 81, 50, 0.1);
+      color: var(--highlight);
+      border: 1px solid rgba(237, 81, 50, 0.25);
+    }
+
+    .gen-warning {
+      background: #FFF8F6;
+      border: 1px solid rgba(237, 81, 50, 0.35);
+      border-left: 5px solid var(--highlight);
+      border-radius: 10px;
+      padding: 13px 16px;
+      margin-bottom: 18px;
+      color: var(--rich-black);
+      font-size: 13.5px;
+      line-height: 1.55;
+    }
+
+    .gen-warning strong { color: var(--highlight); }
+
+    .gen-section { margin-top: 22px; }
+
+    .gen-section h4 {
+      margin: 0 0 12px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--medium-gray);
+      font-weight: 700;
+    }
+
+    .gen-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .gen-milestone {
+      display: flex;
+      gap: 14px;
+      background: #FBFCFD;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 14px;
+      align-items: flex-start;
+    }
+
+    .gen-milestone.past-due {
+      border-color: rgba(237, 81, 50, 0.4);
+      background: #FFF8F6;
+    }
+
+    .gen-milestone.send-day {
+      border-color: rgba(19, 176, 194, 0.4);
+      background: rgba(19, 176, 194, 0.05);
+    }
+
+    .milestone-date {
+      flex: 0 0 124px;
+      font-size: 13px;
+    }
+
+    .milestone-date .date-line {
+      font-weight: 700;
+      color: var(--adorama-blue);
+    }
+
+    .gen-milestone.send-day .date-line { color: #0a7a87; }
+    .gen-milestone.past-due .date-line { color: var(--highlight); }
+
+    .milestone-date .offset {
+      display: block;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--medium-gray);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-top: 2px;
+    }
+
+    .milestone-date .past-tag {
+      display: inline-block;
+      background: var(--highlight);
+      color: var(--white);
+      font-size: 9.5px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-top: 5px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
+    .milestone-actions {
+      flex: 1;
+      font-size: 13px;
+      color: var(--rich-black);
+      line-height: 1.55;
+    }
+
+    .milestone-actions ul { padding-left: 18px; margin: 0; }
+    .milestone-actions li { margin: 3px 0; }
+
+    .milestone-subactions {
+      padding-left: 18px;
+      margin: 8px 0 0;
+      font-size: 12.5px;
+      color: var(--medium-gray);
+    }
+
+    .milestone-subactions li { margin: 2px 0; }
+
+    .milestone-warning {
+      margin-top: 10px;
+      padding: 9px 12px;
+      background: #FFF8F6;
+      border-left: 3px solid var(--highlight);
+      border-radius: 6px;
+      font-size: 12.5px;
+      color: var(--rich-black);
+      line-height: 1.5;
+    }
+
+    .milestone-warning strong { color: var(--highlight); }
+
+    .subject-template {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 12px;
+      margin: 8px 0 4px;
+      font-family: "SF Mono", Consolas, monospace;
+      font-size: 12px;
+      color: var(--adorama-blue);
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      word-break: break-word;
+    }
+
+    .subject-template-text { flex: 1 1 auto; min-width: 0; }
+
+    .gen-contacts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .gen-contact-pill {
+      background: rgba(0, 67, 135, 0.06);
+      color: var(--adorama-blue);
+      border: 1px solid rgba(0, 67, 135, 0.2);
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 12.5px;
+      font-weight: 700;
+    }
+
+    .gen-contact-pill .role {
+      color: var(--medium-gray);
+      font-weight: 500;
+      margin-left: 6px;
+    }
+
+    .gen-contact-pill.approver {
+      background: rgba(237, 81, 50, 0.08);
+      color: var(--highlight);
+      border-color: rgba(237, 81, 50, 0.3);
+    }
+
+    .gen-contact-pill.approver .role { color: rgba(237, 81, 50, 0.7); }
+
+    .gen-contact-pill.merchant {
+      background: rgba(19, 176, 194, 0.1);
+      color: #0a7a87;
+      border-color: rgba(19, 176, 194, 0.3);
+    }
+
+    .gen-contact-pill.merchant .role { color: rgba(10, 122, 135, 0.7); }
+
+    /* Contact buckets within Contacts section */
+    .gen-bucket {
+      margin-bottom: 12px;
+    }
+
+    .gen-bucket:last-child { margin-bottom: 0; }
+
+    .gen-bucket-title {
+      margin: 0 0 6px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--medium-gray);
+    }
+
+    /* Suggested Segments */
+    .gen-segments {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .gen-segment-pill {
+      background: rgba(0, 67, 135, 0.06);
+      color: var(--adorama-blue);
+      border: 1px solid rgba(0, 67, 135, 0.18);
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 11.5px;
+      font-weight: 700;
+      font-family: "SF Mono", Consolas, monospace;
+    }
+
+    .gen-segment-note {
+      margin-top: 10px;
+      padding: 9px 12px;
+      background: #F0FBFD;
+      border-left: 3px solid var(--teal);
+      border-radius: 6px;
+      font-size: 12.5px;
+      color: var(--rich-black);
+      line-height: 1.5;
+    }
+
+    .gen-segment-note strong { color: #0a7a87; }
+
+    .gen-checklist {
+      column-count: 2;
+      column-gap: 8px;
+    }
+
+    .gen-check-item {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      background: #FBFCFD;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 13px;
+      font-size: 13px;
+      color: var(--rich-black);
+      cursor: pointer;
+      transition: background 0.15s ease;
+      line-height: 1.45;
+      margin-bottom: 8px;
+      break-inside: avoid;
+      -webkit-column-break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .gen-check-item:hover { background: rgba(19, 176, 194, 0.05); }
+
+    .gen-check-item input[type="checkbox"] {
+      flex: 0 0 auto;
+      margin: 2px 0 0 0;
+      cursor: pointer;
+      accent-color: var(--teal);
+      width: 15px;
+      height: 15px;
+    }
+
+    .gen-check-item.is-checked {
+      background: rgba(19, 176, 194, 0.08);
+      border-color: rgba(19, 176, 194, 0.3);
+    }
+
+    .gen-check-item.is-checked .gen-check-label {
+      text-decoration: line-through;
+      color: var(--medium-gray);
+    }
+
+    .gen-actions {
+      margin-top: 24px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn-secondary {
+      background: var(--white);
+      color: var(--adorama-blue);
+      border: 1px solid var(--adorama-blue);
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.15s ease;
+    }
+
+    .btn-secondary:hover {
+      background: var(--adorama-blue);
+      color: var(--white);
+    }
+
+    .btn-secondary.copied {
+      background: var(--teal);
+      border-color: var(--teal);
+      color: var(--rich-black);
+    }
+
+    .gen-notes {
+      background: #F0FBFD;
+      border: 1px solid rgba(19, 176, 194, 0.3);
+      border-left: 4px solid var(--teal);
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-top: 14px;
+      font-size: 13px;
+      color: var(--rich-black);
+      line-height: 1.55;
+    }
+
+    .gen-notes strong { color: #0a7a87; }
+
+    @media (max-width: 760px) {
+      .modal-backdrop { padding: 0; align-items: stretch; }
+      .modal-dialog { border-radius: 0; max-width: 100%; }
+      .modal-body { max-height: calc(100vh - 130px); padding: 20px; }
+      .modal-header { padding: 16px 20px; }
+      .generator-form { grid-template-columns: 1fr; }
+      .gen-summary { grid-template-columns: 1fr; }
+      .gen-checklist { column-count: 1; }
+      .gen-milestone { flex-direction: column; gap: 6px; }
+      .milestone-date { flex: none; }
+      .hero-cta { flex-direction: column; align-items: stretch; }
+      .btn-primary { width: 100%; }
+    }
+    /* ============= END GENERATOR ============= */
+    .sample-link {
+      display: block;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 12px;
+      margin-top: 6px;
+      font-size: 12px;
+      font-family: "SF Mono", Consolas, monospace;
+      color: var(--adorama-blue);
+      text-decoration: none;
+      transition: all 0.15s ease;
+      word-break: break-all;
+    }
+
+    .sample-link:hover {
+      background: rgba(0, 67, 135, 0.04);
+      border-color: var(--adorama-blue);
+      text-decoration: none;
+    }
+
+    .sample-link:before {
+      content: "\1F517  ";
+      opacity: 0.6;
+    }
+
+    .used-for {
+      display: inline-block;
+      background: rgba(19, 176, 194, 0.1);
+      color: #0a7a87;
+      border: 1px solid rgba(19, 176, 194, 0.3);
+      border-radius: 999px;
+      padding: 3px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      margin: 6px 0 10px;
+    }
+
+    /* Cadence day grouping */
+    .cadence-day {
+      margin-bottom: 26px;
+    }
+
+    .cadence-day:last-child { margin-bottom: 0; }
+
+    .day-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+
+    .day-name {
+      background: var(--teal);
+      color: var(--rich-black);
+      border-radius: 8px;
+      padding: 6px 14px;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .day-types {
+      color: var(--medium-gray);
+      font-size: 13.5px;
+      line-height: 1.5;
+    }
+
+    .day-types strong {
+      color: var(--rich-black);
+      font-weight: 700;
+    }
+
+    /* ===== EMAIL REFERENCE TABLE ===== */
+    .ref-table-wrap {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow-x: auto;
+      background: var(--white);
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .ref-table {
+      width: 100%;
+      min-width: 1100px;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    .ref-table thead th {
+      background: var(--adorama-blue);
+      color: var(--white);
+      text-align: left;
+      padding: 12px 14px;
+      font-size: 11.5px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-weight: 700;
+      vertical-align: bottom;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    .ref-table tbody td {
+      padding: 13px 14px;
+      border-top: 1px solid var(--border);
+      vertical-align: top;
+      color: var(--dark-gray);
+      line-height: 1.5;
+    }
+
+    .ref-table tbody tr:nth-child(even) td {
+      background: #FBFCFD;
+    }
+
+    .ref-table .ref-cadence {
+      font-weight: 700;
+      color: var(--rich-black);
+      min-width: 220px;
+    }
+
+    .ref-table .ref-cadence-cat {
+      display: block;
+      font-weight: 600;
+      font-size: 10.5px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 3px;
+    }
+
+    .ref-format,
+    .ref-skus,
+    .ref-approval { min-width: 180px; }
+
+    .ref-notes { min-width: 200px; font-size: 12.5px; }
+
+    .ref-design {
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .ref-design-pill {
+      display: inline-block;
+      padding: 4px 11px;
+      border-radius: 999px;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .ref-design-pill.adr {
+      background: rgba(19, 176, 194, 0.12);
+      color: #0a7a87;
+      border: 1px solid rgba(19, 176, 194, 0.35);
+    }
+
+    .ref-design-pill.aw {
+      background: rgba(237, 81, 50, 0.1);
+      color: var(--highlight);
+      border: 1px solid rgba(237, 81, 50, 0.3);
+    }
+
+    .ref-jira {
+      min-width: 150px;
+      font-size: 12px;
+    }
+
+    .ref-jira a {
+      display: inline-block;
+      background: rgba(0, 67, 135, 0.06);
+      color: var(--adorama-blue);
+      border: 1px solid rgba(0, 67, 135, 0.2);
+      border-radius: 6px;
+      padding: 3px 9px;
+      font-family: "SF Mono", Consolas, monospace;
+      font-size: 11.5px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.15s ease;
+    }
+
+    .ref-jira a:hover {
+      background: var(--adorama-blue);
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .ref-jira-label {
+      display: block;
+      color: var(--medium-gray);
+      font-size: 11px;
+      margin-top: 4px;
+      line-height: 1.3;
+    }
+
+    .ref-jira-tbd {
+      color: var(--dark-gray);
+      font-style: italic;
+      font-size: 12px;
+    }
+
+    .ref-jira-tbd strong {
+      font-style: normal;
+      color: var(--rich-black);
+    }
+
+    /* Jira Tickets card (Tools section) */
+    .jira-tickets-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px;
+      margin-bottom: 22px;
+    }
+
+    .jira-tickets-head h4 {
+      margin: 0 0 6px;
+      font-size: 16px;
+      color: var(--rich-black);
+    }
+
+    .jira-tickets-head p {
+      margin: 0 0 16px;
+      font-size: 13px;
+      color: var(--medium-gray);
+      line-height: 1.5;
+    }
+
+    .jira-tickets-head p strong {
+      color: var(--rich-black);
+    }
+
+    .jira-tickets-subhead {
+      margin: 18px 0 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--adorama-blue);
+    }
+
+    /* Group Chats categorized */
+    .chat-group {
+      margin-bottom: 22px;
+    }
+
+    .chat-group:last-child { margin-bottom: 0; }
+
+    .chat-group-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .chat-group-header h4 {
+      margin: 0;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--adorama-blue);
+    }
+
+    .chat-group-header .chat-group-badge {
+      flex: 0 0 auto;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .chat-group.cat-core .chat-group-badge {
+      background: rgba(0, 67, 135, 0.12);
+      color: var(--adorama-blue);
+    }
+
+    .chat-group.cat-merchants .chat-group-badge {
+      background: rgba(19, 176, 194, 0.15);
+      color: #0a7a87;
+    }
+
+    .chat-group.cat-newsletters .chat-group-badge {
+      background: rgba(237, 81, 50, 0.12);
+      color: var(--highlight);
+    }
+
+    .chat-group.cat-npa .chat-group-badge {
+      background: rgba(107, 79, 191, 0.15);
+      color: #6B4FBF;
+    }
+
+    .chat-group.cat-other .chat-group-badge {
+      background: rgba(88, 92, 95, 0.15);
+      color: var(--dark-gray);
+    }
+
+    .chat-group-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* Glossary */
+    .glossary-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .glossary-group h4 {
+      margin: 0 0 12px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--adorama-blue);
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .glossary-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .glossary-item {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 14px;
+      align-items: baseline;
+      padding: 6px 0;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .glossary-term {
+      font-weight: 700;
+      color: var(--rich-black);
+      font-family: "SF Mono", Consolas, monospace;
+      font-size: 12.5px;
+    }
+
+    .glossary-def {
+      color: var(--dark-gray);
+    }
+
+    .glossary-def strong { color: var(--rich-black); }
+
+    @media (max-width: 760px) {
+      .glossary-grid { grid-template-columns: 1fr; }
+      .glossary-item { grid-template-columns: 80px 1fr; gap: 10px; }
+    }
+
+    .jira-tickets-subhead:first-of-type { margin-top: 0; }
+
+    .jira-tickets-subhead-note {
+      color: var(--medium-gray);
+      font-weight: 500;
+      letter-spacing: 0;
+      text-transform: none;
+      margin-left: 6px;
+    }
+
+    .jira-ticket.secondary {
+      border-left-color: var(--teal);
+    }
+
+    .jira-ticket.secondary .jira-ticket-id {
+      color: #0a7a87;
+    }
+
+    .jira-ticket.secondary:hover {
+      border-left-color: #0c92a0;
+    }
+
+    .jira-ticket.archive {
+      border-left-color: var(--medium-gray);
+      opacity: 0.78;
+    }
+
+    .jira-ticket.archive .jira-ticket-id {
+      color: var(--medium-gray);
+    }
+
+    .jira-ticket.archive:hover {
+      opacity: 1;
+      border-left-color: var(--dark-gray);
+    }
+
+    .jira-tickets-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .jira-ticket {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 12px 14px;
+      background: #FBFCFD;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--adorama-blue);
+      border-radius: 10px;
+      text-decoration: none;
+      transition: all 0.15s ease;
+    }
+
+    .jira-ticket:hover {
+      background: rgba(0, 67, 135, 0.04);
+      border-left-color: var(--link-blue);
+      transform: translateX(2px);
+      text-decoration: none;
+    }
+
+    .jira-ticket-id {
+      font-family: "SF Mono", Consolas, monospace;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--adorama-blue);
+      letter-spacing: 0.02em;
+    }
+
+    .jira-ticket-label {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--rich-black);
+      line-height: 1.3;
+    }
+
+    .jira-ticket-cadences {
+      font-size: 11.5px;
+      color: var(--medium-gray);
+      line-height: 1.5;
+      margin-top: 2px;
+    }
+
+    @media (max-width: 1100px) {
+      .jira-tickets-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 760px) {
+      .jira-tickets-grid { grid-template-columns: 1fr; }
+    }
+
+    .ref-people {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      font-size: 12.5px;
+    }
+
+    .ref-people .person { color: var(--rich-black); }
+    .ref-people .person.muted { color: var(--medium-gray); font-style: italic; }
+
+    .ref-format-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    .ref-format-tag {
+      background: rgba(0, 67, 135, 0.06);
+      color: var(--adorama-blue);
+      border: 1px solid rgba(0, 67, 135, 0.18);
+      border-radius: 6px;
+      padding: 2px 8px;
+      font-size: 11.5px;
+      font-weight: 600;
+    }
+
+    .ref-format-tag.special {
+      background: rgba(19, 176, 194, 0.08);
+      color: #0a7a87;
+      border-color: rgba(19, 176, 194, 0.25);
+    }
+
+    .ref-table-help {
+      margin-top: 10px;
+      font-size: 12.5px;
+      color: var(--medium-gray);
+      line-height: 1.5;
+    }
+    /* ===== END EMAIL REFERENCE TABLE ===== */
+
+    .cadence-table {
+      width: 100%;
+      border-collapse: collapse;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .cadence-table th {
+      background: var(--adorama-blue);
+      color: var(--white);
+      text-align: left;
+      padding: 11px 13px;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+    }
+
+    .cadence-table td {
+      padding: 11px 13px;
+      border-top: 1px solid var(--border);
+      vertical-align: top;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .cadence-table td:first-child {
+      font-family: "SF Mono", Consolas, monospace;
+      font-size: 12px;
+      color: var(--rich-black);
+      word-break: break-all;
+    }
+
+    .cadence-table td:not(:first-child) a {
+      font-family: "SF Mono", Consolas, monospace;
+      font-size: 12px;
+      word-break: break-all;
+    }
+
+    .footer {
+      color: var(--medium-gray);
+      text-align: center;
+      font-size: 12px;
+      padding: 20px 0 8px;
+    }
+
+    @media (max-width: 980px) {
+      .layout { display: block; }
+
+      .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+      }
+
+      main {
+        margin-left: 0;
+        width: 100%;
+        padding: 18px;
+      }
+
+      .hero-meta,
+      .grid,
+      .grid.two,
+      .checklist {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h2 { font-size: 28px; }
+
+      .hero-logo { width: 56px; height: 56px; top: 18px; right: 18px; }
+
+      .process-timeline { padding-left: 42px; }
+      .process-timeline:before { left: 14px; }
+      .step-number {
+        left: -42px;
+        width: 32px;
+        height: 32px;
+        font-size: 12px;
+      }
+    }
+  
+
+    /* === Standalone page overrides === */
+    body {
+      background: linear-gradient(135deg, var(--cream) 0%, #FFFFFF 100%);
+      min-height: 100vh;
+      padding: 0;
+    }
+
+    .modal-backdrop.standalone {
+      position: static;
+      background: transparent;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      display: block;
+      padding: 28px 16px 60px;
+      overflow-y: visible;
+      z-index: auto;
+    }
+
+    .modal-backdrop.standalone .modal-dialog {
+      max-width: 1000px;
+      margin: 0 auto;
+      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.10);
+      animation: none;
+    }
+
+    .modal-backdrop.standalone .modal-body {
+      max-height: none;
+      overflow-y: visible;
+    }
+
+    .standalone-bar {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 18px 16px 0;
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    .standalone-bar a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      background: var(--white);
+      color: var(--adorama-blue);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.15s ease;
+    }
+
+    .standalone-bar a:hover {
+      background: var(--adorama-blue);
+      color: var(--white);
+      border-color: var(--adorama-blue);
+      text-decoration: none;
+    }
+
+    @media (max-width: 760px) {
+      .modal-backdrop.standalone { padding: 16px 0 60px; }
+      .modal-backdrop.standalone .modal-dialog { border-radius: 0; }
+      .standalone-bar { padding: 12px 16px 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="standalone-bar">
+    <a href="#" onclick="window.close(); return false;">&times; Close Tab</a>
+  </div>
+
+  <div class="modal-backdrop standalone is-open">
+    <div class="modal-dialog">
+          <div class="modal-header">
+            <div>
+              <h3 id="genModalTitle">Campaign Process Generator</h3>
+              <p>Pick the campaign details — the tool produces the timeline, design routing, contacts, SKU request template, and a copyable checklist.</p>
+            </div>
+            
+          </div>
+          <div class="modal-body">
+            <div class="generator-form">
+              <div class="form-field full">
+                <label for="genCampaignName">Campaign Name</label>
+                <input type="text" id="genCampaignName" placeholder="e.g., March Photo Madness" autocomplete="off">
+                <div class="form-hint">Used to auto-generate the SKU Request email subject + naming references.</div>
+              </div>
+
+              <div class="form-field">
+                <label for="genCadence">Email Cadence</label>
+                <select id="genCadence">
+                  <option value="">— Select cadence —</option>
+                  <optgroup label="Promo">
+                    <option value="promo-rebates">Photo Rebates</option>
+                    <option value="promo-mystery">Mystery Sale</option>
+                    <option value="promo-weekend">Weekend Deals</option>
+                    <option value="promo-flash">Flash Sale</option>
+                    <option value="promo-top">Top Deals</option>
+                  </optgroup>
+                  <optgroup label="Services">
+                    <option value="svc-openbox">Open Box</option>
+                    <option value="svc-trade">Trade</option>
+                    <option value="svc-used">Used</option>
+                    <option value="svc-edu">EDU</option>
+                    <option value="svc-pb">Private Brands</option>
+                  </optgroup>
+                  <optgroup label="NPA / New Arrivals">
+                    <option value="npa">NPA (New Product Announcements)</option>
+                    <option value="npa-recap">New Arrivals / NPA Recap</option>
+                  </optgroup>
+                  <optgroup label="Newsletter">
+                    <option value="nl-creators">Creators' Huddle</option>
+                    <option value="nl-photo">Photo (In Focus)</option>
+                    <option value="nl-video">Video</option>
+                    <option value="nl-pb">Private Brands</option>
+                  </optgroup>
+                  <optgroup label="Events / Store">
+                    <option value="events">Events</option>
+                    <option value="store-nl">Store Newsletter</option>
+                  </optgroup>
+                  <optgroup label="Loyalty / PLCC">
+                    <option value="loyalty">Loyalty / VIP</option>
+                    <option value="plcc">PLCC</option>
+                  </optgroup>
+                  <option value="other">Other</option>
+                </select>
+                <div class="form-hint" id="genCadenceHint">Drives contact routing and design rules.</div>
+              </div>
+
+              <div class="form-field">
+                <label for="genFormat">Email Format</label>
+                <select id="genFormat">
+                  <option value="">— Select format —</option>
+                  <option value="postcard">Postcard Only</option>
+                  <option value="categories">With Categories</option>
+                  <option value="brands">With Brands</option>
+                  <option value="static-products">With Static Products</option>
+                  <option value="dynamic-products">With Dynamic Products</option>
+                </select>
+                <div class="form-hint" id="genFormatHint">Layout style — see Section 04 for live samples.</div>
+              </div>
+
+              <div class="form-field">
+                <label for="genCategory">Category</label>
+                <select id="genCategory">
+                  <option value="">— Select category —</option>
+                  <option value="photo">Photo</option>
+                  <option value="video">Video</option>
+                  <option value="memory-storage">Memory Card / Storage</option>
+                  <option value="home-office">Home Office</option>
+                  <option value="lighting">Lighting (not Private Brands)</option>
+                  <option value="computers">Computers</option>
+                  <option value="gaming">Gaming</option>
+                  <option value="apple">Apple</option>
+                  <option value="musical-instruments">Musical Instruments</option>
+                  <option value="consumer-audio">Consumer Audio (Headphones, Speakers)</option>
+                  <option value="pro-audio">Pro Audio</option>
+                  <option value="drones">Drones</option>
+                  <option value="action-cameras">Action Cameras</option>
+                  <option value="private-brands">Private Brands</option>
+                  <option value="n-a">N/A — no merchant SKUs</option>
+                </select>
+                <div class="form-hint">Routes SKU requests to the right merchant.</div>
+              </div>
+
+              <div class="form-field">
+                <label for="genCampaignType">Campaign Type</label>
+                <select id="genCampaignType">
+                  <option value="global">Global</option>
+                  <option value="email-exclusive">Email-Exclusive</option>
+                </select>
+                <div class="form-hint" id="genCampaignTypeHint">Determines design routing for non-locked cadences.</div>
+              </div>
+
+              <div class="form-field">
+                <label for="genSendDate">Send Date</label>
+                <input type="date" id="genSendDate">
+                <div class="form-hint" id="genDateHint">Pick a future send date.</div>
+              </div>
+
+              <div class="form-actions">
+                <button id="genGenerateBtn" class="btn-primary" type="button">⚡ Generate Process</button>
+                <button id="genResetBtn" class="btn-secondary" type="button">Reset</button>
+              </div>
+            </div>
+
+            <div id="genOutput" class="gen-output"></div>
+          </div>
+        </div>
+  </div>
+
+  <script>
+    (function () {
+      function showCopied(btn) {
+        var originalText = btn.dataset.originalText || btn.textContent;
+        btn.dataset.originalText = originalText;
+        btn.textContent = '\u2713 Copied';
+        btn.classList.add('copied');
+        setTimeout(function () {
+          btn.textContent = originalText;
+          btn.classList.remove('copied');
+        }, 1500);
+      }
+
+      function fallbackCopy(text) {
+        var textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try { document.execCommand('copy'); } catch (e) {}
+        document.body.removeChild(textarea);
+      }
+
+      document.addEventListener('click', function (event) {
+        var btn = event.target.closest('.copy-btn');
+        if (!btn) return;
+        var text = btn.getAttribute('data-copy');
+        if (!text) return;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(function () {
+            showCopied(btn);
+          }).catch(function () {
+            fallbackCopy(text);
+            showCopied(btn);
+          });
+        } else {
+          fallbackCopy(text);
+          showCopied(btn);
+        }
+      });
+
+      document.addEventListener('change', function (event) {
+        var cb = event.target;
+        if (cb.type !== 'checkbox') return;
+        var label = cb.closest('.qa-check');
+        if (label) label.classList.toggle('is-checked', cb.checked);
+      });
+
+
+      var EMAIL_CADENCES = {
+        // Promo
+        'promo-rebates': {
+          label: 'Promo: Photo Rebates',
+          contacts: [{ name: 'Robert Zlotogorsky', role: 'Marketing Ops' }, { name: 'Josh Lefkowits', role: 'Photo Merchant' }, { name: 'Arthur Hershkovitz', role: 'Photo Merchant' }],
+          requiresSKUs: true, locked: false, design: null,
+          designNote: 'Global \u2192 Adorama Design (also creates web assets); Email-Exclusive \u2192 AW Designer.',
+          jira: { id: 'MKT-93582', label: 'Photo-Video Emails & Newsletters', url: 'https://jira.adorama.com/browse/MKT-93582' },
+          recommendedFormat: 'static-products',
+          routeTo: 'Robert Zlotogorsky, Josh Lefkowits, Arthur Hershkovitz, Heather Nichols',
+          approvers: 'Robert Zlotogorsky, Josh Lefkowits, Arthur Hershkovitz, Heather Nichols',
+          suggestedSegments: ['Go-To Segments (pick one)']
+        },
+        'promo-mystery': {
+          label: 'Promo: Mystery Sale',
+          contacts: [{ name: 'Robert Zlotogorsky', role: 'Marketing Ops' }],
+          requiresSKUs: false, locked: true, design: 'AW',
+          notes: [{ text: 'Heather Nichols & Zoriana Kos \u2014 request updating of landing page (Mystery Sale) GLP and products. Products will be dynamically pulled if not enough SKUs.', role: 'Landing page update' }],
+          jira: { id: 'MKT-99009', label: 'Adorama Emails 2026', url: 'https://jira.adorama.com/browse/MKT-99009' },
+          jiraNote: 'You can also create directly in ClickUp if the designer is AW.',
+          recommendedFormat: 'postcard',
+          routeTo: 'Heather Nichols',
+          approvers: 'Heather Nichols',
+          suggestedSegments: ['Go-To Segments (pick one)']
+        },
+        'promo-weekend': {
+          label: 'Promo: Weekend Deals',
+          contacts: [{ name: 'Robert Zlotogorsky', role: 'Marketing Ops' }],
+          requiresSKUs: true, locked: true, design: 'AW',
+          jira: { id: 'MKT-99009', label: 'Adorama Emails 2026', url: 'https://jira.adorama.com/browse/MKT-99009' },
+          jiraNote: 'You can also create directly in ClickUp if the designer is AW.',
+          recommendedFormat: 'static-products',
+          routeTo: 'Heather Nichols, Merchants',
+          approvers: 'Heather Nichols, Merchants',
+          suggestedSegments: ['Go-To Segments (pick one)']
+        },
+        'promo-flash': {
+          label: 'Promo: Flash Sale',
+          contacts: [{ name: 'Robert Zlotogorsky', role: 'Marketing Ops' }],
+          requiresSKUs: true, locked: true, design: 'AW',
+          notes: [{ text: 'Heather Nichols & Zoriana Kos \u2014 request updating of landing page (Flash Sale) GLP and products.', role: 'Landing page update' }],
+          jira: { id: 'MKT-99009', label: 'Adorama Emails 2026', url: 'https://jira.adorama.com/browse/MKT-99009' },
+          jiraNote: 'You can also create directly in ClickUp if the designer is AW.',
+          recommendedFormat: 'postcard',
+          routeTo: 'Heather Nichols',
+          approvers: 'Heather Nichols',
+          suggestedSegments: ['Go-To Segments (pick one)']
+        },
+        'promo-top': {
+          label: 'Promo: Top Deals',
+          contacts: [{ name: 'Robert Zlotogorsky', role: 'Marketing Ops' }],
+          requiresSKUs: true, locked: true, design: 'AW',
+          jira: { id: 'MKT-99009', label: 'Adorama Emails 2026', url: 'https://jira.adorama.com/browse/MKT-99009' },
+          jiraNote: 'You can also create directly in ClickUp if the designer is AW.',
+          recommendedFormat: 'static-products',
+          routeTo: 'Heather Nichols, Merchants',
+          approvers: 'Heather Nichols, Merchants',
+          suggestedSegments: ['Go-To Segments (pick one)']
+        },
+        // Services
+        'svc-openbox': {
+          label: 'Services: Open Box',
+          contacts: [{ name: 'Robert Zlotogorsky', role: 'Marketing Ops' }],
+          requiresSKUs: true, locked: true, design: 'AW',
+          jira: { id: 'MKT-99009', label: 'Adorama Emails 2026', url: 'https://jira.adorama.com/browse/MKT-99009' },
+          jiraNote: 'You can also create directly in ClickUp if the designer is AW.',
+          recommendedFormat: 'categories',
+          routeTo: 'Heather Nichols',
+          approvers: 'Heather Nichols',
+          suggestedSegments: ['_open-box-newCustomers-6m', '_open-box-active-atRisk-lost-buyers-openers', '_open-box-lost-buyers-openers-PCLV_25', '_open-box-affinity-used-department', '_open-box-Openers', '_open-box-SL1-B01-Nonbuyers-Engaged90D', '_open-box-buyers-full-and-discount-365-openers']
+        },
+        'svc-trade': {
+          label: 'Services: Trade',
+          contacts: [{ name: 'Alla Igolnikova', role: 'Category Marketing' }],
+          requiresSKUs: true, locked: true, design: 'ADR',
+          jira: { id: 'MKT-99006', label: 'Trade & Used 2026', url: 'https://jira.adorama.com/browse/MKT-99006' },
+          recommendedFormat: 'brands',
+          routeTo: 'Heather Nichols, Merchants',
+          approvers: 'Heather Nichols, Merchants',
+          suggestedSegments: ['_trade-buyers-full-and-discount-90-openers', '_trade-affinity-used-all-90-openers', '_trade-browsers-Used-90-openers', '_trade-purchasers-Used-90-openers', '_trade-viewed-clicked-pages']
+        },
+        'svc-used': {
+          label: 'Services: Used',
+          contacts: [{ name: 'Alla Igolnikova', role: 'Category Marketing' }],
+          requiresSKUs: true, locked: true, design: 'ADR',
+          jira: { id: 'MKT-99006', label: 'Trade & Used 2026', url: 'https://jira.adorama.com/browse/MKT-99006' },
+          recommendedFormat: 'static-products',
+          routeTo: 'Alla Igolnikova, Heather Nichols',
+          approvers: 'Alla Igolnikova, Heather Nichols',
+          suggestedSegments: ['_affinity-used-all-365-openers', '_browsers-Used-180-openers', '_purchasers-Used-365-openers', '_buyers-discount-365-openers']
+        },
+        'svc-edu': {
+          label: 'Services: EDU',
+          contacts: [{ name: 'Alla Igolnikova', role: 'Category Marketing' }],
+          requiresSKUs: true, locked: true, design: 'ADR',
+          jira: { id: 'MKT-99173', label: 'EDU / Classroom Connect 2026', url: 'https://jira.adorama.com/browse/MKT-99173' },
+          recommendedFormat: 'static-products',
+          routeTo: 'Alla Igolnikova, Heather Nichols',
+          approvers: 'Alla Igolnikova, Heather Nichols',
+          suggestedSegments: ['SEEDLIST | EDU', '_with-edu-email', '_april2026-edu-verified-with-consent', '_Edu-is-verified-TRUE'],
+          segmentNote: 'The dated _verified-with-consent segment is replaced monthly \u2014 get the updated list from Alla.'
+        },
+        'svc-pb': {
+          label: 'Services: Private Brands',
+          contacts: [{ name: 'Solomon Leifer', role: 'Private Brands Merchant' }, { name: 'Usher Sperber', role: 'Private Brands Merchant' }],
+          requiresSKUs: true, locked: true, design: 'ADR',
+          jira: { id: 'MKT-98683', label: 'Private Brands Emails 2026', url: 'https://jira.adorama.com/browse/MKT-98683' },
+          recommendedFormat: 'static-products',
+          routeTo: 'Solomon Leifer, Usher Sperber, Heather Nichols',
+          approvers: 'Solomon Leifer, Usher Sperber, Heather Nichols',
+          suggestedSegments: ['_private-brands-90-day-responders', '_private-brands-affinity', '_private-brands-lighting-affinity-med-high', '_private-brands-photo-video-affinity-high', '_private-brands-lighting-purchasers-browsers', '_private-brands-purchasers-browsers']
+        },
+        // NPA
+        'npa': {
+          label: 'NPA (New Product Announcements)',
+          contacts: [{ name: 'Robert Zlotogorsky', role: 'Marketing Ops' }],
+          requiresSKUs: true, locked: true, design: 'ADR',
+          jira: null,
+          jiraNote: 'Jira ticket will be provided by Robert Zlotogorsky.',
+          recommendedFormat: 'static-products',
+          routeTo: 'Robert Zlotogorsky, specific merchant for the brand',
+          approvers: 'Robert Zlotogorsky, specific merchant',
+          suggestedSegments: [],
+          segmentNote: 'Segments depend on the product category and brand. Look at previous NPA emails and replicate the segments used in the top-performing send.'
+        },
+        'npa-recap': {
+          label: 'New Arrivals / NPA Recap',
+          contacts: [{ name: 'Robert Zlotogorsky', role: 'Marketing Ops' }],
+          requiresSKUs: true, locked: true, design: 'ADR',
+          jira: { id: 'MKT-99009', label: 'Adorama Emails 2026', url: 'https://jira.adorama.com/browse/MKT-99009' },
+          recommendedFormat: 'static-products',
+          routeTo: 'Robert Zlotogorsky, specific merchant',
+          approvers: 'Robert Zlotogorsky, specific merchant',
+          suggestedSegments: [],
+          segmentNote: 'Segments depend on featured products. Reference recent recap sends.'
+        },
+        // Newsletter
+        'nl-creators': {
+          label: "Newsletter: Creators' Huddle",
+          contacts: [{ name: 'Daniel Norton', role: 'Editorial' }, { name: 'Cristina Santelises', role: 'Content' }],
+          requiresSKUs: false, locked: true, design: 'ADR',
+          notes: [{ text: 'Content and email brief from Daniel Norton & Cristina Santelises.', role: 'Content brief' }],
+          jira: { id: 'MKT-67859', label: "Creator's Huddle Weekly Templates", url: 'https://jira.adorama.com/browse/MKT-67859' },
+          recommendedFormat: 'postcard',
+          routeTo: 'Daniel Norton, Cristina Santelises',
+          approvers: 'Daniel Norton, Cristina Santelises',
+          suggestedSegments: ['_CreatorsHuddle-create-no-matter-what', '_CreatorsHuddle-affinity-photography-med', '_CreatorsHuddle-active-buyers-90-days-openers', '_CreatorsHuddle-active-at-risk-buyers-openers', '_CreatorsHuddle-Store-Phone-Purchasers', '_CreatorsHuddle-42West-Signups-SourceALC-BLC-NonMSFT', '_CreatorsHuddle-42West-Browsed-45D-BLC-NonMSFT']
+        },
+        'nl-photo': {
+          label: 'Newsletter: Photo (In Focus)',
+          contacts: [{ name: 'Josh Lefkowits', role: 'Photo Merchant' }, { name: 'Arthur Hershkovitz', role: 'Photo Merchant' }],
+          requiresSKUs: true, locked: true, design: 'AW',
+          notes: [{ text: 'If With Brands format, get from Robert Zlotogorsky.', role: 'Get brand promos' }],
+          jira: { id: 'MKT-93582', label: 'Photo-Video Emails & Newsletters', url: 'https://jira.adorama.com/browse/MKT-93582' },
+          jiraNote: 'You can also create directly in ClickUp if the designer is AW.',
+          recommendedFormat: 'static-products',
+          routeTo: 'Josh Lefkowits, Arthur Hershkovitz',
+          approvers: 'Josh Lefkowits, Arthur Hershkovitz',
+          suggestedSegments: ['_Photo-Newsletter-brands-aff', '_Photo-Newsletter-brands-aff-lookalike', '_Photo-Newsletter-brands-2y-buyers-6m-browsers', '_Photo-Newsletter-photo-aff', '_Photo-Newsletter-photo-aff-lookalike', '_Photo-Newsletter-photo-6m-browsers', '_Photo-Newsletter-buyers-photography-2y-openers', 'MultiBuyer-HighVal-Engaged', '1xBuyer-HighVal-Engaged']
+        },
+        'nl-video': {
+          label: 'Newsletter: Video',
+          contacts: [{ name: 'Israel Herschkowit', role: 'Video Merchant' }, { name: 'Sarah Ryan', role: 'Video Merchant' }, { name: 'Aron Grossman', role: 'Video Merchant' }],
+          requiresSKUs: true, locked: true, design: 'AW',
+          jira: { id: 'MKT-93582', label: 'Photo-Video Emails & Newsletters', url: 'https://jira.adorama.com/browse/MKT-93582' },
+          jiraNote: 'You can also create directly in ClickUp if the designer is AW.',
+          recommendedFormat: 'static-products',
+          routeTo: 'Heather Nichols, Israel Herschkowit, Sarah Ryan, Aron Grossman',
+          approvers: 'Heather Nichols, Israel Herschkowit, Sarah Ryan, Aron Grossman',
+          suggestedSegments: ['_video-newsletter-brands-affinity', '_video-newsletter-buyers-video-5y-browsers', '_video-newsletter-buyers-video-3y-90-days-responders', '_video-newsletter-affinity-video-all', '_video-newsletter-active-atRisk-lost-buyers-90-day-openers', '_video-newsletter-6m-carters-video']
+        },
+        'nl-pb': {
+          label: 'Newsletter: Private Brands',
+          contacts: [{ name: 'Daniel Norton', role: 'Editorial' }, { name: 'Cristina Santelises', role: 'Content' }, { name: 'Susan', role: 'Private Brands' }, { name: 'Solomon Leifer', role: 'Private Brands Merchant' }, { name: 'Usher Sperber', role: 'Private Brands Merchant' }],
+          requiresSKUs: true, locked: true, design: 'ADR',
+          notes: [{ text: 'If With Brands format, confirm with Heather Nichols the % OFF to use.', role: 'Confirm % offer' }],
+          jira: { id: 'MKT-98683', label: 'Private Brands Emails 2026', url: 'https://jira.adorama.com/browse/MKT-98683' },
+          recommendedFormat: 'static-products',
+          routeTo: 'Solomon Leifer, Usher Sperber',
+          approvers: 'Solomon Leifer, Usher Sperber',
+          suggestedSegments: ['_private-brands-newsletter-brands-purchasers-browsers', '_private-brands-newsletter-BC-18m-purchasers-90d-browsers', '_private-brands-newsletter-breadcrumb-affinity-med', '_private-brands-newsletter-brands-affinity-med', '_private-brands-emails-180d-openers-clickers', '_private-brands-lighting-affinity-med-high', '_private-brands-photo-video-affinity-high']
+        },
+        // Events / Store / Loyalty
+        'events': {
+          label: 'Events',
+          contacts: [{ name: 'Theresa Raffetto', role: 'Content Producer (Events)' }, { name: 'Joshua Carl Pardi\u00f1ez', role: 'Backup' }, { name: 'Krizha Anne Tubera', role: 'Backup' }],
+          requiresSKUs: false, locked: true, design: 'AW',
+          notes: [{ text: 'Check the Events tab in the Marketing Submissions sheet.', role: 'Reference' }],
+          jira: { id: 'MKT-93596', label: 'Adorama Events Emails', url: 'https://jira.adorama.com/browse/MKT-93596' },
+          jiraNote: 'You can also create directly in ClickUp if the designer is AW.',
+          recommendedFormat: 'postcard',
+          routeTo: 'Theresa Raffetto',
+          approvers: 'Theresa Raffetto',
+          suggestedSegments: [],
+          segmentNote: 'Event-specific segments \u2014 reference recent Events sends.'
+        },
+        'store-nl': {
+          label: 'Store Newsletter',
+          contacts: [{ name: 'Keith McCord', role: 'Category Marketing' }, { name: 'Mary Yam-Wong', role: 'Store' }, { name: 'Niranee Shoba Chattergoon', role: 'Store' }],
+          requiresSKUs: true, locked: true, design: 'ADR',
+          jira: { id: 'MKT-98993', label: 'Store Email Newsletter 2026 Series', url: 'https://jira.adorama.com/browse/MKT-98993' },
+          recommendedFormat: 'postcard',
+          routeTo: 'Keith McCord, Mary Yam-Wong',
+          approvers: 'Keith McCord, Mary Yam-Wong',
+          suggestedSegments: [],
+          segmentNote: 'Store-specific segments \u2014 reference recent Store Newsletter sends.'
+        },
+        'loyalty': {
+          label: 'Loyalty / VIP',
+          contacts: [{ name: 'Julio', role: 'Loyalty / Finance' }],
+          requiresSKUs: false, locked: true, design: 'ADR',
+          notes: [{ text: 'Julio creates the Jira ticket + copy brief, then assigns to designer. Once design is complete, ready for build.', role: 'Get ticket' }],
+          jira: null,
+          jiraNote: 'Jira ticket will be provided by Julio Carrillo.',
+          recommendedFormat: 'postcard',
+          routeTo: 'Julio',
+          approvers: 'Julio',
+          suggestedSegments: [],
+          segmentNote: 'Loyalty-specific segments \u2014 Julio defines targeting per send.'
+        },
+        'plcc': {
+          label: 'PLCC',
+          contacts: [{ name: 'Julio', role: 'Loyalty / Finance' }],
+          requiresSKUs: false, locked: true, design: 'ADR',
+          jira: null,
+          jiraNote: 'Jira ticket will be provided by Julio Carrillo.',
+          recommendedFormat: 'postcard',
+          routeTo: 'Julio',
+          approvers: 'Julio',
+          suggestedSegments: [],
+          segmentNote: 'PLCC-specific segments \u2014 Julio defines targeting per send.'
+        },
+        // Catch-all
+        'other': {
+          label: 'Other',
+          contacts: [],
+          requiresSKUs: true, locked: false, design: null,
+          designNote: 'Routing depends on Campaign Type. Global \u2192 Adorama Design; Email-Exclusive \u2192 AW Designer.',
+          jira: null,
+          recommendedFormat: null,
+          routeTo: 'Marketing Ops, Site Merchandiser, Merchants',
+          approvers: 'Marketing Ops, Site Merchandiser, Merchants',
+          suggestedSegments: []
+        }
+      };
+
+      var EMAIL_FORMATS = {
+        'postcard': {
+          label: 'Postcard Only',
+          typical: 'Mystery Sale, Flash Sale, Multi-touch'
+        },
+        'categories': {
+          label: 'With Categories',
+          typical: 'Open Box, Weekend Deals'
+        },
+        'brands': {
+          label: 'With Brands',
+          typical: 'Photo Rebates, Brand Promos'
+        },
+        'static-products': {
+          label: 'With Static Products',
+          typical: 'Top Picks, Curated Promos'
+        },
+        'dynamic-products': {
+          label: 'With Dynamic Products',
+          typical: 'Warehouse Sale, Final Hours'
+        }
+      };
+
+      var CATEGORIES = {
+        'photo': { label: 'Photo', merchants: [{ name: 'Josh Lefkowits', email: 'joshl@adorama.com' }, { name: 'Arthur Hershkovitz', email: 'arthurh@adorama.com' }] },
+        'video': { label: 'Video', merchants: [{ name: 'Israel Herschkowit', email: 'israelh@adorama.com' }, { name: 'Sarah Ryan', email: 'sryan@adorama.com' }, { name: 'Aron Grossman', email: 'arong@adorama.com' }] },
+        'memory-storage': { label: 'Memory / Storage', merchants: [{ name: 'Shloimy Singer', email: 'shloimys@adorama.com' }] },
+        'home-office': { label: 'Home Office', merchants: [{ name: 'Shloimy Singer', email: 'shloimys@adorama.com' }] },
+        'lighting': { label: 'Lighting', merchants: [{ name: 'Tovi Paskes', email: 'tovip@adorama.com' }, { name: 'Lekeisha Wharton', email: 'lekeishaw@adorama.com' }] },
+        'computers': { label: 'Computers', merchants: [{ name: 'Jeff Frank', email: 'jfrank@adorama.com' }] },
+        'gaming': { label: 'Gaming', merchants: [{ name: 'Jeff Frank', email: 'jfrank@adorama.com' }] },
+        'apple': { label: 'Apple', merchants: [{ name: 'Abraham Gancz', email: 'abrahamg@adorama.com' }] },
+        'musical-instruments': { label: 'Musical Instruments', merchants: [{ name: 'Andy Pollak', email: 'andyp@adorama.com' }, { name: 'Ana Rogelisa Dizon', email: 'adizon@adorama.com' }] },
+        'consumer-audio': { label: 'Consumer Audio', merchants: [{ name: 'Andy Pollak', email: 'andyp@adorama.com' }, { name: 'Ana Rogelisa Dizon', email: 'adizon@adorama.com' }] },
+        'pro-audio': { label: 'Pro Audio', merchants: [{ name: 'Moshe Hirsch', email: 'mosheh@adorama.com' }] },
+        'drones': { label: 'Drones', merchants: [{ name: 'Sol Steif', email: 'ssteif@adorama.com' }, { name: 'Ivy Krisha Fajardo', email: 'ivykf@adorama.com' }] },
+        'action-cameras': { label: 'Action Cameras', merchants: [{ name: 'Sol Steif', email: 'ssteif@adorama.com' }, { name: 'Ivy Krisha Fajardo', email: 'ivykf@adorama.com' }] },
+        'private-brands': { label: 'Private Brands', merchants: [{ name: 'Solomon Leifer', email: 'solomonl@adorama.com' }, { name: 'Usher Sperber', email: 'ushers@adorama.com' }] },
+        'n-a': { label: 'N/A', merchants: [] }
+      };
+
+      var DAY_SUGGESTIONS = {
+        0: 'Sunday sends are typically Events or Store Newsletter.',
+        1: 'Monday sends are typically Promo campaigns (deals, rebates).',
+        2: '',
+        3: 'Wednesday sends are typically Services (Open Box, EDU, Trade, Used, Private Brands).',
+        4: 'Thursday sends are typically Loyalty / PLCC.',
+        5: 'Friday sends are typically Promo campaigns (deals, rebates).',
+        6: 'Saturday sends are typically Newsletters (Photo, Video, Creators Huddle, Private Brands).'
+      };
+
+      // Determine design assignment from cadence + format + campaign type
+      function determineDesign(cadenceKey, formatKey, campaignType) {
+        var cadence = EMAIL_CADENCES[cadenceKey];
+        if (!cadence) return null;
+        if (cadence.locked) return cadence.design;
+        // Non-locked (Photo Rebates, Other): driven by Campaign Type
+        return campaignType === 'global' ? 'ADR' : 'AW';
+      }
+
+      // Build SKU Request email subject:
+      // SKUs Request | M/D Campaign Name (Submission Due: Day M/D)
+      function buildSKUSubject(campaignName, sendDate, dueDate) {
+        var name = campaignName ? campaignName.trim() : '[Campaign Name]';
+        return 'SKUs Request | ' + formatShortDate(sendDate) + ' ' + name + ' (Submission Due: ' + formatDayShortDate(dueDate) + ')';
+      }
+
+      function buildMilestoneGroups(cadence, requiresSKUs, requiresMerchantApproval, campaignName, sendDate) {
+        var groups = [];
+        var routeStakeholders = requiresMerchantApproval && cadence.routeTo
+          ? cadence.routeTo
+          : 'Marketing Ops, Site Merchandiser';
+        var approvalStakeholders = requiresMerchantApproval && cadence.approvers
+          ? cadence.approvers
+          : (cadence.approvers || 'Marketing Ops, Site Merchandiser');
+
+        if (requiresSKUs) {
+          // Submission due = at least 5 business days AFTER the request date.
+          // Request goes out at T-10, so submission due = T-5 (5 business days before send).
+          var skuDueDate = subtractBusinessDays(sendDate, 5);
+          var skuSubject = buildSKUSubject(campaignName, sendDate, skuDueDate);
+          groups.push({
+            offset: 10,
+            actions: [
+              'Create a tab in Marketing Submissions 2026 for this campaign',
+              'Send SKU request to merchants \u2014 use this subject:'
+            ],
+            template: { label: 'SKU Request Subject', text: skuSubject, copyId: 'skuSubject' },
+            subActions: ['Submission deadline: ' + formatDayShortDate(skuDueDate) + ' (5 business days before send)']
+          });
+        }
+
+        // Step 7: Source/UTM + Brief + Tickets
+        var ticketActions = [
+          'Add campaign + send time to the Source Sheet (UTM codes)',
+          'Draft Subject Line + Preheader (you can ask AW Copywriter to review)',
+          'Write the email brief'
+        ];
+        if (cadence.jira) {
+          ticketActions.push('File Jira ticket under <strong>' + cadence.jira.id + '</strong> (' + escapeHtml(cadence.jira.label) + ') for the Internal Design Team');
+        } else if (cadence.jiraNote) {
+          ticketActions.push('Jira ticket: <em>' + escapeHtml(cadence.jiraNote) + '</em>');
+        } else {
+          ticketActions.push('File Jira ticket (Internal Design Team)');
+        }
+        ticketActions.push('File ClickUp task (AW Builder + AW Designer if needed) \u2014 include any additional banners (max 2 per email): title, link, asset');
+        // ClickUp shortcut note (applies when both Jira AND a jiraNote about ClickUp exist)
+        if (cadence.jira && cadence.jiraNote) {
+          ticketActions.push('<em style="color:#0a7a87;">Tip: ' + escapeHtml(cadence.jiraNote) + '</em>');
+        }
+
+        groups.push({ offset: 7, actions: ticketActions, jiraLink: cadence.jira });
+
+        groups.push({ offset: 3, actions: [
+          'Final design due \u2014 review and QA',
+          'Propose audience segments to Gerber for approval'
+        ]});
+
+        groups.push({ offset: 2, actions: [
+          'AW Builder builds email in Bluecore',
+          'Test in Gmail \u2014 verify rendering, no clipping, total size \u2264 100KB',
+          'AW Builder routes proof to <strong>' + escapeHtml(routeStakeholders) + '</strong>'
+        ]});
+
+        // Scheduling — flag if send day is Sat/Sun/Mon (must schedule on or before Friday)
+        var sendDay = sendDate.getDay();
+        var schedulingWarning = (sendDay === 0 || sendDay === 1 || sendDay === 6)
+          ? 'Saturday, Sunday, and Monday emails must be scheduled on or before Friday.'
+          : null;
+
+        groups.push({
+          offset: 1,
+          actions: [
+            'Secure final approvals (<strong>' + escapeHtml(approvalStakeholders) + '</strong>)',
+            'Confirm link approval from Heather Nichols',
+            'AW Builder schedules the campaign in Bluecore'
+          ],
+          warning: schedulingWarning
+        });
+
+        groups.push({ offset: 0, actions: [
+          'Send confirmation \u2014 verify campaign sent at scheduled time',
+          'Post-send check: clicks, revenue, engagement',
+          'Flag and escalate any issues immediately'
+        ], sendDay: true });
+
+        return groups;
+      }
+
+      function buildChecklist(cadence, formatKey, categoryKey, design, requiresSKUs) {
+        var items = [];
+
+        if (requiresSKUs) {
+          items.push('Create a tab in Marketing Submissions 2026 for this campaign');
+          if (categoryKey && categoryKey !== 'n-a' && CATEGORIES[categoryKey]) {
+            items.push('Email merchants for SKUs (' + CATEGORIES[categoryKey].merchants.map(function (m) { return m.name; }).join(', ') + ')');
+          } else {
+            items.push('Email merchants for SKUs');
+          }
+        }
+        items.push('Add campaign to Source Sheet for UTM codes');
+        items.push('Write Subject Line + Preheader');
+        items.push('Write email brief');
+        items.push('File Jira ticket (Internal Design Team)');
+        items.push('File ClickUp task (AW Builder) \u2014 include banner assets if any (max 2)');
+        if (design === 'ADR') {
+          items.push('Confirm capacity with Adorama Design Team (1\u20132 due dates/day max)');
+        } else if (design === 'AW') {
+          items.push('Confirm capacity with AW Designer (3\u20134/week, 1/day max)');
+        }
+        items.push('QA email brief (copy, links, pricing)');
+        items.push('QA design (layout, branding)');
+        items.push('QA email proof (rendering, links, personalization)');
+        items.push('Test send to Gmail \u2014 verify \u2264100KB, no clipping');
+        items.push('Propose segments to Gerber, secure approval');
+        items.push('Confirm link approval from Heather');
+        items.push('AW Builder schedules in Bluecore');
+        items.push('Verify send date, time, segments, counts, UTMs are correct');
+        items.push('Post-send: confirm delivery + check initial performance');
+        return items;
+      }
+
+      function formatDate(d) {
+        var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        return days[d.getDay()] + ', ' + months[d.getMonth()] + ' ' + d.getDate();
+      }
+
+      // M/D (no leading zeros, no year) e.g. "5/9"
+      function formatShortDate(d) {
+        return (d.getMonth() + 1) + '/' + d.getDate();
+      }
+
+      // Day M/D e.g. "Mon 5/4"
+      function formatDayShortDate(d) {
+        var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        return days[d.getDay()] + ' ' + (d.getMonth() + 1) + '/' + d.getDate();
+      }
+
+      function escapeHtml(s) {
+        return String(s).replace(/[&<>"']/g, function (c) {
+          return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+        });
+      }
+
+      function addDays(date, days) {
+        var d = new Date(date.getTime());
+        d.setDate(d.getDate() + days);
+        return d;
+      }
+
+      // Subtract business days (skip Sat=6 and Sun=0)
+      function subtractBusinessDays(date, days) {
+        var d = new Date(date.getTime());
+        if (days <= 0) return d;
+        var subtracted = 0;
+        while (subtracted < days) {
+          d.setDate(d.getDate() - 1);
+          var day = d.getDay();
+          if (day !== 0 && day !== 6) subtracted++;
+        }
+        return d;
+      }
+
+      function isBeforeToday(date) {
+        var today = new Date();
+        today.setHours(0, 0, 0, 0);
+        return date < today;
+      }
+
+      // ----- Element refs -----
+      var openBtn = document.getElementById('genOpenBtn');
+      var closeBtn = document.getElementById('genCloseBtn');
+      var modal = document.getElementById('genModal');
+      var generateBtn = document.getElementById('genGenerateBtn');
+      var resetBtn = document.getElementById('genResetBtn');
+      var nameInput = document.getElementById('genCampaignName');
+      var cadenceSelect = document.getElementById('genCadence');
+      var formatSelect = document.getElementById('genFormat');
+      var categorySelect = document.getElementById('genCategory');
+      var campaignTypeSelect = document.getElementById('genCampaignType');
+      var dateInput = document.getElementById('genSendDate');
+      var cadenceHint = document.getElementById('genCadenceHint');
+      var formatHint = document.getElementById('genFormatHint');
+      var campaignTypeHint = document.getElementById('genCampaignTypeHint');
+      var dateHint = document.getElementById('genDateHint');
+      var output = document.getElementById('genOutput');
+
+      // (standalone: no openBtn/modal guards)
+
+      var todayStr = new Date().toISOString().split('T')[0];
+      dateInput.min = todayStr;
+
+      // (standalone: modal is always visible, no open/close needed)
+      // Auto-focus the campaign name field on load
+      setTimeout(function () { if (nameInput) nameInput.focus(); }, 100);
+
+      // ----- Cadence change updates hints (Campaign Type stays enabled in all cases) -----
+      cadenceSelect.addEventListener('change', function () {
+        var key = cadenceSelect.value;
+        if (!key) {
+          cadenceHint.textContent = 'Drives contact routing and design rules.';
+          campaignTypeHint.textContent = 'Determines design routing for non-locked cadences.';
+          updateFormatHint();
+          return;
+        }
+        var cadence = EMAIL_CADENCES[key];
+        if (cadence.locked) {
+          var lockedLabel = cadence.design === 'ADR' ? 'Adorama Design Team' : 'Alchemy Workx Designer';
+          cadenceHint.textContent = 'Design routing typically \u2192 ' + lockedLabel + '.';
+          campaignTypeHint.textContent = 'This cadence usually routes to ' + cadence.design + ', but you can override.';
+        } else {
+          cadenceHint.textContent = cadence.designNote || 'Design routing depends on Format + Campaign Type.';
+          campaignTypeHint.textContent = 'Global \u2192 Adorama Design \u2022 Email-Exclusive \u2192 AW Designer.';
+        }
+        // Auto-suggest the recommended format if user hasn't picked one yet
+        if (cadence.recommendedFormat && !formatSelect.value) {
+          formatSelect.value = cadence.recommendedFormat;
+        }
+        updateFormatHint();
+      });
+
+      // ----- Format hint reflects format + campaign type combo -----
+      function updateFormatHint() {
+        var key = formatSelect.value;
+        if (!key) {
+          formatHint.textContent = 'Layout style \u2014 see Section 04 for live samples.';
+          return;
+        }
+        var format = EMAIL_FORMATS[key];
+        var campaignType = campaignTypeSelect.value;
+        var formatNeedsSKUs = (key === 'static-products' || key === 'dynamic-products');
+        var postcardEE = (key === 'postcard' && campaignType === 'email-exclusive');
+
+        var skuTag;
+        if (formatNeedsSKUs) {
+          skuTag = ' \u00b7 SKU request + merchant approval included.';
+        } else if (postcardEE) {
+          skuTag = ' \u00b7 SKU submission needed (no merchant approval).';
+        } else {
+          skuTag = ' \u00b7 No SKU request needed.';
+        }
+
+        formatHint.textContent = 'Typical: ' + format.typical + skuTag;
+      }
+
+      formatSelect.addEventListener('change', updateFormatHint);
+      campaignTypeSelect.addEventListener('change', updateFormatHint);
+
+      // ----- Date suggestion -----
+      dateInput.addEventListener('change', function () {
+        var v = dateInput.value;
+        if (!v) {
+          dateHint.textContent = 'Pick a future send date.';
+          dateHint.classList.remove('suggest');
+          return;
+        }
+        var parts = v.split('-');
+        var d = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
+        var suggestion = DAY_SUGGESTIONS[d.getDay()];
+        if (suggestion) {
+          dateHint.textContent = '\ud83d\udca1 ' + suggestion;
+          dateHint.classList.add('suggest');
+        } else {
+          dateHint.textContent = formatDate(d) + ' \u2014 no typical cadence for Tuesdays.';
+          dateHint.classList.remove('suggest');
+        }
+      });
+
+      // ----- Reset -----
+      resetBtn.addEventListener('click', function () {
+        nameInput.value = '';
+        cadenceSelect.value = '';
+        formatSelect.value = '';
+        categorySelect.value = '';
+        campaignTypeSelect.value = 'global';
+        dateInput.value = '';
+        cadenceHint.textContent = 'Drives contact routing and design rules.';
+        formatHint.textContent = 'Layout style \u2014 see Section 04 for live samples.';
+        campaignTypeHint.textContent = 'Determines design routing for non-locked cadences.';
+        dateHint.textContent = 'Pick a future send date.';
+        dateHint.classList.remove('suggest');
+        output.classList.remove('is-shown');
+        output.innerHTML = '';
+      });
+
+      // ----- Generate -----
+      generateBtn.addEventListener('click', function () {
+        if (!cadenceSelect.value) { alert('Please select an Email Cadence.'); cadenceSelect.focus(); return; }
+        if (!formatSelect.value) { alert('Please select an Email Format.'); formatSelect.focus(); return; }
+        if (!dateInput.value) { alert('Please select a Send Date.'); dateInput.focus(); return; }
+        renderOutput();
+      });
+
+      function renderOutput() {
+        var cadenceKey = cadenceSelect.value;
+        var cadence = EMAIL_CADENCES[cadenceKey];
+        var formatKey = formatSelect.value;
+        var format = EMAIL_FORMATS[formatKey];
+        var categoryKey = categorySelect.value;
+        var category = categoryKey ? CATEGORIES[categoryKey] : null;
+        var campaignType = campaignTypeSelect.value;
+        var campaignName = nameInput.value.trim();
+
+        var dateParts = dateInput.value.split('-');
+        var sendDate = new Date(parseInt(dateParts[0], 10), parseInt(dateParts[1], 10) - 1, parseInt(dateParts[2], 10));
+
+        var design = determineDesign(cadenceKey, formatKey, campaignType);
+        var designLabel = design === 'ADR' ? 'Adorama Design Team' : 'Alchemy Workx Designer';
+
+        // SKU submission triggers:
+        //   1. Format = Static or Dynamic Products (always shows SKUs in the email), OR
+        //   2. Format = Postcard + Campaign Type = Email-Exclusive (e.g. Mystery Sale —
+        //      SKUs needed for back-end qualification, even though the email doesn't list them)
+        var formatNeedsSKUs = (formatKey === 'static-products' || formatKey === 'dynamic-products');
+        var postcardEmailExclusive = (formatKey === 'postcard' && campaignType === 'email-exclusive');
+        var requiresSKUs = cadence.requiresSKUs && (formatNeedsSKUs || postcardEmailExclusive);
+
+        // Merchant proof approval is only needed when SKUs are visibly in the email
+        // (Static/Dynamic Products). Postcard EE skips this since merchants have nothing to review.
+        var requiresMerchantApproval = cadence.requiresSKUs && formatNeedsSKUs;
+
+        var milestoneGroups = buildMilestoneGroups(cadence, requiresSKUs, requiresMerchantApproval, campaignName, sendDate);
+        var milestones = milestoneGroups.map(function (g) {
+          var date = g.offset === 0 ? sendDate : subtractBusinessDays(sendDate, g.offset);
+          return {
+            date: date,
+            offset: g.offset,
+            actions: g.actions,
+            template: g.template,
+            sendDay: !!g.sendDay,
+            pastDue: isBeforeToday(date) && !g.sendDay
+          };
+        });
+
+        var pastDueCount = milestones.filter(function (m) { return m.pastDue; }).length;
+        var contacts = cadence.contacts.slice();
+
+        var html = '';
+
+        if (pastDueCount > 0) {
+          html += '<div class="gen-warning"><strong>\u26a0\ufe0f Tight timeline.</strong> ' + pastDueCount + ' milestone' + (pastDueCount > 1 ? 's are' : ' is') + ' already past the recommended start date for a ' + escapeHtml(formatDate(sendDate)) + ' send. Plan to compress steps, escalate to AW Builder/Designer, or push the send date.</div>';
+        }
+
+        // Summary tiles
+        html += '<div class="gen-summary">';
+        html += '<div class="gen-summary-cell"><div class="gen-summary-label">Campaign</div><div class="gen-summary-value">' + escapeHtml(campaignName || cadence.label + ' \u2014 ' + format.label) + '</div></div>';
+        html += '<div class="gen-summary-cell"><div class="gen-summary-label">Send Date</div><div class="gen-summary-value">' + escapeHtml(formatDate(sendDate)) + '</div></div>';
+        html += '</div>';
+
+        // Timeline
+        html += '<div class="gen-section"><h4>Timeline</h4><div class="gen-timeline">';
+        milestones.forEach(function (m) {
+          var classes = ['gen-milestone'];
+          if (m.sendDay) classes.push('send-day');
+          if (m.pastDue) classes.push('past-due');
+          var offsetLabel = m.sendDay ? 'Send day' : 'T-' + m.offset + ' business day' + (m.offset === 1 ? '' : 's');
+          html += '<div class="' + classes.join(' ') + '"><div class="milestone-date">';
+          html += '<div class="date-line">' + escapeHtml(formatDate(m.date)) + '</div>';
+          html += '<span class="offset">' + offsetLabel + '</span>';
+          if (m.pastDue) html += '<span class="past-tag">PAST DUE</span>';
+          html += '</div><div class="milestone-actions"><ul>';
+          m.actions.forEach(function (a) { html += '<li>' + a + '</li>'; });
+          html += '</ul>';
+          if (m.template) {
+            html += '<div class="subject-template"><span class="subject-template-text">' + escapeHtml(m.template.text) + '</span><button class="copy-btn" data-copy="' + escapeHtml(m.template.text) + '">Copy</button></div>';
+          }
+          if (m.subActions && m.subActions.length) {
+            html += '<ul class="milestone-subactions">';
+            m.subActions.forEach(function (s) { html += '<li>' + escapeHtml(s) + '</li>'; });
+            html += '</ul>';
+          }
+          if (m.warning) {
+            html += '<div class="milestone-warning"><strong>Note:</strong> ' + escapeHtml(m.warning) + '</div>';
+          }
+          html += '</div></div>';
+        });
+        html += '</div></div>';
+
+        // Contacts — split into 3 buckets
+        // Helper: parse a comma-separated names string into [{name, role}]
+        function parseNamesString(str, defaultRole) {
+          if (!str) return [];
+          return str.split(',').map(function (n) {
+            return { name: n.trim(), role: defaultRole };
+          }).filter(function (x) { return x.name.length > 0; });
+        }
+
+        // Helper: extract names from notes text (looks for common name patterns)
+        function extractNamesFromNotes(notesArr) {
+          if (!notesArr || !notesArr.length) return [];
+          // Known full names from EMAIL_CADENCES + Email Reference table — these are the
+          // people who realistically appear in any cadence note
+          var knownNames = [
+            'Robert Zlotogorsky', 'Heather Nichols', 'Zoriana Kos', 'Alla Igolnikova',
+            'Solomon Leifer', 'Usher Sperber', 'Daniel Norton', 'Cristina Santelises',
+            'Theresa Raffetto', 'Joshua Carl Pardi\u00f1ez', 'Krizha Anne Tubera',
+            'Keith McCord', 'Mary Yam-Wong', 'Niranee Shoba Chattergoon',
+            'Josh Lefkowits', 'Arthur Hershkovitz', 'Israel Herschkowit', 'Sarah Ryan', 'Aron Grossman',
+            'Julio Carrillo', 'Julio', 'Susan'
+          ];
+          var found = [];
+          var seen = {};
+          notesArr.forEach(function (note) {
+            // Notes can be plain strings (legacy) or { text, role } objects
+            var noteText = typeof note === 'string' ? note : note.text;
+            var noteRole = typeof note === 'string' ? 'mentioned in notes' : (note.role || 'mentioned in notes');
+            knownNames.forEach(function (n) {
+              if (noteText.indexOf(n) !== -1 && !seen[n]) {
+                found.push({ name: n, role: noteRole });
+                seen[n] = true;
+              }
+            });
+          });
+          return found;
+        }
+
+        // Build SKUs bucket: category merchants + cadence-level merchant contacts
+        var skusBucket = [];
+        if (requiresSKUs) {
+          if (category && category.merchants.length) {
+            category.merchants.forEach(function (m) {
+              skusBucket.push({ name: m.name, role: category.label + ' merchant' });
+            });
+          }
+          // Add any cadence contacts whose role explicitly mentions "Merchant"
+          contacts.forEach(function (c) {
+            if (/merchant/i.test(c.role)) {
+              skusBucket.push({ name: c.name, role: c.role });
+            }
+          });
+        }
+
+        // Build Approval bucket: cadence.approvers + always-on Heather (links) and Gerber (segments)
+        // Heather is filtered from cadence approvers since she always shows as "Link approval" below.
+        var approvalBucket = parseNamesString(cadence.approvers, 'Approver').filter(function (p) {
+          return p.name !== 'Heather Nichols';
+        });
+        approvalBucket.push({ name: 'Heather Nichols', role: 'Link approval' });
+        approvalBucket.push({ name: 'Gerber', role: 'Segment approval' });
+
+        // Build Other bucket: people mentioned in notes + cadence non-merchant contacts
+        var otherBucket = extractNamesFromNotes(cadence.notes);
+        contacts.forEach(function (c) {
+          if (!/merchant/i.test(c.role)) {
+            otherBucket.push({ name: c.name, role: c.role });
+          }
+        });
+
+        function renderBucket(label, items, pillClass) {
+          if (!items.length) return '';
+          var out = '<div class="gen-bucket"><h5 class="gen-bucket-title">' + escapeHtml(label) + '</h5><div class="gen-contacts">';
+          items.forEach(function (p) {
+            out += '<span class="gen-contact-pill ' + pillClass + '">' + escapeHtml(p.name) + '<span class="role">\u00b7 ' + escapeHtml(p.role) + '</span></span>';
+          });
+          out += '</div></div>';
+          return out;
+        }
+
+        html += '<div class="gen-section"><h4>Contacts</h4>';
+        html += renderBucket('SKUs From', skusBucket, 'merchant');
+        html += renderBucket('Approval', approvalBucket, 'approver');
+        html += renderBucket('Other', otherBucket, '');
+        html += '</div>';
+
+        // Suggested Segments
+        if ((cadence.suggestedSegments && cadence.suggestedSegments.length) || cadence.segmentNote) {
+          html += '<div class="gen-section"><h4>Suggested Segments</h4>';
+          if (cadence.suggestedSegments && cadence.suggestedSegments.length) {
+            html += '<div class="gen-segments">';
+            cadence.suggestedSegments.forEach(function (s) {
+              html += '<span class="gen-segment-pill">' + escapeHtml(s) + '</span>';
+            });
+            html += '</div>';
+          }
+          if (cadence.segmentNote) {
+            html += '<div class="gen-segment-note"><strong>Note:</strong> ' + escapeHtml(cadence.segmentNote) + '</div>';
+          }
+          html += '</div>';
+        }
+
+        // Checklist
+        var checklistItems = buildChecklist(cadence, formatKey, categoryKey, design, requiresSKUs);
+        html += '<div class="gen-section"><h4>Checklist</h4><div class="gen-checklist">';
+        checklistItems.forEach(function (item, idx) {
+          var id = 'genCheck_' + idx;
+          html += '<label class="gen-check-item" for="' + id + '"><input type="checkbox" id="' + id + '"><span class="gen-check-label">' + escapeHtml(item) + '</span></label>';
+        });
+        html += '</div></div>';
+
+        html += '<div class="gen-actions">';
+        html += '<button id="genCopyBtn" class="btn-secondary" type="button">\ud83d\udccb Copy Full Process to Clipboard</button>';
+        html += '</div>';
+
+        output.innerHTML = html;
+        output.classList.add('is-shown');
+
+        // Wire checkbox toggle
+        output.querySelectorAll('.gen-check-item input').forEach(function (cb) {
+          cb.addEventListener('change', function () {
+            cb.closest('.gen-check-item').classList.toggle('is-checked', cb.checked);
+          });
+        });
+
+        // Wire Copy Full Process
+        var copyBtn = document.getElementById('genCopyBtn');
+        copyBtn.addEventListener('click', function () {
+          var plain = buildPlainText(cadence, format, category, categoryKey, sendDate, design, designLabel, milestones, contacts, checklistItems, pastDueCount, campaignName, requiresSKUs);
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(plain).then(function () {
+              showCopiedSecondary(copyBtn);
+            }).catch(function () {
+              fallbackCopy(plain);
+              showCopiedSecondary(copyBtn);
+            });
+          } else {
+            fallbackCopy(plain);
+            showCopiedSecondary(copyBtn);
+          }
+        });
+
+        // Smooth scroll output into view inside the modal body
+        setTimeout(function () {
+          output.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 50);
+      }
+
+      function showCopiedSecondary(btn) {
+        var orig = btn.dataset.original || btn.textContent;
+        btn.dataset.original = orig;
+        btn.textContent = '\u2713 Copied to clipboard';
+        btn.classList.add('copied');
+        setTimeout(function () {
+          btn.textContent = orig;
+          btn.classList.remove('copied');
+        }, 1800);
+      }
+
+      function buildPlainText(cadence, format, category, categoryKey, sendDate, design, designLabel, milestones, contacts, checklistItems, pastDueCount, campaignName, requiresSKUs) {
+        var lines = [];
+        lines.push('CAMPAIGN PROCESS');
+        if (campaignName) lines.push('Campaign: ' + campaignName);
+        lines.push('Cadence: ' + cadence.label);
+        lines.push('Format: ' + format.label);
+        if (categoryKey && categoryKey !== 'n-a' && category) {
+          lines.push('Category: ' + category.label);
+        }
+        lines.push('Send Date: ' + formatDate(sendDate));
+        lines.push('Design Assigned: ' + designLabel + ' (' + design + ')');
+        if (pastDueCount > 0) {
+          lines.push('');
+          lines.push('\u26a0\ufe0f TIGHT TIMELINE \u2014 ' + pastDueCount + ' milestone(s) past recommended start.');
+        }
+
+        lines.push('');
+        lines.push('\u2501\u2501\u2501 TIMELINE \u2501\u2501\u2501');
+        milestones.forEach(function (m) {
+          var label = m.sendDay ? 'Send day' : 'T-' + m.offset;
+          var marker = m.pastDue ? ' [PAST DUE]' : (m.sendDay ? ' [SEND]' : '');
+          lines.push('');
+          lines.push('\u2022 ' + formatDate(m.date) + ' (' + label + ')' + marker);
+          m.actions.forEach(function (a) { lines.push('   - ' + a.replace(/<[^>]+>/g, '')); });
+          if (m.template) {
+            lines.push('   ' + m.template.text);
+          }
+          if (m.subActions && m.subActions.length) {
+            m.subActions.forEach(function (s) { lines.push('   - ' + s); });
+          }
+          if (m.warning) {
+            lines.push('   \u26a0\ufe0f Note: ' + m.warning);
+          }
+        });
+
+        lines.push('');
+        lines.push('\u2501\u2501\u2501 CONTACTS \u2501\u2501\u2501');
+
+        // SKUs From bucket
+        var skuLines = [];
+        if (requiresSKUs) {
+          if (category && category.merchants.length) {
+            category.merchants.forEach(function (m) {
+              skuLines.push('\u2022 ' + m.name + ' \u2014 ' + m.email + ' (' + category.label + ' merchant)');
+            });
+          }
+          contacts.forEach(function (c) {
+            if (/merchant/i.test(c.role)) {
+              skuLines.push('\u2022 ' + c.name + ' (' + c.role + ')');
+            }
+          });
+        }
+        if (skuLines.length) {
+          lines.push('SKUs From:');
+          skuLines.forEach(function (l) { lines.push('  ' + l); });
+        }
+
+        // Approval bucket
+        lines.push('Approval:');
+        if (cadence.approvers) {
+          cadence.approvers.split(',').forEach(function (n) {
+            var name = n.trim();
+            // Skip Heather here since she's always shown below as "Link approval"
+            if (name && name !== 'Heather Nichols') lines.push('  \u2022 ' + name + ' (Approver)');
+          });
+        }
+        lines.push('  \u2022 Heather Nichols (Link approval)');
+        lines.push('  \u2022 Gerber (Segment approval)');
+
+        // Other bucket
+        var otherLines = [];
+        var seenOther = {};
+        if (cadence.notes && cadence.notes.length) {
+          var knownNamesPT = ['Robert Zlotogorsky', 'Heather Nichols', 'Zoriana Kos', 'Alla Igolnikova',
+            'Solomon Leifer', 'Usher Sperber', 'Daniel Norton', 'Cristina Santelises',
+            'Theresa Raffetto', 'Joshua Carl Pardi\u00f1ez', 'Krizha Anne Tubera',
+            'Keith McCord', 'Mary Yam-Wong', 'Niranee Shoba Chattergoon',
+            'Josh Lefkowits', 'Arthur Hershkovitz', 'Israel Herschkowit', 'Sarah Ryan', 'Aron Grossman',
+            'Julio Carrillo', 'Julio', 'Susan'];
+          cadence.notes.forEach(function (note) {
+            // Notes can be plain strings (legacy) or { text, role } objects
+            var noteText = typeof note === 'string' ? note : note.text;
+            var noteRole = typeof note === 'string' ? 'mentioned in notes' : (note.role || 'mentioned in notes');
+            knownNamesPT.forEach(function (n) {
+              if (noteText.indexOf(n) !== -1 && !seenOther[n]) {
+                otherLines.push('  \u2022 ' + n + ' (' + noteRole + ')');
+                seenOther[n] = true;
+              }
+            });
+          });
+        }
+        contacts.forEach(function (c) {
+          if (!/merchant/i.test(c.role)) {
+            otherLines.push('  \u2022 ' + c.name + ' (' + c.role + ')');
+          }
+        });
+        if (otherLines.length) {
+          lines.push('Other:');
+          otherLines.forEach(function (l) { lines.push(l); });
+        }
+
+        if ((cadence.suggestedSegments && cadence.suggestedSegments.length) || cadence.segmentNote) {
+          lines.push('');
+          lines.push('\u2501\u2501\u2501 SUGGESTED SEGMENTS \u2501\u2501\u2501');
+          if (cadence.suggestedSegments && cadence.suggestedSegments.length) {
+            cadence.suggestedSegments.forEach(function (s) { lines.push('\u2022 ' + s); });
+          }
+          if (cadence.segmentNote) {
+            lines.push('Note: ' + cadence.segmentNote);
+          }
+        }
+
+        lines.push('');
+        lines.push('\u2501\u2501\u2501 CHECKLIST \u2501\u2501\u2501');
+        checklistItems.forEach(function (item) { lines.push('[ ] ' + item); });
+
+        return lines.join('\n');
+      }
+      
+    })();
+  </script>
+</body>
+</html>
