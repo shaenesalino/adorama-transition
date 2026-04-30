@@ -28,7 +28,7 @@
 
     body {
       margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, Roboto, "Helvetica Neue", Arial, sans-serif;
       color: var(--rich-black);
       background: linear-gradient(135deg, #F7FAFC 0%, var(--light-gray) 100%);
     }
@@ -643,9 +643,9 @@
 
     /* Place each category in a specific column to keep small ones together on the left */
     .issues-cat.cat-skus     { grid-column: 1; }
-    .issues-cat.cat-design   { grid-column: 2; grid-row: span 3; }
     .issues-cat.cat-audience { grid-column: 1; }
-    .issues-cat.cat-sms      { grid-column: 1; }
+    .issues-cat.cat-design   { grid-column: 2; }
+    .issues-cat.cat-test     { grid-column: 2; }
 
     .issues-cat .issues-subhead {
       margin: 0 0 8px;
@@ -657,13 +657,13 @@
     .issues-cat.cat-skus     .issues-subhead { color: var(--adorama-blue); border-bottom-color: rgba(0, 67, 135, 0.4); }
     .issues-cat.cat-design   .issues-subhead { color: #C7421F;             border-bottom-color: rgba(237, 81, 50, 0.5); }
     .issues-cat.cat-audience .issues-subhead { color: #0a7a87;             border-bottom-color: rgba(19, 176, 194, 0.5); }
-    .issues-cat.cat-sms      .issues-subhead { color: #6B4FBF;             border-bottom-color: rgba(107, 79, 191, 0.5); }
+    .issues-cat.cat-test     .issues-subhead { color: #6B4FBF;             border-bottom-color: rgba(107, 79, 191, 0.5); }
 
     /* Category-tinted left border on each accordion */
     .issues-cat.cat-skus     details { border-left: 3px solid rgba(0, 67, 135, 0.6); }
     .issues-cat.cat-design   details { border-left: 3px solid rgba(237, 81, 50, 0.55); }
     .issues-cat.cat-audience details { border-left: 3px solid rgba(19, 176, 194, 0.55); }
-    .issues-cat.cat-sms      details { border-left: 3px solid rgba(107, 79, 191, 0.55); }
+    .issues-cat.cat-test     details { border-left: 3px solid rgba(107, 79, 191, 0.55); }
 
     .issues-grid details {
       border: 1px solid var(--border);
@@ -715,7 +715,7 @@
       .issues-cat.cat-skus,
       .issues-cat.cat-design,
       .issues-cat.cat-audience,
-      .issues-cat.cat-sms { grid-column: 1; grid-row: auto; }
+      .issues-cat.cat-test { grid-column: 1; grid-row: auto; }
     }
 
         table {
@@ -1400,6 +1400,7 @@
       display: flex;
       gap: 10px;
       align-items: center;
+      justify-content: flex-end;
       margin-top: 4px;
       padding-top: 16px;
       border-top: 1px solid var(--border);
@@ -1413,6 +1414,540 @@
     }
 
     .gen-output.is-shown { display: block; }
+
+    /* Glossary tooltips — subtle dotted underline, native tooltip on hover */
+    .gen-gloss {
+      text-decoration: underline dotted rgba(0, 67, 135, 0.35);
+      text-underline-offset: 2px;
+      cursor: help;
+      color: inherit;
+    }
+
+    .gen-gloss:hover {
+      text-decoration-color: var(--adorama-blue);
+    }
+
+    /* Watch-out warnings panel */
+    .gen-watchouts {
+      margin-bottom: 18px;
+      padding: 12px 16px;
+      background: linear-gradient(135deg, rgba(255, 213, 79, 0.18) 0%, rgba(255, 213, 79, 0.08) 100%);
+      border: 1px solid rgba(232, 163, 23, 0.35);
+      border-left: 3px solid #E8A317;
+      border-radius: 10px;
+    }
+
+    .gen-watchouts-head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11.5px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #B07700;
+      margin-bottom: 8px;
+    }
+
+    .gen-watchouts-icon {
+      font-size: 14px;
+    }
+
+    .gen-watchouts-list {
+      margin: 0;
+      padding-left: 20px;
+      font-size: 13px;
+      color: var(--rich-black);
+      line-height: 1.55;
+    }
+
+    .gen-watchouts-list li {
+      margin-bottom: 6px;
+    }
+
+    .gen-watchouts-list li:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Expandable segments suggestion */
+    .gen-segments-expand {
+      border: 1px solid rgba(0, 67, 135, 0.18);
+      background: var(--white);
+      border-radius: 7px;
+      padding: 0;
+      margin-bottom: 8px;
+      overflow: hidden;
+    }
+
+    .gen-segments-expand summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .gen-segments-expand summary::-webkit-details-marker { display: none; }
+
+    .gen-segments-expand summary::after {
+      content: "\002B";
+      font-size: 14px;
+      color: var(--highlight);
+      font-weight: 800;
+      margin-left: auto;
+    }
+
+    .gen-segments-expand[open] summary::after {
+      content: "\2013";
+    }
+
+    .gen-segments-summary-text {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--adorama-blue);
+    }
+
+    .gen-segments-count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 20px;
+      padding: 1px 6px;
+      background: rgba(19, 176, 194, 0.12);
+      color: #0a7a87;
+      border: 1px solid rgba(19, 176, 194, 0.3);
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+
+    .gen-segments-expand .gen-sidecar-segments {
+      padding: 0 12px 10px;
+      flex-direction: column;
+      align-items: stretch;
+      display: flex;
+      gap: 4px;
+    }
+
+    .gen-segments-expand .gen-sidecar-seg {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 5px 8px;
+      background: #FBFCFD;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-family: "SF Mono", Consolas, monospace;
+      font-size: 11px;
+      color: var(--rich-black);
+      word-break: break-all;
+    }
+
+    /* The text content of a segment row — fills available space, keeps glossarize abbr tags inline */
+    .gen-seg-name {
+      flex: 1 1 auto;
+      min-width: 0;
+      display: inline;
+    }
+
+    .gen-seg-name .gen-gloss {
+      /* Glossary tooltips inside seg names should be visually flat, not break layout */
+      text-decoration-color: rgba(0, 67, 135, 0.25);
+    }
+
+    .gen-segments-expand .seg-inline-copy {
+      flex: 0 0 auto;
+      padding: 1px 7px;
+      font-size: 9.5px;
+      font-weight: 700;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      color: var(--adorama-blue);
+      cursor: pointer;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .gen-segments-expand .seg-inline-copy:hover {
+      background: var(--adorama-blue);
+      color: var(--white);
+      border-color: var(--adorama-blue);
+    }
+
+    .gen-segments-expand .seg-inline-copy.copied {
+      background: var(--teal);
+      color: var(--white);
+      border-color: var(--teal);
+    }
+
+    .gen-segments-expand .gen-sidecar-note {
+      margin: 0 12px 8px;
+      padding: 6px 10px;
+      background: rgba(0, 67, 135, 0.04);
+      border-left: 2px solid var(--adorama-blue);
+      border-radius: 4px;
+      font-size: 11.5px;
+      color: var(--rich-black);
+      line-height: 1.5;
+    }
+
+    .gen-segments-help {
+      padding: 6px 12px 10px;
+      font-size: 10.5px;
+      color: var(--medium-gray);
+      line-height: 1.5;
+      font-style: italic;
+    }
+
+    /* Section label inside expanded segments (e.g. "SEEDLIST", "STANDARD EXCLUSIONS") */
+    .gen-segments-section-label {
+      padding: 8px 12px 4px;
+      font-size: 9.5px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--medium-gray);
+      border-top: 1px dashed rgba(0, 67, 135, 0.12);
+      margin-top: 4px;
+    }
+
+    /* Seedlist row — slight teal accent */
+    .gen-segments-expand .gen-seg-seedlist {
+      background: rgba(19, 176, 194, 0.05);
+      border-color: rgba(19, 176, 194, 0.25);
+    }
+
+    /* Exclusion row — orange accent */
+    .gen-segments-expand .gen-seg-exclusion {
+      background: rgba(237, 81, 50, 0.04);
+      border-color: rgba(237, 81, 50, 0.22);
+      flex-wrap: wrap;
+    }
+
+    .gen-seg-exclusion-note {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      font-size: 10px;
+      font-style: italic;
+      font-weight: 500;
+      color: var(--medium-gray);
+      margin-left: auto;
+      padding-right: 4px;
+    }
+
+    /* === Validation styles === */
+    .field-missing {
+      border-color: rgba(237, 81, 50, 0.5) !important;
+      box-shadow: 0 0 0 2px rgba(237, 81, 50, 0.08) !important;
+    }
+
+    .field-missing:focus {
+      border-color: var(--highlight) !important;
+      box-shadow: 0 0 0 2px rgba(237, 81, 50, 0.18) !important;
+    }
+
+    .gen-validation-hint {
+      grid-column: 1 / -1;
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--highlight);
+      font-weight: 600;
+      min-height: 18px;
+      text-align: right;
+    }
+
+    .gen-validation-hint:empty { display: none; }
+
+    /* === Inline mini-calendar === */
+    .gen-calendar {
+      margin-bottom: 18px;
+      padding: 16px 18px 18px;
+      background:
+        radial-gradient(ellipse at top right, rgba(19, 176, 194, 0.06) 0%, transparent 60%),
+        radial-gradient(ellipse at bottom left, rgba(0, 67, 135, 0.05) 0%, transparent 55%),
+        var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+    }
+
+    .gen-calendar-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .gen-calendar-title {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--rich-black);
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .gen-cal-title-icon {
+      font-size: 14px;
+      filter: saturate(1.2);
+    }
+
+    .gen-calendar-legend {
+      display: flex;
+      gap: 12px;
+      font-size: 10.5px;
+      color: var(--medium-gray);
+      flex-wrap: wrap;
+    }
+
+    .gen-calendar-legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .gen-calendar-legend-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .gen-cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 5px;
+    }
+
+    .gen-cal-dow {
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--medium-gray);
+      text-align: center;
+      padding-bottom: 3px;
+    }
+
+    @keyframes genCalCellIn {
+      from {
+        opacity: 0;
+        transform: translateY(4px) scale(0.97);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .gen-cal-day {
+      position: relative;
+      min-height: 60px;
+      padding: 5px 6px 6px;
+      background: linear-gradient(180deg, #FCFDFE 0%, #F8FAFC 100%);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+      animation: genCalCellIn 0.32s cubic-bezier(0.2, 0.8, 0.3, 1) both;
+      overflow: hidden;
+    }
+
+    .gen-cal-day:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(0, 67, 135, 0.10);
+      border-color: rgba(0, 67, 135, 0.32);
+      z-index: 2;
+    }
+
+    .gen-cal-day.has-milestone {
+      background: linear-gradient(180deg, rgba(19, 176, 194, 0.04) 0%, rgba(19, 176, 194, 0.10) 100%);
+      border-color: rgba(19, 176, 194, 0.32);
+    }
+
+    .gen-cal-day.is-weekend {
+      background: repeating-linear-gradient(
+        45deg,
+        #F4F6F9,
+        #F4F6F9 6px,
+        #EFF2F6 6px,
+        #EFF2F6 12px
+      );
+      opacity: 0.85;
+    }
+
+    .gen-cal-day.is-weekend.has-milestone {
+      background: linear-gradient(180deg, rgba(19, 176, 194, 0.04) 0%, rgba(19, 176, 194, 0.12) 100%);
+      opacity: 1;
+    }
+
+    .gen-cal-day.is-outside { opacity: 0.3; }
+
+    .gen-cal-day.is-today {
+      box-shadow:
+        inset 0 0 0 2px var(--adorama-blue),
+        0 0 0 4px rgba(0, 67, 135, 0.10);
+    }
+
+    .gen-cal-day.is-today:hover {
+      box-shadow:
+        inset 0 0 0 2px var(--adorama-blue),
+        0 4px 14px rgba(0, 67, 135, 0.22);
+    }
+
+    @keyframes genSendShine {
+      0%, 100% { transform: translateX(-110%) skewX(-20deg); opacity: 0; }
+      50% { opacity: 0.55; }
+      80% { transform: translateX(220%) skewX(-20deg); opacity: 0; }
+    }
+
+    @keyframes genSendPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(0, 67, 135, 0.45), 0 4px 16px rgba(0, 67, 135, 0.22); }
+      50% { box-shadow: 0 0 0 5px rgba(0, 67, 135, 0.0), 0 4px 22px rgba(0, 67, 135, 0.36); }
+    }
+
+    .gen-cal-day.is-send {
+      background:
+        radial-gradient(ellipse at top right, rgba(255, 255, 255, 0.18) 0%, transparent 60%),
+        linear-gradient(135deg, var(--adorama-blue) 0%, #0066CC 70%, #1E88E5 100%);
+      border-color: var(--adorama-blue);
+      animation: genCalCellIn 0.32s cubic-bezier(0.2, 0.8, 0.3, 1) both, genSendPulse 2.6s ease-in-out 0.3s infinite;
+    }
+
+    .gen-cal-day.is-send:hover {
+      transform: translateY(-2px);
+    }
+
+    /* Shine sweep across the send day cell */
+    .gen-cal-send-shine {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 30%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.55) 50%, transparent 100%);
+      pointer-events: none;
+      animation: genSendShine 3.5s ease-in-out 0.6s infinite;
+    }
+
+    .gen-cal-day.is-send.is-today {
+      box-shadow: inset 0 0 0 2px #FFD54F, 0 0 0 4px rgba(255, 213, 79, 0.30);
+    }
+
+    .gen-cal-daynum {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--dark-gray);
+      line-height: 1;
+    }
+
+    .gen-cal-day.is-send .gen-cal-daynum {
+      color: var(--white);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
+    }
+
+    /* TODAY pill — small badge anchored top-right of today cell */
+    .gen-cal-today-pill {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      padding: 1px 5px;
+      background: var(--adorama-blue);
+      color: var(--white);
+      font-size: 8px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      border-radius: 3px;
+      line-height: 1.4;
+      box-shadow: 0 1px 3px rgba(0, 67, 135, 0.35);
+      z-index: 3;
+    }
+
+    .gen-cal-day.is-send .gen-cal-today-pill {
+      background: #FFD54F;
+      color: var(--rich-black);
+      box-shadow: 0 1px 3px rgba(255, 213, 79, 0.6);
+    }
+
+    .gen-cal-dots {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3px;
+      margin-top: auto;
+    }
+
+    .gen-cal-dot {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      min-width: 26px;
+      padding: 2px 5px;
+      background: linear-gradient(135deg, #14C2D2 0%, var(--teal) 100%);
+      color: var(--white);
+      border-radius: 4px;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      line-height: 1.3;
+      box-shadow: 0 1px 2px rgba(19, 176, 194, 0.30);
+      transition: transform 0.15s ease;
+    }
+
+    .gen-cal-dot:hover {
+      transform: scale(1.08);
+    }
+
+    .gen-cal-dot-icon {
+      font-size: 10px;
+      filter: saturate(1.1);
+      line-height: 1;
+    }
+
+    .gen-cal-dot-label {
+      font-size: 9px;
+    }
+
+    .gen-cal-dot.past-due {
+      background: linear-gradient(135deg, #F46C50 0%, var(--highlight) 100%);
+      box-shadow: 0 1px 2px rgba(237, 81, 50, 0.35);
+    }
+
+    .gen-cal-dot.is-send-dot {
+      background: linear-gradient(135deg, #FFD54F 0%, #FFB300 100%);
+      color: var(--rich-black);
+      box-shadow: 0 1px 3px rgba(255, 179, 0, 0.45);
+    }
+
+    .gen-cal-day.is-send .gen-cal-dot {
+      background: rgba(255, 255, 255, 0.95);
+      color: var(--adorama-blue);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
+    }
+
+    @media (max-width: 600px) {
+      .gen-cal-day { min-height: 48px; padding: 4px; gap: 2px; }
+      .gen-cal-daynum { font-size: 10px; }
+      .gen-cal-dot { min-width: 20px; padding: 1px 3px; font-size: 8px; gap: 1px; }
+      .gen-cal-dot-icon { font-size: 9px; }
+      .gen-cal-dot-label { font-size: 8px; }
+      .gen-cal-today-pill { top: 2px; right: 2px; font-size: 7px; padding: 1px 3px; }
+    }
 
     .gen-summary {
       display: grid;
@@ -1721,69 +2256,174 @@
       margin: 0 auto;
     }
 
+    /* === Timeline grid: vertical rail + numbered markers + content + sidecar === */
+    .gen-tl-grid {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      max-width: none;
+      margin: 0;
+    }
+
+    .gen-tl-step {
+      display: grid;
+      grid-template-columns: 36px minmax(0, 1fr) minmax(0, 1fr);
+      column-gap: 16px;
+      align-items: stretch;
+      position: relative;
+      padding: 0 0 18px;
+    }
+
+    .gen-tl-step:last-child { padding-bottom: 0; }
+
+    /* Vertical track line connecting markers */
+    .gen-tl-step::before {
+      content: '';
+      position: absolute;
+      left: 17px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, rgba(0, 67, 135, 0.25), rgba(19, 176, 194, 0.25));
+      z-index: 0;
+    }
+
+    /* Top of first step + bottom of last step: trim line to midpoint of marker */
+    .gen-tl-step:first-child::before { top: 18px; }
+    .gen-tl-step:last-child::before { bottom: calc(100% - 18px); }
+
+    /* Single-step edge case: hide line entirely */
+    .gen-tl-grid:has(> .gen-tl-step:only-child) .gen-tl-step::before { display: none; }
+
+    /* Marker: numbered disc */
+    .gen-tl-marker {
+      position: relative;
+      z-index: 1;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--white);
+      border: 2.5px solid var(--adorama-blue);
+      color: var(--adorama-blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 13px;
+      flex: 0 0 auto;
+      box-shadow: 0 2px 6px rgba(0, 67, 135, 0.12);
+      align-self: flex-start;
+      transition: all 0.15s ease;
+    }
+
+    .gen-tl-step.is-past-due .gen-tl-marker {
+      border-color: var(--highlight);
+      color: var(--highlight);
+      box-shadow: 0 2px 6px rgba(237, 81, 50, 0.18);
+    }
+
+    .gen-tl-step.is-send .gen-tl-marker {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, var(--teal) 0%, #0a7a87 100%);
+      border-color: var(--teal);
+      color: var(--white);
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      box-shadow: 0 3px 10px rgba(19, 176, 194, 0.32);
+    }
+
+    /* === Milestone pill (left card) === */
     .gen-tl-pill {
       padding: 14px 18px;
       border-radius: 12px;
       border: 1.5px solid rgba(0, 67, 135, 0.2);
       background: rgba(0, 67, 135, 0.04);
       transition: all 0.15s ease;
+      min-width: 0;
+      position: relative;
+    }
+
+    .gen-tl-pill:hover {
+      border-color: rgba(0, 67, 135, 0.35);
+      background: rgba(0, 67, 135, 0.06);
     }
 
     .gen-tl-pill.send-day {
-      background: rgba(19, 176, 194, 0.08);
-      border-color: rgba(19, 176, 194, 0.4);
+      background: linear-gradient(135deg, rgba(19, 176, 194, 0.1) 0%, rgba(19, 176, 194, 0.04) 100%);
+      border-color: rgba(19, 176, 194, 0.45);
     }
 
     .gen-tl-pill.past-due {
-      background: rgba(237, 81, 50, 0.06);
-      border-color: rgba(237, 81, 50, 0.45);
+      background: linear-gradient(135deg, rgba(237, 81, 50, 0.08) 0%, rgba(237, 81, 50, 0.03) 100%);
+      border-color: rgba(237, 81, 50, 0.5);
     }
 
     .gen-tl-head {
       display: flex;
       align-items: center;
       gap: 10px;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px dashed rgba(0, 67, 135, 0.15);
       flex-wrap: wrap;
     }
 
+    .gen-tl-pill.past-due .gen-tl-head {
+      border-bottom-color: rgba(237, 81, 50, 0.25);
+    }
+
+    .gen-tl-pill.send-day .gen-tl-head {
+      border-bottom-color: rgba(19, 176, 194, 0.3);
+    }
+
     .gen-tl-date {
-      font-size: 14px;
-      font-weight: 700;
+      font-size: 14.5px;
+      font-weight: 800;
       color: var(--rich-black);
+      letter-spacing: 0;
     }
 
     .gen-tl-offset {
-      font-size: 11.5px;
-      font-weight: 700;
+      font-size: 10.5px;
+      font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.08em;
       color: var(--medium-gray);
       background: var(--white);
       border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 2px 8px;
+      border-radius: 4px;
+      padding: 2px 7px;
     }
 
     .gen-tl-flag {
-      font-size: 10.5px;
-      font-weight: 700;
+      font-size: 10px;
+      font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: 0.07em;
-      padding: 3px 8px;
-      border-radius: 5px;
+      letter-spacing: 0.1em;
+      padding: 3px 9px;
+      border-radius: 4px;
       margin-left: auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
     }
 
     .gen-tl-flag.past {
       background: var(--highlight);
       color: var(--white);
+      box-shadow: 0 1px 3px rgba(237, 81, 50, 0.3);
     }
+
+    .gen-tl-flag.past::before { content: '⚠'; font-size: 11px; }
 
     .gen-tl-flag.send {
       background: var(--teal);
       color: var(--white);
+      box-shadow: 0 1px 3px rgba(19, 176, 194, 0.3);
     }
+
+    .gen-tl-flag.send::before { content: '🚀'; font-size: 11px; }
 
     .gen-tl-actions {
       margin: 0;
@@ -1823,55 +2463,6 @@
 
     .gen-tl-warning strong { color: #B07700; }
 
-    .gen-wf-arrow {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 4px 0;
-      color: var(--medium-gray);
-    }
-
-    .gen-wf-arrow svg {
-      width: 18px;
-      height: 18px;
-    }
-
-    /* === 2-column timeline grid: left = process, right = sidecar specifics === */
-    .gen-tl-grid {
-      display: flex;
-      flex-direction: column;
-      max-width: none;
-      margin: 0;
-    }
-
-    .gen-tl-row {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      gap: 16px;
-      align-items: start;
-    }
-
-    .gen-tl-row .gen-tl-pill {
-      min-width: 0;
-    }
-
-    .gen-tl-arrow-row {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 6px 0;
-      color: var(--medium-gray);
-      /* arrow appears under the LEFT column only, since the chain is process-flow */
-      grid-column: 1;
-      width: calc(50% - 8px);
-      align-self: flex-start;
-    }
-
-    .gen-tl-arrow-row svg {
-      width: 18px;
-      height: 18px;
-    }
-
     /* Sidecar (right column) */
     .gen-tl-sidecar {
       align-self: stretch;
@@ -1889,6 +2480,32 @@
       background: transparent;
       border: none;
       padding: 0;
+    }
+
+    /* Mobile: stack marker above content, sidecar below pill */
+    @media (max-width: 760px) {
+      .gen-tl-step {
+        grid-template-columns: 1fr;
+        column-gap: 0;
+        row-gap: 8px;
+        padding-left: 22px;
+      }
+      .gen-tl-step::before {
+        left: 9px;
+      }
+      .gen-tl-marker {
+        position: absolute;
+        left: -8px;
+        top: 0;
+        width: 30px;
+        height: 30px;
+        font-size: 11px;
+      }
+      .gen-tl-step.is-send .gen-tl-marker {
+        width: 34px;
+        height: 34px;
+        font-size: 9.5px;
+      }
     }
 
     .gen-sidecar-heading {
@@ -1989,6 +2606,101 @@
 
     .gen-sidecar-tip strong { color: #B07700; }
 
+    /* "If something goes wrong" expandable block in sidecars */
+    .gen-sidecar-troubleshoot {
+      margin-top: 10px;
+      background: rgba(237, 81, 50, 0.05);
+      border: 1px solid rgba(237, 81, 50, 0.22);
+      border-left: 3px solid var(--highlight);
+      border-radius: 7px;
+      overflow: hidden;
+    }
+
+    .gen-sidecar-troubleshoot summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #C7421F;
+      letter-spacing: 0.02em;
+    }
+
+    .gen-sidecar-troubleshoot summary::-webkit-details-marker { display: none; }
+
+    .gen-sidecar-troubleshoot summary::after {
+      content: "\002B";
+      margin-left: auto;
+      color: var(--highlight);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .gen-sidecar-troubleshoot[open] summary::after {
+      content: "\2013";
+    }
+
+    .gen-tr-icon {
+      color: var(--highlight);
+      font-size: 13px;
+      flex: 0 0 auto;
+    }
+
+    .gen-tr-count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 18px;
+      padding: 1px 6px;
+      background: rgba(237, 81, 50, 0.12);
+      color: var(--highlight);
+      border: 1px solid rgba(237, 81, 50, 0.30);
+      border-radius: 3px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0;
+      margin-left: auto;
+      margin-right: 6px;
+    }
+
+    .gen-tr-body {
+      padding: 0 12px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .gen-tr-item {
+      padding: 8px 10px;
+      background: var(--white);
+      border: 1px solid rgba(237, 81, 50, 0.18);
+      border-radius: 5px;
+      font-size: 11.5px;
+      line-height: 1.5;
+    }
+
+    .gen-tr-issue {
+      font-weight: 700;
+      color: var(--rich-black);
+      margin-bottom: 4px;
+    }
+
+    .gen-tr-fix {
+      color: var(--dark-gray);
+    }
+
+    .gen-tr-fix code {
+      font-family: "SF Mono", Consolas, monospace;
+      font-size: 10.5px;
+      padding: 1px 4px;
+      background: rgba(0, 67, 135, 0.06);
+      border-radius: 3px;
+      color: var(--adorama-blue);
+    }
+
     /* External link inside sidecar (Jira ticket card) */
     .gen-sidecar-link {
       display: flex;
@@ -2028,15 +2740,6 @@
       .gen-tl-pill { padding: 12px 14px; }
       .gen-tl-date { font-size: 13.5px; }
       .gen-tl-actions { font-size: 13px; padding-left: 18px; }
-      /* Stack columns on mobile */
-      .gen-tl-row {
-        grid-template-columns: 1fr;
-        gap: 8px;
-      }
-      .gen-tl-arrow-row {
-        grid-column: 1;
-        width: 100%;
-      }
       .gen-tl-sidecar {
         padding: 12px 14px;
         font-size: 12.5px;
@@ -2361,6 +3064,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 3px;
+      align-items: center;
     }
 
     .ref-format-tag {
@@ -2380,6 +3084,45 @@
       color: #0a7a87;
       border-color: rgba(19, 176, 194, 0.25);
     }
+
+    /* Connector tokens between format tags + within people lists */
+    /* OR (slash) — alternation between options */
+    .fmt-or {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #0a7a87;
+      font-weight: 800;
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      padding: 0 2px;
+    }
+
+    .fmt-or::before { content: '/'; }
+
+    /* AND (plus) — combined / both required */
+    .fmt-and {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--highlight);
+      font-weight: 800;
+      font-size: 12px;
+      padding: 0 2px;
+    }
+
+    .fmt-and::before { content: '+'; }
+
+    /* Connector words inside people lists ("or", "and") */
+    .ref-people-list .conn {
+      font-style: italic;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .ref-people-list .conn.or { color: #0a7a87; }
+    .ref-people-list .conn.and { color: var(--highlight); }
+    .ref-people-list .conn::after { content: ''; }
 
     .ref-jira-link {
       display: inline-block;
@@ -2422,6 +3165,7 @@
     .ref-people-list .person { color: var(--rich-black); font-weight: 600; }
     .ref-people-list .person::after { content: ","; color: var(--medium-gray); margin-left: 2px; font-weight: 400; }
     .ref-people-list .person:last-of-type::after { content: ""; }
+    .ref-people-list .person:has(+ .conn)::after { content: ""; }
     .ref-people-list .person.muted { color: var(--medium-gray); font-style: italic; font-weight: 500; }
     .ref-people-list .person.muted::after { content: ""; }
     .ref-people-list .person.dash { color: var(--medium-gray); font-weight: 400; }
@@ -3142,7 +3886,6 @@
       letter-spacing: 0.06em;
       text-decoration: none;
       transition: all 0.12s ease;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
     }
 
     .cad-chip.bc {
@@ -3333,6 +4076,8 @@
                     <option value="promo-weekend">Weekend Deals</option>
                     <option value="promo-flash">Flash Sale</option>
                     <option value="promo-top">Top Deals</option>
+                    <option value="promo-global">Global Campaign</option>
+                    <option value="promo-other">Other</option>
                   </optgroup>
                   <optgroup label="Services">
                     <option value="svc-openbox">Open Box</option>
@@ -3347,9 +4092,9 @@
                   </optgroup>
                   <optgroup label="Newsletter">
                     <option value="nl-creators">Creators&#39; Huddle</option>
-                    <option value="nl-photo">Photo (In Focus)</option>
-                    <option value="nl-video">Video</option>
-                    <option value="nl-pb">Private Brands</option>
+                    <option value="nl-photo">Photo Newsletter</option>
+                    <option value="nl-video">Video Newsletter</option>
+                    <option value="nl-pb">Private Brands Newsletter</option>
                   </optgroup>
                   <optgroup label="Events / Store">
                     <option value="events">Events</option>
@@ -3359,7 +4104,6 @@
                     <option value="loyalty">Loyalty / VIP</option>
                     <option value="plcc">PLCC</option>
                   </optgroup>
-                  <option value="other">Other</option>
                 </select>
                 <div class="form-hint" id="genCadenceHint">Drives contact routing and design rules.</div>
               </div>
@@ -3369,10 +4113,10 @@
                 <select id="genFormat">
                   <option value="">— Select format —</option>
                   <option value="postcard">Postcard Only</option>
-                  <option value="categories">With Categories</option>
-                  <option value="brands">With Brands</option>
-                  <option value="static-products">With Static Products</option>
-                  <option value="dynamic-products">With Dynamic Products</option>
+                  <option value="categories">Categories</option>
+                  <option value="brands">Brands</option>
+                  <option value="static-products">Static Products</option>
+                  <option value="dynamic-products">Dynamic Products</option>
                 </select>
                 <div class="form-hint" id="genFormatHint">Layout style — see Section 04 for live samples.</div>
               </div>
@@ -3381,6 +4125,7 @@
                 <label for="genCategory">Category</label>
                 <select id="genCategory">
                   <option value="">— Select category —</option>
+                  <option value="all-categories">All Categories (Evergreen LP)</option>
                   <option value="photo">Photo</option>
                   <option value="video">Video</option>
                   <option value="memory-storage">Memory Card / Storage</option>
@@ -3422,9 +4167,10 @@
               </div>
 
               <div class="form-actions">
-                <button id="genGenerateBtn" class="btn-primary" type="button">⚡ Generate Process</button>
                 <button id="genResetBtn" class="btn-secondary" type="button">Reset</button>
+                <button id="genGenerateBtn" class="btn-primary" type="button">⚡ Generate Process</button>
               </div>
+              <div id="genValidationHint" class="gen-validation-hint" aria-live="polite"></div>
             </div>
 
             <div id="genOutput" class="gen-output"></div>
@@ -3620,12 +4366,12 @@
             <tr>
               <td class="cat"><a href="https://adorama.sharepoint.com/:x:/r/sites/EmailMarketingTeam/Shared%20Documents/EMAIL%20PLANNING/2026/05-May/ADORAMA/2026%20Adorama%20May%20Email%20Calendar.xlsx?d=w1a7437e6e22840b78ac7bc1ee5ae93dd&amp;csf=1&amp;web=1&amp;e=gvSXeK" target="_blank" rel="noopener noreferrer">2026 Adorama Email Calendar</a></td>
               <td>Email Marketing Team &gt; Email Planning &gt; [Year] &gt; [Month]</td>
-              <td>The email framework Gerber builds every month. <strong>Source of truth for email schedule.</strong></td>
+              <td>The email framework Gerber Rivera builds every month. <strong>Source of truth for email schedule.</strong></td>
             </tr>
             <tr>
               <td class="cat"><a href="https://adorama.sharepoint.com/:x:/r/sites/EmailMarketingTeam/Shared%20Documents/SMS%20Planning/2026/05-May/ADORAMA/2026%20Adorama%20May%20SMS%20Calendar.xlsx?d=w11aa756d60d240c3aa15cad28758c31c&amp;csf=1&amp;web=1&amp;e=i5Izv0" target="_blank" rel="noopener noreferrer">2026 Adorama SMS Calendar</a></td>
               <td>Email Marketing &gt; SMS Planning &gt; [Year] &gt; [Month]</td>
-              <td>The SMS framework Gerber builds every month. <strong>Source of truth for SMS schedule.</strong></td>
+              <td>The SMS framework Gerber Rivera builds every month. <strong>Source of truth for SMS schedule.</strong></td>
             </tr>
             <tr>
               <td class="cat"><a href="https://adorama.sharepoint.com/:x:/s/Marketing/IQAhDzmEyXnWTIYh-LUDwrjxAaDA7h_qKUOpm48HXqQvw0g?CID=f70e73f5-6bb5-4f2c-4da0-44302d48b004&amp;e=lNxm7j" target="_blank" rel="noopener noreferrer">2026 Marketing Campaign Calendar</a></td>
@@ -3634,13 +4380,13 @@
             </tr>
             <tr>
               <td class="cat"><a href="https://adorama-my.sharepoint.com/:x:/r/personal/gerberr_adorama_com/_layouts/15/Doc.aspx?sourcedoc=%7B7A05C13C-7B3B-442D-A844-06D1739235BF%7D&amp;file=Adorama%20Email%20Production%20Schedule%20and%20Status%20-112621.xlsx&amp;fromShare=true&amp;action=default&amp;mobileredirect=true" target="_blank" rel="noopener noreferrer">Adorama Email Production Schedule &amp; Status</a></td>
-              <td>Gerber's Drive</td>
+              <td>Gerber Rivera's Drive</td>
               <td>Copy the email schedule here from the Monthly Calendar. <strong>Your tracker for each email's progress.</strong> You can also include SMS campaigns to view everything in one file.</td>
             </tr>
             <tr>
               <td class="cat"><a href="https://adorama.sharepoint.com/:x:/r/sites/EmailMarketingTeam/_layouts/15/Doc.aspx?sourcedoc=%7B4E644C89-1ACA-4761-88B1-41CED4F210D0%7D&amp;file=Adorama%20Daily%20Report%20-%20MTD%20and%20YTD.xlsx&amp;action=default&amp;mobileredirect=true" target="_blank" rel="noopener noreferrer">Adorama Daily Report — MTD &amp; YTD</a></td>
               <td>Email Marketing &gt; Report &gt; ADO</td>
-              <td>Where you put Gerber's "breakfast." Monitors MTD and YTD trend, plus week-over-same-week-last-year performance.</td>
+              <td>Where you put Gerber Rivera's "breakfast." Monitors MTD and YTD trend, plus week-over-same-week-last-year performance.</td>
             </tr>
             <tr>
               <td class="cat"><a href="https://adorama.sharepoint.com/:x:/s/Marketing/IQDVyIBrFoGfSaIY-CIYnOVNARIQPLaxeXmCBWHnzbbLPEA?CID=f3ab4cc5-af9e-8902-bdc8-0eff39b7e2f5&amp;e=YaXtqe" target="_blank" rel="noopener noreferrer">Marketing Submissions 2026</a></td>
@@ -3668,7 +4414,7 @@
           <div>
             <div class="section-kicker">03 / Email Workflow</div>
             <h3>General Email Process</h3>
-            <p class="section-desc">End-to-end process from briefing to post-send, ordered by when each step should begin relative to the send date. Earliest start is Step 1 (SKUs, T-10), latest is post-send. <strong>Business days</strong> count Monday–Friday only.</p>
+            <p class="section-desc">End-to-end process from briefing to post-send, ordered by when each step should begin relative to the send date. Earliest start is Step 1 (SKUs, 10 business days before), latest is post-send. <strong>Business days</strong> count Monday–Friday only.</p>
           </div>
         </div>
 
@@ -3681,6 +4427,15 @@
                 <span class="timing-pill calm">10+ business days before</span>
               </div>
               <p>Request SKUs and complete product details from Merchants. Ensure all required information (pricing, links, images) is accurate and complete.</p>
+              <p style="margin-top: 6px; padding: 8px 12px; background: #FFF8F6; border-left: 2px solid var(--highlight); border-radius: 4px; font-size: 12px; color: var(--rich-black); line-height: 1.55;">
+                <strong style="color: var(--highlight);">Deadline &amp; reminders:</strong> SKU request goes out <strong>10 business days before send</strong>. The deadline depends on format:
+                <span style="display: block; padding-left: 10px; margin: 4px 0;">
+                  &bull; <strong>Static Products</strong>: 5-day deadline &mdash; designer needs the exact SKUs before they start.<br>
+                  &bull; <strong>Dynamic Products</strong>: 7-day deadline &mdash; SKUs pull from the product feed at click, so design doesn&rsquo;t block on them.<br>
+                  &bull; <strong>Evergreen LP</strong> (Mystery / Flash): 7-day deadline &mdash; SKUs are used for back-end audience qualification only, not shown in the email.
+                </span>
+                If needed, send a reminder on the morning of the due date stating it is due by <strong>EOD</strong>. You may send another reminder the morning after the due date, allowing last-minute submissions until <strong>noon</strong>. After that, stop. If there are still no submissions or not enough SKUs, look for alternatives. Reach out to <strong>Heather</strong> or <strong>Marketing Ops</strong>, or pull top SKUs from <strong>Looker YTD</strong>. For the Evergreen landing page, <strong>Heather</strong> and <strong>Zoriana</strong> will set up the remaining SKUs to pull dynamically.
+              </p>
             </div>
           </div>
 
@@ -3741,7 +4496,7 @@
                 <h4>Segments</h4>
                 <span class="timing-pill urgent">2–3 business days before</span>
               </div>
-              <p>Propose audience segments to <strong>Gerber</strong> and secure approval. Prepare segments as early as possible to avoid delays.</p>
+              <p>Propose audience segments to <strong>Gerber Rivera</strong> and secure approval. Prepare segments as early as possible to avoid delays.</p>
             </div>
           </div>
 
@@ -3815,6 +4570,9 @@
                 <li>Email proof (rendering, links, personalization)</li>
                 <li>Final campaign setup (segments, scheduling, tracking)</li>
               </ul>
+              <p style="margin-top: 6px; padding: 6px 10px; background: #FFF8F6; border-left: 2px solid var(--highlight); border-radius: 4px; font-size: 11.5px; color: var(--rich-black);">
+                <strong style="color: var(--highlight);">Note:</strong> Check products via <strong>Time Machine</strong> before designer starts working on the creative to avoid back and forth.
+              </p>
             </div>
           </div>
 
@@ -3866,7 +4624,7 @@
                 <span class="timing-pill urgent">3+ business days before</span>
               
               </div>
-              <p>Propose the target audience segment and secure approval from <strong>Gerber</strong>.</p>
+              <p>Propose the target audience segment and secure approval from <strong>Gerber Rivera</strong>.</p>
             </div>
           </div>
 
@@ -3943,7 +4701,7 @@
                 <h5 class="compact-group-title">Email Team</h5>
                 <div class="compact-list">
                   <div class="compact-row"><span class="compact-name">Sean</span><span class="compact-meta">1-540-999-8470</span><button class="copy-btn" data-copy="15409998470">Copy</button></div>
-                  <div class="compact-row"><span class="compact-name">Gerber</span><span class="compact-meta">1-818-468-3454</span><button class="copy-btn" data-copy="18184683454">Copy</button></div>
+                  <div class="compact-row"><span class="compact-name">Gerber Rivera</span><span class="compact-meta">1-818-468-3454</span><button class="copy-btn" data-copy="18184683454">Copy</button></div>
                 </div>
               </div>
               <div class="compact-group">
@@ -4007,7 +4765,7 @@
           </div>
 
           <div class="card accent-left">
-            <h4>With Categories</h4>
+            <h4>Categories</h4>
             <p>Highlights product categories instead of specific SKUs. Common for broad campaigns with multiple entry points.</p>
             <div class="used-for">Used for: Open Box, Weekend Deals, Multi-touch</div>
             <a class="sample-link" href="https://app.bluecore.com/admin/campaigns/adorama/5936831600123904" target="_blank" rel="noopener noreferrer">040126-08AM-Services-Open-Box</a>
@@ -4015,7 +4773,7 @@
           </div>
 
           <div class="card accent-left">
-            <h4>With Brands</h4>
+            <h4>Brands</h4>
             <p>Organized by featured brands. Often used for rebate or brand-driven campaigns.</p>
             <div class="used-for">Used for: Photo Rebates, Brand Promos</div>
             <a class="sample-link" href="https://app.bluecore.com/admin/campaigns/adorama/4854646772195328" target="_blank" rel="noopener noreferrer">041326-08AM-Promo-Photo-Rebates</a>
@@ -4023,14 +4781,14 @@
           </div>
 
           <div class="card accent-left">
-            <h4>With Static Products</h4>
+            <h4>Static Products</h4>
             <p>Features manually selected SKUs designed directly into the email. Fixed content that does not change dynamically.</p>
             <a class="sample-link" href="https://app.bluecore.com/admin/campaigns/adorama/5232270736482304" target="_blank" rel="noopener noreferrer">032326-STO-Promo-This-Weeks-Top-Picks</a>
             <a class="sample-link" href="https://app.bluecore.com/admin/campaigns/adorama/5713225309872128" target="_blank" rel="noopener noreferrer">030626-08AM-Promo-Photo-Deals-March-Photo-Madness</a>
           </div>
 
           <div class="card accent-left" style="grid-column: span 2;">
-            <h4>With Dynamic Products</h4>
+            <h4>Dynamic Products</h4>
             <p>Products are dynamically pulled from an imported list or product catalog. Updates automatically based on feed or selection.</p>
             <div class="grid two" style="margin-top: 8px;">
               <a class="sample-link" href="https://app.bluecore.com/admin/campaigns/adorama/5973816716943360" target="_blank" rel="noopener noreferrer">042726-08AM-Promo-V2-Warehouse-Sale-General</a>
@@ -4062,10 +4820,11 @@
               <span class="ref-design-pill adr">ADR</span>
               </div>
               <div class="ref-card-body">
-              <span class="ref-label">Format</span><span class="ref-value"><span class="ref-format-tags"><span class="ref-format-tag">With Static Products</span><span class="ref-format-tag">With Brands</span></span></span>
+              <span class="ref-label">Format</span><span class="ref-value"><span class="ref-format-tags"><span class="ref-format-tag">Static Products</span><span class="fmt-or" aria-label="or"></span><span class="ref-format-tag">Dynamic Products</span><span class="fmt-or" aria-label="or"></span><span class="ref-format-tag">Brands</span></span></span>
               <span class="ref-label">Jira</span><span class="ref-value"><a class="ref-jira-link" href="https://jira.adorama.com/browse/MKT-93582" target="_blank" rel="noopener noreferrer" title="Photo-Video Emails &amp; Newsletters">MKT-93582</a></span>
               <span class="ref-label">SKUs</span><span class="ref-value"><span class="ref-people-list"><span class="person ">Josh Lefkowits</span><span class="person ">Arthur Hershkovitz</span></span></span>
-              <span class="ref-label">Approval</span><span class="ref-value"><span class="ref-people-list"><span class="person ">Robert Zlotogorsky</span><span class="person ">Josh Lefkowits</span><span class="person ">Arthur Hershkovitz</span><span class="person ">Heather Nichols</span></span></span>
+              <span class="ref-label">Brands</span><span class="ref-value"><span class="ref-people-list"><span class="person ">Robert Zlotogorsky</span><span class="person ">Keith McCord</span><span class="conn or">or</span><span class="person muted">check on JIRA</span></span></span>
+              <span class="ref-label">Approval</span><span class="ref-value"><span class="ref-people-list"><span class="person ">Robert Zlotogorsky</span><span class="person ">Arthur Hershkovitz</span><span class="person ">Heather Nichols</span></span></span>
               </div>
               <div class="ref-card-samples"><div class="ref-card-samples-label">Recent examples</div>
               <div class="cad-row"><span class="cad-name">030626-08AM-Promo-Photo-Deals-March-Photo-Madness</span><span class="cad-chips"><a class="cad-chip bc" href="https://app.bluecore.com/admin/campaigns/adorama/5713225309872128" target="_blank" rel="noopener noreferrer" title="BC">BC</a><a class="cad-chip jira" href="https://jira.adorama.com/browse/MKT-100458" target="_blank" rel="noopener noreferrer" title="JIRA">JIRA</a><a class="cad-chip cu" href="https://app.clickup.com/t/86afv8227" target="_blank" rel="noopener noreferrer" title="CU">CU</a></span></div>
@@ -4078,7 +4837,7 @@
               <span class="ref-design-pill aw">AW</span>
               </div>
               <div class="ref-card-body">
-              <span class="ref-label">Format</span><span class="ref-value"><span class="ref-format-tags"><span class="ref-format-tag">Postcard</span><span class="ref-format-tag special">Evergreen LP</span></span></span>
+              <span class="ref-label">Format</span><span class="ref-value"><span class="ref-format-tags"><span class="ref-format-tag">Postcard</span><span class="fmt-and" aria-label="and"></span><span class="ref-format-tag special">Evergreen LP</span></span></span>
               <span class="ref-label">Jira</span><span class="ref-value"><a class="ref-jira-link" href="https://jira.adorama.com/browse/MKT-99009" target="_blank" rel="noopener noreferrer" title="Adorama Emails 2026">MKT-99009</a></span>
               <span class="ref-label">SKUs</span><span class="ref-value"><span class="ref-people-list"><span class="person ">All Merchants</span><span class="person muted">Products will be dynamically pulled if not enough SKUs</span></span></span>
               <span class="ref-label">Approval</span><span class="ref-value"><span class="ref-people-list"><span class="person ">Heather Nichols</span></span></span>
@@ -4092,10 +4851,10 @@
               <span class="ref-design-pill aw">AW</span>
               </div>
               <div class="ref-card-body">
-              <span class="ref-label">Format</span><span class="ref-value"><span class="ref-format-tags"><span class="ref-format-tag">With Static Products</span><span class="ref-format-tag">With Dynamic Products</span><span class="ref-format-tag">With Categories</span></span></span>
+              <span class="ref-label">Format</span><span class="ref-value"><span class="ref-format-tags"><span class="ref-format-tag">Static Products</span><span class="fmt-or" aria-label="or"></span><span class="ref-format-tag">Dynamic Products</span><span class="fmt-and" aria-label="and"></span><span class="ref-format-tag">Categories</span></span></span>
               <span class="ref-label">Jira</span><span class="ref-value"><a class="ref-jira-link" href="https://jira.adorama.com/browse/MKT-99009" target="_blank" rel="noopener noreferrer" title="Adorama Emails 2026">MKT-99009</a></span>
-              <span class="ref-label">SKUs</span><span class="ref-value"><span class="ref-people-list"><span class="person ">Heather Nichols</span><span class="person muted">or Merchants</span></span></span>
-              <span class="ref-label">Approval</span><span class="ref-value"><span class="ref-people-list"><span class="person ">Heather Nichols</span><span class="person muted">+ Merchants</span></span></span>
+              <span class="ref-label">SKUs</span><span class="ref-value"><span class="ref-people-list"><span class="person ">Heather Nichols</span><span class="conn or">or</span><span class="person ">Relevant Merchants</span><span class="person muted">(according to category)</span></span></span>
+              <span class="ref-label">Approval</span><span class="ref-value"><span class="ref-people-list"><span class="person ">Heather Nichols</span><span class="person ">Relevant Merchants</span></span></span>
               </div>
               <div class="ref-card-samples"><div class="ref-card-samples-label">Recent examples</div><div class="cad-row"><span class="cad-name">041026-08AM-Promo-Weekend-Deals</span><span class="cad-chips"><a class="cad-chip bc" href="https://app.bluecore.com/admin/campaigns/adorama/6501284351696896" target="_blank" rel="noopener noreferrer" title="BC">BC</a><a class="cad-chip jira" href="https://jira.adorama.com/browse/MKT-101322" target="_blank" rel="noopener noreferrer" title="JIRA">JIRA</a><a class="cad-chip cu" href="https://app.clickup.com/t/86agdk3jb" target="_blank" rel="noopener noreferrer" title="CU">CU</a></span></div><div class="cad-row"><span class="cad-name">010425-06PM-Weekend-Deals</span><span class="cad-chips"><a class="cad-chip bc" href="https://app.bluecore.com/admin/campaigns/adorama/5482866303164416" target="_blank" rel="noopener noreferrer" title="BC">BC</a><span class="cad-chip empty" title="N/A">JIRA</span><a class="cad-chip cu" href="https://app.clickup.com/t/86a61gxga" target="_blank" rel="noopener noreferrer" title="CU">CU</a></span></div></div>
               </div>
@@ -4105,7 +4864,7 @@
               <span class="ref-design-pill aw">AW</span>
               </div>
               <div class="ref-card-body">
-              <span class="ref-label">Format</span><span class="ref-value"><span class="ref-format-tags"><span class="ref-format-tag">Postcard</span><span class="ref-format-tag special">Evergreen LP</span></span></span>
+              <span class="ref-label">Format</span><span class="ref-value"><span class="ref-format-tags"><span class="ref-format-tag">Postcard</span><span class="fmt-and" aria-label="and"></span><span class="ref-format-tag special">Evergreen LP</span></span></span>
               <span class="ref-label">Jira</span><span class="ref-value"><a class="ref-jira-link" href="https://jira.adorama.com/browse/MKT-99009" target="_blank" rel="noopener noreferrer" title="Adorama Emails 2026">MKT-99009</a></span>
               <span class="ref-label">SKUs</span><span class="ref-value"><span class="ref-people-list"><span class="person ">All Merchants</span><span class="person muted">Products will be dynamically pulled if not enough SKUs</span></span></span>
               <span class="ref-label">Approval</span><span class="ref-value"><span class="ref-people-list"><span class="person ">Heather Nichols</span></span></span>
@@ -4119,9 +4878,9 @@
               <span class="ref-design-pill aw">AW</span>
               </div>
               <div class="ref-card-body">
-              <span class="ref-label">Format</span><span class="ref-value"><span class="ref-format-tags"><span class="ref-format-tag">With Static Products</span><span class="ref-format-tag">With Dynamic Products</span></span></span>
+              <span class="ref-label">Format</span><span class="ref-value"><span class="ref-format-tags"><span class="ref-format-tag">Static Products</span><span class="fmt-or" aria-label="or"></span><span class="ref-format-tag">Dynamic Products</span></span></span>
               <span class="ref-label">Jira</span><span class="ref-value"><a class="ref-jira-link" href="https://jira.adorama.com/browse/MKT-99009" target="_blank" rel="noopener noreferrer" title="Adorama Emails 2026">MKT-99009</a></span>
-              <span class="ref-label">SKUs</span><span class="ref-value"><span class="ref-people-list"><span class="person ">Heather Nichols</span><span class="person muted">or pull from Looker</span></span></span>
+              <span class="ref-label">SKUs</span><span class="ref-value"><span class="ref-people-list"><span class="person ">Heather Nichols</span><span class="conn or">or</span><span class="person muted">pull top SKUs from Looker and verify with Heather</span></span></span>
               <span class="ref-label">Approval</span><span class="ref-value"><span class="ref-people-list"><span class="person ">Heather Nichols</span><span class="person muted">+ Merchants</span></span></span>
               </div>
               <div class="ref-card-samples"><div class="ref-card-samples-label">Recent examples</div><div class="cad-row"><span class="cad-name">042026-STO-Promo-Top-Deals</span><span class="cad-chips"><a class="cad-chip bc" href="https://app.bluecore.com/admin/campaigns/adorama/6739710544044032" target="_blank" rel="noopener noreferrer" title="BC">BC</a><span class="cad-chip empty" title="N/A">JIRA</span><a class="cad-chip cu" href="https://app.clickup.com/t/86agpjq57" target="_blank" rel="noopener noreferrer" title="CU">CU</a></span></div></div>
@@ -4141,9 +4900,8 @@
               <span class="ref-design-pill aw">AW</span>
               </div>
               <div class="ref-card-body">
-              <span class="ref-label">Format</span><span class="ref-value"><span class="ref-format-tags"><span class="ref-format-tag">With Categories</span></span></span>
+              <span class="ref-label">Format</span><span class="ref-value"><span class="ref-format-tags"><span class="ref-format-tag">Categories</span></span></span>
               <span class="ref-label">Jira</span><span class="ref-value"><a class="ref-jira-link" href="https://jira.adorama.com/browse/MKT-99009" target="_blank" rel="noopener noreferrer" title="Adorama Emails 2026">MKT-99009</a></span>
-              <span class="ref-label">SKUs</span><span class="ref-value"><span class="ref-people-list"><span class="person  dash">—</span></span></span>
               <span class="ref-label">Approval</span><span class="ref-value"><span class="ref-people-list"><span class="person ">Heather Nichols</span></span></span>
               </div>
               <div class="ref-card-samples"><div class="ref-card-samples-label">Recent examples</div>
@@ -4156,10 +4914,10 @@
               <span class="ref-design-pill adr">ADR</span>
               </div>
               <div class="ref-card-body">
-              <span class="ref-label">Format</span><span class="ref-value"><span class="ref-format-tags"><span class="ref-format-tag">With Brands</span></span></span>
+              <span class="ref-label">Format</span><span class="ref-value"><span class="ref-format-tags"><span class="ref-format-tag">Brands</span></span></span>
               <span class="ref-label">Jira</span><span class="ref-value"><a class="ref-jira-link" href="https://jira.adorama.com/browse/MKT-99006" target="_blank" rel="noopener noreferrer" title="Trade &amp; Used 2026">MKT-99006</a></span>
-              <span class="ref-label">SKUs</span><span class="ref-value"><span class="ref-people-list"><span class="person  dash">—</span></span></span>
-              <span class="ref-label">Approval</span><span class="ref-value"><span class="ref-people-list"><span class="person ">Heather Nichols</span><span class="person muted">+ Merchants</span></span></span>
+              <span class="ref-label">Brands</span><span class="ref-value"><span class="ref-people-list"><span class="person ">Alla Igolnikova</span><span class="person ">Robert Zlotogorsky</span></span></span>
+              <span class="ref-label">Approval</span><span class="ref-value"><span class="ref-people-list"><span class="person ">Alla Igolnikova</span><span class="person ">Heather Nichols</span></span></span>
               </div>
               <div class="ref-card-samples"><div class="ref-card-samples-label">Recent examples</div>
               <div class="cad-row"><span class="cad-name">042226-STO-Trade-Earth-Day</span><span class="cad-chips"><a class="cad-chip bc" href="https://app.bluecore.com/admin/campaigns/adorama/5990772803231744" target="_blank" rel="noopener noreferrer" title="BC">BC</a><a class="cad-chip jira" href="https://jira.adorama.com/browse/MKT-101489" target="_blank" rel="noopener noreferrer" title="JIRA">JIRA</a><a class="cad-chip cu" href="https://app.clickup.com/t/86agpjq6e" target="_blank" rel="noopener noreferrer" title="CU">CU</a></span></div>
@@ -4171,7 +4929,7 @@
               <span class="ref-design-pill adr">ADR</span>
               </div>
               <div class="ref-card-body">
-              <span class="ref-label">Format</span><span class="ref-value"><span class="ref-format-tags"><span class="ref-format-tag">With Static Products</span><span class="ref-format-tag">With Categories</span></span></span>
+              <span class="ref-label">Format</span><span class="ref-value"><span class="ref-format-tags"><span class="ref-format-tag">Categories</span><span class="fmt-or" aria-label="or"></span><span class="ref-format-tag">Static Products</span></span></span>
               <span class="ref-label">Jira</span><span class="ref-value"><a class="ref-jira-link" href="https://jira.adorama.com/browse/MKT-99006" target="_blank" rel="noopener noreferrer" title="Trade &amp; Used 2026">MKT-99006</a></span>
               <span class="ref-label">SKUs</span><span class="ref-value"><span class="ref-people-list"><span class="person ">Alla Igolnikova</span></span></span>
               <span class="ref-label">Approval</span><span class="ref-value"><span class="ref-people-list"><span class="person ">Alla Igolnikova</span><span class="person ">Heather Nichols</span></span></span>
@@ -4186,9 +4944,10 @@
               <span class="ref-design-pill adr">ADR</span>
               </div>
               <div class="ref-card-body">
-              <span class="ref-label">Format</span><span class="ref-value"><span class="ref-format-tags"><span class="ref-format-tag">With Static Products</span><span class="ref-format-tag">With Categories</span><span class="ref-format-tag">With Brands</span></span></span>
+              <span class="ref-label">Format</span><span class="ref-value"><span class="ref-format-tags"><span class="ref-format-tag">Static Products</span><span class="fmt-and" aria-label="and"></span><span class="ref-format-tag">Categories</span><span class="fmt-or" aria-label="or"></span><span class="ref-format-tag">Brands</span></span></span>
               <span class="ref-label">Jira</span><span class="ref-value"><a class="ref-jira-link" href="https://jira.adorama.com/browse/MKT-99173" target="_blank" rel="noopener noreferrer" title="EDU / Classroom Connect 2026">MKT-99173</a></span>
               <span class="ref-label">SKUs</span><span class="ref-value"><span class="ref-people-list"><span class="person ">Alla Igolnikova</span></span></span>
+              <span class="ref-label">Brands</span><span class="ref-value"><span class="ref-people-list"><span class="person ">Alla Igolnikova</span></span></span>
               <span class="ref-label">Approval</span><span class="ref-value"><span class="ref-people-list"><span class="person ">Alla Igolnikova</span><span class="person ">Heather Nichols</span></span></span>
               </div>
               <div class="ref-card-samples"><div class="ref-card-samples-label">Recent examples</div>
@@ -4201,7 +4960,7 @@
               <span class="ref-design-pill adr">ADR</span>
               </div>
               <div class="ref-card-body">
-              <span class="ref-label">Format</span><span class="ref-value"><span class="ref-format-tags"><span class="ref-format-tag">With Static Products</span></span></span>
+              <span class="ref-label">Format</span><span class="ref-value"><span class="ref-format-tags"><span class="ref-format-tag">Static Products</span></span></span>
               <span class="ref-label">Jira</span><span class="ref-value"><a class="ref-jira-link" href="https://jira.adorama.com/browse/MKT-98683" target="_blank" rel="noopener noreferrer" title="Private Brands Emails 2026">MKT-98683</a></span>
               <span class="ref-label">SKUs</span><span class="ref-value"><span class="ref-people-list"><span class="person ">Solomon Leifer</span><span class="person ">Usher Sperber</span></span></span>
               <span class="ref-label">Approval</span><span class="ref-value"><span class="ref-people-list"><span class="person ">Solomon Leifer</span><span class="person ">Usher Sperber</span><span class="person ">Heather Nichols</span></span></span>
@@ -4227,7 +4986,7 @@
               <div class="ref-card-body">
               <span class="ref-label">Format</span><span class="ref-value"><span class="ref-format-tags"><span class="ref-format-tag special">Specific Content</span></span></span>
               <span class="ref-label">Jira</span><span class="ref-value"><span class="ref-jira-tbd">Provided by <strong>Julio Carrillo</strong></span></span>
-              <span class="ref-label">SKUs</span><span class="ref-value"><span class="ref-people-list"><span class="person  dash">—</span></span></span>
+              <span class="ref-label">SKUs</span><span class="ref-value"><span class="ref-people-list"><span class="person dash">—</span></span></span>
               <span class="ref-label">Approval</span><span class="ref-value"><span class="ref-people-list"><span class="person ">Julio</span></span></span>
               </div>
               <div class="ref-card-note">Julio creates the Jira ticket + copy brief, then assigns to designer. Once design is complete, ready for build.</div>
@@ -4246,7 +5005,7 @@
               <div class="ref-card-body">
               <span class="ref-label">Format</span><span class="ref-value"><span class="ref-format-tags"><span class="ref-format-tag special">Specific Content</span></span></span>
               <span class="ref-label">Jira</span><span class="ref-value"><span class="ref-jira-tbd">Provided by <strong>Julio Carrillo</strong></span></span>
-              <span class="ref-label">SKUs</span><span class="ref-value"><span class="ref-people-list"><span class="person  dash">—</span></span></span>
+              <span class="ref-label">SKUs</span><span class="ref-value"><span class="ref-people-list"><span class="person dash">—</span></span></span>
               <span class="ref-label">Approval</span><span class="ref-value"><span class="ref-people-list"><span class="person ">Julio</span></span></span>
               </div>
               <div class="ref-card-samples"><div class="ref-card-samples-label">Recent examples</div>
@@ -4259,7 +5018,7 @@
         <div class="ref-group cat-newsletter">
           <div class="day-header">
             <span class="day-name">Saturday</span>
-            <span class="day-types"><strong>Newsletters</strong> &mdash; Photo, Video, Creators&rsquo; Huddle, Private Brands</span>
+            <span class="day-types"><strong>Newsletters</strong> &mdash; Photo, Video, Creators&rsquo; Huddle, Private Brands &middot; <em>all have content from Daniel Norton &amp; Cristina Santelises</em></span>
           </div>
           <div class="ref-cards">
             <div class="ref-card" id="ref-creators-huddle">
@@ -4268,12 +5027,12 @@
               <span class="ref-design-pill adr">ADR</span>
               </div>
               <div class="ref-card-body">
-              <span class="ref-label">Format</span><span class="ref-value"><span class="ref-format-tags"><span class="ref-format-tag special">With Content</span></span></span>
+              <span class="ref-label">Format</span><span class="ref-value"><span class="ref-format-tags"><span class="ref-format-tag special">Content</span></span></span>
               <span class="ref-label">Jira</span><span class="ref-value"><a class="ref-jira-link" href="https://jira.adorama.com/browse/MKT-67859" target="_blank" rel="noopener noreferrer" title="Creator's Huddle Weekly Templates">MKT-67859</a></span>
-              <span class="ref-label">SKUs</span><span class="ref-value"><span class="ref-people-list"><span class="person  dash">—</span></span></span>
+              <span class="ref-label">Content</span><span class="ref-value"><span class="ref-people-list"><span class="person ">Daniel Norton</span><span class="person ">Cristina Santelises</span></span></span>
               <span class="ref-label">Approval</span><span class="ref-value"><span class="ref-people-list"><span class="person ">Daniel Norton</span><span class="person ">Cristina Santelises</span></span></span>
               </div>
-              <div class="ref-card-note">Content and email brief from Daniel &amp; Cristina.</div>
+              <div class="ref-card-note">Content and email brief from Daniel Norton &amp; Cristina Santelises.</div>
               <div class="ref-card-samples"><div class="ref-card-samples-label">Recent examples</div>
               <div class="cad-row"><span class="cad-name">040426-09PM-Newsletter-Creators-Huddle</span><span class="cad-chips"><a class="cad-chip bc" href="https://app.bluecore.com/admin/campaigns/adorama/6498757287731200" target="_blank" rel="noopener noreferrer" title="BC">BC</a><a class="cad-chip jira" href="https://jira.adorama.com/browse/MKT-100698" target="_blank" rel="noopener noreferrer" title="JIRA">JIRA</a><a class="cad-chip cu" href="https://app.clickup.com/t/86agdk3f6" target="_blank" rel="noopener noreferrer" title="CU">CU</a></span></div>
               </div>
@@ -4284,12 +5043,13 @@
               <span class="ref-design-pill aw">AW</span>
               </div>
               <div class="ref-card-body">
-              <span class="ref-label">Format</span><span class="ref-value"><span class="ref-format-tags"><span class="ref-format-tag">With Static Products</span><span class="ref-format-tag">With Brands</span><span class="ref-format-tag special">+ Content</span></span></span>
+              <span class="ref-label">Format</span><span class="ref-value"><span class="ref-format-tags"><span class="ref-format-tag">Static Products</span><span class="fmt-or" aria-label="or"></span><span class="ref-format-tag">Brands</span><span class="fmt-and" aria-label="and"></span><span class="ref-format-tag special">Content</span></span></span>
               <span class="ref-label">Jira</span><span class="ref-value"><a class="ref-jira-link" href="https://jira.adorama.com/browse/MKT-93582" target="_blank" rel="noopener noreferrer" title="Photo-Video Emails &amp; Newsletters">MKT-93582</a></span>
               <span class="ref-label">SKUs</span><span class="ref-value"><span class="ref-people-list"><span class="person ">Josh Lefkowits</span><span class="person ">Arthur Hershkovitz</span></span></span>
-              <span class="ref-label">Approval</span><span class="ref-value"><span class="ref-people-list"><span class="person  dash">—</span></span></span>
+              <span class="ref-label">Brands</span><span class="ref-value"><span class="ref-people-list"><span class="person ">Robert Zlotogorsky</span><span class="person ">Keith McCord</span><span class="conn or">or</span><span class="person muted">check on JIRA</span></span></span>
+              <span class="ref-label">Content</span><span class="ref-value"><span class="ref-people-list"><span class="person ">Daniel Norton</span><span class="person ">Cristina Santelises</span></span></span>
+              <span class="ref-label">Approval</span><span class="ref-value"><span class="ref-people-list"><span class="person ">Heather Nichols</span><span class="person ">Daniel Norton</span><span class="person ">Cristina Santelises</span><span class="person muted">+ Merchants if with Products</span></span></span>
               </div>
-              <div class="ref-card-note">If <strong>With Brands</strong>, get from Robert Zlotogorsky.</div>
               <div class="ref-card-samples"><div class="ref-card-samples-label">Recent examples</div>
               <div class="cad-row"><span class="cad-name">041826-09PM-Newsletter-Photo-P-P-NA-GLP</span><span class="cad-chips"><a class="cad-chip bc" href="https://app.bluecore.com/admin/campaigns/adorama/6751111878664192" target="_blank" rel="noopener noreferrer" title="BC">BC</a><span class="cad-chip empty" title="N/A">JIRA</span><a class="cad-chip cu" href="https://app.clickup.com/t/86agepyez" target="_blank" rel="noopener noreferrer" title="CU">CU</a></span></div>
               </div>
@@ -4300,10 +5060,11 @@
               <span class="ref-design-pill aw">AW</span>
               </div>
               <div class="ref-card-body">
-              <span class="ref-label">Format</span><span class="ref-value"><span class="ref-format-tags"><span class="ref-format-tag">With Static Products</span><span class="ref-format-tag special">+ Content</span></span></span>
+              <span class="ref-label">Format</span><span class="ref-value"><span class="ref-format-tags"><span class="ref-format-tag">Static Products</span><span class="fmt-and" aria-label="and"></span><span class="ref-format-tag">Brands</span><span class="fmt-and" aria-label="and"></span><span class="ref-format-tag special">Content</span></span></span>
               <span class="ref-label">Jira</span><span class="ref-value"><a class="ref-jira-link" href="https://jira.adorama.com/browse/MKT-93582" target="_blank" rel="noopener noreferrer" title="Photo-Video Emails &amp; Newsletters">MKT-93582</a></span>
               <span class="ref-label">SKUs</span><span class="ref-value"><span class="ref-people-list"><span class="person ">Israel Herschkowit</span><span class="person ">Sarah Ryan</span><span class="person ">Aron Grossman</span></span></span>
-              <span class="ref-label">Approval</span><span class="ref-value"><span class="ref-people-list"><span class="person ">Heather Nichols</span><span class="person ">Israel Herschkowit</span><span class="person ">Sarah Ryan</span><span class="person ">Aron Grossman</span></span></span>
+              <span class="ref-label">Brands</span><span class="ref-value"><span class="ref-people-list"><span class="person ">Sarah Ryan</span></span></span>
+              <span class="ref-label">Approval</span><span class="ref-value"><span class="ref-people-list"><span class="person ">Heather Nichols</span><span class="person ">Sarah Ryan</span><span class="person ">Israel Herschkowit</span><span class="person ">Aron Grossman</span></span></span>
               </div>
               <div class="ref-card-samples"><div class="ref-card-samples-label">Recent examples</div>
               <div class="cad-row"><span class="cad-name">041126-09PM-Newsletter-Video</span><span class="cad-chips"><a class="cad-chip bc" href="https://app.bluecore.com/admin/campaigns/adorama/5897600592896000" target="_blank" rel="noopener noreferrer" title="BC">BC</a><span class="cad-chip empty" title="N/A">JIRA</span><a class="cad-chip cu" href="https://app.clickup.com/t/86agdk3k9" target="_blank" rel="noopener noreferrer" title="CU">CU</a></span></div>
@@ -4315,12 +5076,12 @@
               <span class="ref-design-pill adr">ADR</span>
               </div>
               <div class="ref-card-body">
-              <span class="ref-label">Format</span><span class="ref-value"><span class="ref-format-tags"><span class="ref-format-tag">With Static Products</span><span class="ref-format-tag">With Brands</span><span class="ref-format-tag special">+ Content</span></span></span>
+              <span class="ref-label">Format</span><span class="ref-value"><span class="ref-format-tags"><span class="ref-format-tag">Static Products</span><span class="fmt-or" aria-label="or"></span><span class="ref-format-tag">Brands</span><span class="fmt-and" aria-label="and"></span><span class="ref-format-tag special">Content</span></span></span>
               <span class="ref-label">Jira</span><span class="ref-value"><a class="ref-jira-link" href="https://jira.adorama.com/browse/MKT-98683" target="_blank" rel="noopener noreferrer" title="Private Brands Emails 2026">MKT-98683</a></span>
               <span class="ref-label">SKUs</span><span class="ref-value"><span class="ref-people-list"><span class="person ">Solomon Leifer</span><span class="person ">Usher Sperber</span></span></span>
-              <span class="ref-label">Approval</span><span class="ref-value"><span class="ref-people-list"><span class="person  dash">—</span></span></span>
+              <span class="ref-label">Brands</span><span class="ref-value"><span class="ref-people-list"><span class="person ">Feature All Private Brands</span></span></span>
+              <span class="ref-label">Approval</span><span class="ref-value"><span class="ref-people-list"><span class="person ">Heather Nichols</span><span class="person ">Daniel Norton</span><span class="person ">Cristina Santelises</span><span class="person ">Susan Stripling</span><span class="person muted">+ Merchants if with products</span></span></span>
               </div>
-              <div class="ref-card-note">If <strong>With Brands</strong>, confirm with Heather Nichols the % OFF to use.</div>
               <div class="ref-card-samples"><div class="ref-card-samples-label">Recent examples</div>
               <div class="cad-row"><span class="cad-name">042526-09PM-Newsletter-Private-Brands</span><span class="cad-chips"><a class="cad-chip bc" href="https://app.bluecore.com/admin/campaigns/adorama/5458926533206016" target="_blank" rel="noopener noreferrer" title="BC">BC</a><a class="cad-chip jira" href="https://jira.adorama.com/browse/MKT-101595" target="_blank" rel="noopener noreferrer" title="JIRA">JIRA</a><a class="cad-chip cu" href="https://app.clickup.com/t/86agpjq9z" target="_blank" rel="noopener noreferrer" title="CU">CU</a></span></div>
               </div>
@@ -4342,10 +5103,10 @@
               <div class="ref-card-body">
               <span class="ref-label">Format</span><span class="ref-value"><span class="ref-format-tags"><span class="ref-format-tag special">Specific Content</span></span></span>
               <span class="ref-label">Jira</span><span class="ref-value"><a class="ref-jira-link" href="https://jira.adorama.com/browse/MKT-93596" target="_blank" rel="noopener noreferrer" title="Adorama Events Emails">MKT-93596</a></span>
-              <span class="ref-label">SKUs</span><span class="ref-value"><span class="ref-people-list"><span class="person  dash">—</span></span></span>
+              <span class="ref-label">Events</span><span class="ref-value"><span class="ref-people-list"><span class="person ">Theresa Raffetto</span></span></span>
               <span class="ref-label">Approval</span><span class="ref-value"><span class="ref-people-list"><span class="person ">Theresa Raffetto</span></span></span>
               </div>
-              <div class="ref-card-note">Check the Events tab in the Marketing Submissions sheet.</div>
+              <div class="ref-card-note">Theresa will enter on the Events tab in the Marketing Submissions sheet.</div>
               <div class="ref-card-samples"><div class="ref-card-samples-label">Recent examples</div>
               <div class="cad-row"><span class="cad-name">031526-STO-Events-CwC-Mark-Mann-In-Store-Joe-Addison</span><span class="cad-chips"><a class="cad-chip bc" href="https://app.bluecore.com/admin/campaigns/adorama/6536797536247808" target="_blank" rel="noopener noreferrer" title="BC">BC</a><span class="cad-chip empty" title="N/A">JIRA</span><a class="cad-chip cu" href="https://app.clickup.com/t/86afv827h" target="_blank" rel="noopener noreferrer" title="CU">CU</a></span></div>
               <div class="cad-row"><span class="cad-name">030826-08AM-Events-Susan-Stripling-Daniel-Norton</span><span class="cad-chips"><a class="cad-chip bc" href="https://app.bluecore.com/admin/campaigns/adorama/4693125547024384" target="_blank" rel="noopener noreferrer" title="BC">BC</a><span class="cad-chip empty" title="N/A">JIRA</span><a class="cad-chip cu" href="https://app.clickup.com/t/86afv823p" target="_blank" rel="noopener noreferrer" title="CU">CU</a></span></div>
@@ -4381,7 +5142,7 @@
               <span class="ref-design-pill adr">ADR</span>
               </div>
               <div class="ref-card-body">
-              <span class="ref-label">Format</span><span class="ref-value"><span class="ref-format-tags"><span class="ref-format-tag">With Static Products</span><span class="ref-format-tag special">+ Content</span></span></span>
+              <span class="ref-label">Format</span><span class="ref-value"><span class="ref-format-tags"><span class="ref-format-tag">Static Products</span><span class="fmt-and" aria-label="and"></span><span class="ref-format-tag special">Content</span></span></span>
               <span class="ref-label">Jira</span><span class="ref-value"><span class="ref-jira-tbd">Provided by <strong>Robert Zlotogorsky</strong></span></span>
               <span class="ref-label">SKUs</span><span class="ref-value"><span class="ref-people-list"><span class="person ">Robert Zlotogorsky</span></span></span>
               <span class="ref-label">Approval</span><span class="ref-value"><span class="ref-people-list"><span class="person ">Robert Zlotogorsky</span><span class="person muted">+ specific merchant</span></span></span>
@@ -4397,7 +5158,7 @@
               <span class="ref-design-pill adr">ADR</span>
               </div>
               <div class="ref-card-body">
-              <span class="ref-label">Format</span><span class="ref-value"><span class="ref-format-tags"><span class="ref-format-tag">With Static Products</span></span></span>
+              <span class="ref-label">Format</span><span class="ref-value"><span class="ref-format-tags"><span class="ref-format-tag">Static Products</span></span></span>
               <span class="ref-label">Jira</span><span class="ref-value"><a class="ref-jira-link" href="https://jira.adorama.com/browse/MKT-99009" target="_blank" rel="noopener noreferrer" title="Adorama Emails 2026">MKT-99009</a></span>
               <span class="ref-label">SKUs</span><span class="ref-value"><span class="ref-people-list"><span class="person ">Robert Zlotogorsky</span></span></span>
               <span class="ref-label">Approval</span><span class="ref-value"><span class="ref-people-list"><span class="person ">Robert Zlotogorsky</span><span class="person muted">+ specific merchant</span></span></span>
@@ -4767,8 +5528,8 @@
           <summary>Standard Exclusions to Apply</summary>
           <div class="details-body">
             <ul>
-              <li><strong>Exclusion_Private-Brands-BH-Godox</strong> &mdash; apply to nearly all sends.</li>
-              <li><strong>_Purchasers-in-the-last-48-hours</strong> &mdash; suppress recent purchasers from promo sends.</li>
+              <li><strong>Exclusion_Private-Brands-BH-Godox</strong> &mdash; apply to all emails.</li>
+              <li><strong>_Purchasers-in-the-last-48-hours</strong> &mdash; apply only to multi-touch campaigns.</li>
             </ul>
           </div>
         </details>
@@ -4913,6 +5674,7 @@
               <div class="compact-list">
                 <div class="compact-row"><span class="compact-name">Akiva Clair</span><span class="compact-meta">Social Media Manager &middot; Coupon requests</span></div>
                 <div class="compact-row"><span class="compact-name">Niranee Shoba Chattergoon</span><span class="compact-meta">Store Manager &middot; Store offers</span></div>
+                <div class="compact-row"><span class="compact-name">Susan Stripling</span><span class="compact-meta">Private Brands Newsletter approval</span></div>
               </div>
             </div>
           </div>
@@ -5105,32 +5867,29 @@
         <div class="issues-grid">
           <div class="issues-cat cat-skus">
             <h4 class="issues-subhead">SKUs &amp; Merchants</h4>
-            <details><summary>Merchant hasn&rsquo;t sent SKUs by deadline</summary><div class="details-body">Send a same-day reminder via the email thread. If still no response, escalate to the merchant mailing list and ping <strong>Robert</strong> or the relevant category contact (<strong>Alla</strong> for Trade/Used/EDU, etc.).</div></details>
-        <details><summary>Merchant sends wrong SKUs (out of stock, mispriced, wrong category)</summary><div class="details-body">First, confirm what&rsquo;s actually live on the website using <strong>Time Machine</strong>. You can also try appending <code>?emailprice=t</code> to the product URL to surface the email-specific price. If the SKU is still wrong, reach out to the merchant to confirm which price should be followed &mdash; or whether the SKU needs to be replaced.</div></details>
-        <details><summary>Merchant only partially fills the SKU request</summary><div class="details-body">Inform <strong>Gerber</strong> of how many SKUs you received. Ask <strong>Heather</strong> / Marketing Ops to supplement the remaining SKUs.</div></details>
-        <details><summary>Merchant sends SKUs after the deadline</summary><div class="details-body">Check whether there&rsquo;s still time to update the email. If not, let the merchant know the SKU will be included in the next suitable email.</div></details>
-          </div>
-          <div class="issues-cat cat-design">
-            <h4 class="issues-subhead">Design &amp; Build</h4>
-            <details><summary>ADR designer is at capacity (1&ndash;2/day cap maxed)</summary><div class="details-body">Send the request to <strong>AW</strong> instead. If there&rsquo;s an existing global asset, provide the PSD so AW can match the design system.</div></details>
-        <details><summary>AW designer is at capacity (3&ndash;4/week, 1/day cap maxed)</summary><div class="details-body">If <em>both</em> ADR and AW are at full capacity, push the design due date back &mdash; making sure the new date still fits within the overall send timeline.</div></details>
-        <details><summary>Design comes back wrong</summary><div class="details-body">If it&rsquo;s a <strong>major change</strong>, ask the designer to update. If it&rsquo;s a <strong>minor change</strong> you can edit yourself, do it for faster turnaround.</div></details>
-        <details><summary>Email exceeds 100KB / clips in Gmail</summary><div class="details-body">For <strong>Newsletters, Events, Store Newsletter, and similar long-form emails</strong>: remove the PFU. For other email types: switch to the shorter Value Proposition footer, or remove it completely if needed.</div></details>
-        <details><summary>HTML or email proof looks clipped</summary><div class="details-body">Review total email file size, simplify heavy modules, reduce unnecessary copy, and keep unsubscribe/legal content visible before the clipping point. Adding a countdown timer can also push you over &mdash; test before including one.</div></details>
-        <details><summary>Pricing or savings do not match</summary><div class="details-body">Check the latest product feed, product page, merchant sheet, and any manual override in the build. Use <strong>Time Machine</strong> to confirm the live price for the scheduled send time.</div></details>
-        <details><summary>Dynamic product block is not showing correctly</summary><div class="details-body">Confirm SKU eligibility, feed status, inventory availability, template conditions, and category logic.</div></details>
-        <details><summary>Product feed broken / dynamic block empty on send day</summary><div class="details-body">Let <strong>Gerber</strong> know immediately. Reach out to <strong>Bluecore chat support</strong> and submit a support ticket right away.</div></details>
+            <details><summary>Merchant hasn&rsquo;t sent SKUs by the deadline / Not enough SKUs</summary><div class="details-body">SKU request goes out <strong>10 business days before send</strong>. The deadline depends on format: <strong>Static Products</strong> uses a <strong>5-day deadline</strong> (designer needs the exact SKUs before they start), while <strong>Dynamic Products</strong> and <strong>Evergreen LP</strong> (Mystery / Flash) use a <strong>7-day deadline</strong> &mdash; for Dynamic, SKUs pull from the product feed at click; for Evergreen, SKUs are used for back-end audience qualification only and not shown in the email. If needed, send a reminder on the morning of the due date stating it is due by <strong>EOD</strong>. You may send another reminder the morning after the due date, allowing last-minute submissions until <strong>noon</strong>. After that, stop. If there are still no submissions or not enough SKUs, look for alternatives. Reach out to <strong>Heather</strong> or <strong>Marketing Ops</strong>, or pull top SKUs from <strong>Looker YTD</strong>. For the Evergreen landing page, <strong>Heather</strong> and <strong>Zoriana</strong> will set up the remaining SKUs to pull dynamically.</div></details>
+            <details><summary>SKU submitted is incorrect (out of stock, mispriced, no discount)</summary><div class="details-body">First, confirm what&rsquo;s live on the website using <strong>Time Machine</strong>. You can also append <code>?emailprice=t</code> to the product URL to surface the email-specific price. If the SKU is still incorrect, reach out to the merchant to confirm the correct price or if the SKU needs to be replaced.</div></details>
+            <details><summary>Merchant sends SKUs after the deadline</summary><div class="details-body">Check if there&rsquo;s still time to update the email. If not, inform the merchant that the SKU will be included in the next suitable email.</div></details>
           </div>
           <div class="issues-cat cat-audience">
             <h4 class="issues-subhead">Audience &amp; Send</h4>
-            <details><summary>Email audience is lower than expected</summary><div class="details-body">Check frequency cap, suppression logic, segment exclusions, engagement filters, and whether Bluecore classified the campaign as lower value.</div></details>
-        <details><summary>Frequency cap blocks the send</summary><div class="details-body">For <strong>Promo emails</strong>, override frequency capping when scheduling.</div></details>
+            <details><summary>Email audience is lower than expected</summary><div class="details-body">Check frequency cap, suppression logic, segment exclusions, engagement filters, and whether Bluecore classified the campaign as lower value. Or submit a ticket with <strong>Bluecore Support</strong>.</div></details>
+            <details><summary>Frequency cap blocks the send</summary><div class="details-body">For <strong>Promo emails</strong>, override frequency capping when scheduling.</div></details>
           </div>
-          <div class="issues-cat cat-sms">
-            <h4 class="issues-subhead">SMS</h4>
-            <details><summary>SMS short link not working</summary><div class="details-body">Confirm the link was converted to a short link in <strong>Attentive</strong> before scheduling. If not, the long URL eats into the character count and may break parsing.</div></details>
+          <div class="issues-cat cat-design">
+            <h4 class="issues-subhead">Design</h4>
+            <details><summary>ADR designer is at capacity (1&ndash;2/day maxed)</summary><div class="details-body">Send the request to <strong>AW</strong> instead. If there&rsquo;s an existing global asset, provide the PSD so AW can match the design system.</div></details>
+            <details><summary>AW designer is also at capacity (3&ndash;4/week, 1/day maxed)</summary><div class="details-body">If both <strong>ADR</strong> and <strong>AW</strong> are at full capacity, push the design due date back &mdash; ensuring the new date still fits within the overall send timeline.</div></details>
+            <details><summary>Design comes back incorrect</summary><div class="details-body">If it&rsquo;s a <strong>major issue</strong>, ask the designer to revise it. If it&rsquo;s <strong>minor</strong> and you can fix it yourself, do so for faster turnaround. Always request the <strong>PSD</strong> for flexibility.</div></details>
           </div>
-        
+          <div class="issues-cat cat-test">
+            <h4 class="issues-subhead">Test &amp; Preview</h4>
+            <details><summary>Email exceeds 100KB / clips in Gmail</summary><div class="details-body">For <strong>newsletters, events, store newsletters, and other long-form emails</strong>: remove the PFU. For other email types: switch to the shorter Value Proposition footer, or remove it entirely if needed.</div></details>
+            <details><summary>Dynamic product block not displaying correctly</summary><div class="details-body">Ensure product rules are properly set up. Reach out to <strong>Bluecore support</strong> if needed.</div></details>
+            <details><summary>Product feed is broken / dynamic block is empty on send day</summary><div class="details-body">Notify <strong>Gerber Rivera</strong> immediately. Contact <strong>Bluecore chat support</strong> and submit a support ticket right away.</div></details>
+            <details><summary>Link is not working</summary><div class="details-body">Verify that the link matches what was provided. Confirm with <strong>Heather</strong> for the correct URL if needed.</div></details>
+          </div>
+        </div>
 </section>
 
       <section id="glossary">
@@ -5448,41 +6207,44 @@
       var EMAIL_CADENCES = {
         // Promo
         'promo-rebates': {
-          label: 'Promo: Photo Rebates',
+          label: 'Photo Rebates',
           contacts: [{ name: 'Robert Zlotogorsky', role: 'Marketing Ops' }, { name: 'Josh Lefkowits', role: 'Photo Merchant' }, { name: 'Arthur Hershkovitz', role: 'Photo Merchant' }],
           requiresSKUs: true, locked: false, design: null,
           designNote: 'Global \u2192 Adorama Design (also creates web assets); Email-Exclusive \u2192 AW Designer.',
           jira: { id: 'MKT-93582', label: 'Photo-Video Emails & Newsletters', url: 'https://jira.adorama.com/browse/MKT-93582' },
           recommendedFormat: 'static-products',
-          routeTo: 'Robert Zlotogorsky, Josh Lefkowits, Arthur Hershkovitz, Heather Nichols',
-          approvers: 'Robert Zlotogorsky, Josh Lefkowits, Arthur Hershkovitz, Heather Nichols',
-          suggestedSegments: ['Go-To Segments (pick one)']
+          routeTo: 'Robert Zlotogorsky, Arthur Hershkovitz, Heather Nichols',
+          approvers: 'Robert Zlotogorsky, Arthur Hershkovitz, Heather Nichols',
+          suggestedSegments: ['_365-clickers-openers', '_180-day-responders', '_180-day-responders-plus-likelihood', '_90-day-responders', '_90-day-responders-plus-likelihood'],
+          segmentNote: 'Pick only one segment from this list per send. Default targeting for all Promo campaigns.'
         },
         'promo-mystery': {
-          label: 'Promo: Mystery Sale',
+          label: 'Mystery Sale',
           contacts: [{ name: 'Robert Zlotogorsky', role: 'Marketing Ops' }],
-          requiresSKUs: false, locked: true, design: 'AW',
+          requiresSKUs: true, locked: true, design: 'AW',
           notes: [{ text: 'Heather Nichols & Zoriana Kos \u2014 request updating of landing page (Mystery Sale) GLP and products. Products will be dynamically pulled if not enough SKUs.', role: 'Landing page update' }],
           jira: { id: 'MKT-99009', label: 'Adorama Emails 2026', url: 'https://jira.adorama.com/browse/MKT-99009' },
           jiraNote: 'You can also create directly in ClickUp if the designer is AW.',
           recommendedFormat: 'postcard',
           routeTo: 'Heather Nichols',
           approvers: 'Heather Nichols',
-          suggestedSegments: ['Go-To Segments (pick one)']
+          suggestedSegments: ['_365-clickers-openers', '_180-day-responders', '_180-day-responders-plus-likelihood', '_90-day-responders', '_90-day-responders-plus-likelihood'],
+          segmentNote: 'Pick only one segment from this list per send. Default targeting for all Promo campaigns.'
         },
         'promo-weekend': {
-          label: 'Promo: Weekend Deals',
+          label: 'Weekend Deals',
           contacts: [{ name: 'Robert Zlotogorsky', role: 'Marketing Ops' }],
           requiresSKUs: true, locked: true, design: 'AW',
           jira: { id: 'MKT-99009', label: 'Adorama Emails 2026', url: 'https://jira.adorama.com/browse/MKT-99009' },
           jiraNote: 'You can also create directly in ClickUp if the designer is AW.',
           recommendedFormat: 'static-products',
-          routeTo: 'Heather Nichols, Merchants',
-          approvers: 'Heather Nichols, Merchants',
-          suggestedSegments: ['Go-To Segments (pick one)']
+          routeTo: 'Heather Nichols, Relevant Merchants',
+          approvers: 'Heather Nichols, Relevant Merchants',
+          suggestedSegments: ['_365-clickers-openers', '_180-day-responders', '_180-day-responders-plus-likelihood', '_90-day-responders', '_90-day-responders-plus-likelihood'],
+          segmentNote: 'Pick only one segment from this list per send. Default targeting for all Promo campaigns.'
         },
         'promo-flash': {
-          label: 'Promo: Flash Sale',
+          label: 'Flash Sale',
           contacts: [{ name: 'Robert Zlotogorsky', role: 'Marketing Ops' }],
           requiresSKUs: true, locked: true, design: 'AW',
           notes: [{ text: 'Heather Nichols & Zoriana Kos \u2014 request updating of landing page (Flash Sale) GLP and products.', role: 'Landing page update' }],
@@ -5491,10 +6253,11 @@
           recommendedFormat: 'postcard',
           routeTo: 'Heather Nichols',
           approvers: 'Heather Nichols',
-          suggestedSegments: ['Go-To Segments (pick one)']
+          suggestedSegments: ['_365-clickers-openers', '_180-day-responders', '_180-day-responders-plus-likelihood', '_90-day-responders', '_90-day-responders-plus-likelihood'],
+          segmentNote: 'Pick only one segment from this list per send. Default targeting for all Promo campaigns.'
         },
         'promo-top': {
-          label: 'Promo: Top Deals',
+          label: 'Top Deals',
           contacts: [{ name: 'Robert Zlotogorsky', role: 'Marketing Ops' }],
           requiresSKUs: true, locked: true, design: 'AW',
           jira: { id: 'MKT-99009', label: 'Adorama Emails 2026', url: 'https://jira.adorama.com/browse/MKT-99009' },
@@ -5502,11 +6265,12 @@
           recommendedFormat: 'static-products',
           routeTo: 'Heather Nichols, Merchants',
           approvers: 'Heather Nichols, Merchants',
-          suggestedSegments: ['Go-To Segments (pick one)']
+          suggestedSegments: ['_365-clickers-openers', '_180-day-responders', '_180-day-responders-plus-likelihood', '_90-day-responders', '_90-day-responders-plus-likelihood'],
+          segmentNote: 'Pick only one segment from this list per send. Default targeting for all Promo campaigns.'
         },
         // Services
         'svc-openbox': {
-          label: 'Services: Open Box',
+          label: 'Open Box',
           contacts: [{ name: 'Robert Zlotogorsky', role: 'Marketing Ops' }],
           requiresSKUs: true, locked: true, design: 'AW',
           jira: { id: 'MKT-99009', label: 'Adorama Emails 2026', url: 'https://jira.adorama.com/browse/MKT-99009' },
@@ -5517,17 +6281,17 @@
           suggestedSegments: ['_open-box-newCustomers-6m', '_open-box-active-atRisk-lost-buyers-openers', '_open-box-lost-buyers-openers-PCLV_25', '_open-box-affinity-used-department', '_open-box-Openers', '_open-box-SL1-B01-Nonbuyers-Engaged90D', '_open-box-buyers-full-and-discount-365-openers']
         },
         'svc-trade': {
-          label: 'Services: Trade',
-          contacts: [{ name: 'Alla Igolnikova', role: 'Category Marketing' }],
+          label: 'Trade',
+          contacts: [{ name: 'Alla Igolnikova', role: 'Category Marketing' }, { name: 'Robert Zlotogorsky', role: 'Marketing Ops' }],
           requiresSKUs: true, locked: true, design: 'ADR',
           jira: { id: 'MKT-99006', label: 'Trade & Used 2026', url: 'https://jira.adorama.com/browse/MKT-99006' },
           recommendedFormat: 'brands',
-          routeTo: 'Heather Nichols, Merchants',
-          approvers: 'Heather Nichols, Merchants',
+          routeTo: 'Alla Igolnikova, Heather Nichols',
+          approvers: 'Alla Igolnikova, Heather Nichols',
           suggestedSegments: ['_trade-buyers-full-and-discount-90-openers', '_trade-affinity-used-all-90-openers', '_trade-browsers-Used-90-openers', '_trade-purchasers-Used-90-openers', '_trade-viewed-clicked-pages']
         },
         'svc-used': {
-          label: 'Services: Used',
+          label: 'Used',
           contacts: [{ name: 'Alla Igolnikova', role: 'Category Marketing' }],
           requiresSKUs: true, locked: true, design: 'ADR',
           jira: { id: 'MKT-99006', label: 'Trade & Used 2026', url: 'https://jira.adorama.com/browse/MKT-99006' },
@@ -5537,7 +6301,7 @@
           suggestedSegments: ['_affinity-used-all-365-openers', '_browsers-Used-180-openers', '_purchasers-Used-365-openers', '_buyers-discount-365-openers']
         },
         'svc-edu': {
-          label: 'Services: EDU',
+          label: 'EDU',
           contacts: [{ name: 'Alla Igolnikova', role: 'Category Marketing' }],
           requiresSKUs: true, locked: true, design: 'ADR',
           jira: { id: 'MKT-99173', label: 'EDU / Classroom Connect 2026', url: 'https://jira.adorama.com/browse/MKT-99173' },
@@ -5548,7 +6312,7 @@
           segmentNote: 'The dated _verified-with-consent segment is replaced monthly \u2014 get the updated list from Alla.'
         },
         'svc-pb': {
-          label: 'Services: Private Brands',
+          label: 'Private Brands',
           contacts: [{ name: 'Solomon Leifer', role: 'Private Brands Merchant' }, { name: 'Usher Sperber', role: 'Private Brands Merchant' }],
           requiresSKUs: true, locked: true, design: 'ADR',
           jira: { id: 'MKT-98683', label: 'Private Brands Emails 2026', url: 'https://jira.adorama.com/browse/MKT-98683' },
@@ -5583,7 +6347,7 @@
         },
         // Newsletter
         'nl-creators': {
-          label: "Newsletter: Creators' Huddle",
+          label: "Creators' Huddle",
           contacts: [{ name: 'Daniel Norton', role: 'Editorial' }, { name: 'Cristina Santelises', role: 'Content' }],
           requiresSKUs: false, locked: true, design: 'ADR',
           notes: [{ text: 'Content and email brief from Daniel Norton & Cristina Santelises.', role: 'Content brief' }],
@@ -5594,7 +6358,7 @@
           suggestedSegments: ['_CreatorsHuddle-create-no-matter-what', '_CreatorsHuddle-affinity-photography-med', '_CreatorsHuddle-active-buyers-90-days-openers', '_CreatorsHuddle-active-at-risk-buyers-openers', '_CreatorsHuddle-Store-Phone-Purchasers', '_CreatorsHuddle-42West-Signups-SourceALC-BLC-NonMSFT', '_CreatorsHuddle-42West-Browsed-45D-BLC-NonMSFT']
         },
         'nl-photo': {
-          label: 'Newsletter: Photo (In Focus)',
+          label: 'Photo Newsletter',
           contacts: [{ name: 'Josh Lefkowits', role: 'Photo Merchant' }, { name: 'Arthur Hershkovitz', role: 'Photo Merchant' }],
           requiresSKUs: true, locked: true, design: 'AW',
           notes: [{ text: 'If With Brands format, get from Robert Zlotogorsky.', role: 'Get brand promos' }],
@@ -5606,7 +6370,7 @@
           suggestedSegments: ['_Photo-Newsletter-brands-aff', '_Photo-Newsletter-brands-aff-lookalike', '_Photo-Newsletter-brands-2y-buyers-6m-browsers', '_Photo-Newsletter-photo-aff', '_Photo-Newsletter-photo-aff-lookalike', '_Photo-Newsletter-photo-6m-browsers', '_Photo-Newsletter-buyers-photography-2y-openers', 'MultiBuyer-HighVal-Engaged', '1xBuyer-HighVal-Engaged']
         },
         'nl-video': {
-          label: 'Newsletter: Video',
+          label: 'Video Newsletter',
           contacts: [{ name: 'Israel Herschkowit', role: 'Video Merchant' }, { name: 'Sarah Ryan', role: 'Video Merchant' }, { name: 'Aron Grossman', role: 'Video Merchant' }],
           requiresSKUs: true, locked: true, design: 'AW',
           jira: { id: 'MKT-93582', label: 'Photo-Video Emails & Newsletters', url: 'https://jira.adorama.com/browse/MKT-93582' },
@@ -5617,14 +6381,14 @@
           suggestedSegments: ['_video-newsletter-brands-affinity', '_video-newsletter-buyers-video-5y-browsers', '_video-newsletter-buyers-video-3y-90-days-responders', '_video-newsletter-affinity-video-all', '_video-newsletter-active-atRisk-lost-buyers-90-day-openers', '_video-newsletter-6m-carters-video']
         },
         'nl-pb': {
-          label: 'Newsletter: Private Brands',
-          contacts: [{ name: 'Daniel Norton', role: 'Editorial' }, { name: 'Cristina Santelises', role: 'Content' }, { name: 'Susan', role: 'Private Brands' }, { name: 'Solomon Leifer', role: 'Private Brands Merchant' }, { name: 'Usher Sperber', role: 'Private Brands Merchant' }],
+          label: 'Private Brands Newsletter',
+          contacts: [{ name: 'Daniel Norton', role: 'Editorial' }, { name: 'Cristina Santelises', role: 'Content' }, { name: 'Susan Stripling', role: 'Private Brands' }, { name: 'Solomon Leifer', role: 'Private Brands Merchant' }, { name: 'Usher Sperber', role: 'Private Brands Merchant' }],
           requiresSKUs: true, locked: true, design: 'ADR',
-          notes: [{ text: 'If With Brands format, confirm with Heather Nichols the % OFF to use.', role: 'Confirm % offer' }],
+          notes: [{ text: 'Confirm with Heather Nichols the % OFF to use. Brand list and content from Daniel & Cristina.', role: 'Confirm % offer' }],
           jira: { id: 'MKT-98683', label: 'Private Brands Emails 2026', url: 'https://jira.adorama.com/browse/MKT-98683' },
           recommendedFormat: 'static-products',
-          routeTo: 'Solomon Leifer, Usher Sperber',
-          approvers: 'Solomon Leifer, Usher Sperber',
+          routeTo: 'Heather Nichols, Daniel Norton, Cristina Santelises, Susan Stripling',
+          approvers: 'Heather Nichols, Daniel Norton, Cristina Santelises, Susan Stripling',
           suggestedSegments: ['_private-brands-newsletter-brands-purchasers-browsers', '_private-brands-newsletter-BC-18m-purchasers-90d-browsers', '_private-brands-newsletter-breadcrumb-affinity-med', '_private-brands-newsletter-brands-affinity-med', '_private-brands-emails-180d-openers-clickers', '_private-brands-lighting-affinity-med-high', '_private-brands-photo-video-affinity-high']
         },
         // Events / Store / Loyalty
@@ -5654,35 +6418,48 @@
         },
         'loyalty': {
           label: 'Loyalty / VIP',
-          contacts: [{ name: 'Julio', role: 'Loyalty / Finance' }],
+          contacts: [{ name: 'Julio Carrillo', role: 'Loyalty / Finance' }],
           requiresSKUs: false, locked: true, design: 'ADR',
           notes: [{ text: 'Julio creates the Jira ticket + copy brief, then assigns to designer. Once design is complete, ready for build.', role: 'Get ticket' }],
           jira: null,
           jiraNote: 'Jira ticket will be provided by Julio Carrillo.',
           recommendedFormat: 'postcard',
-          routeTo: 'Julio',
-          approvers: 'Julio',
+          routeTo: 'Julio Carrillo',
+          approvers: 'Julio Carrillo',
           suggestedSegments: [],
           segmentNote: 'Loyalty-specific segments \u2014 Julio defines targeting per send.'
         },
         'plcc': {
           label: 'PLCC',
-          contacts: [{ name: 'Julio', role: 'Loyalty / Finance' }],
+          contacts: [{ name: 'Julio Carrillo', role: 'Loyalty / Finance' }],
           requiresSKUs: false, locked: true, design: 'ADR',
           jira: null,
           jiraNote: 'Jira ticket will be provided by Julio Carrillo.',
           recommendedFormat: 'postcard',
-          routeTo: 'Julio',
-          approvers: 'Julio',
+          routeTo: 'Julio Carrillo',
+          approvers: 'Julio Carrillo',
           suggestedSegments: [],
           segmentNote: 'PLCC-specific segments \u2014 Julio defines targeting per send.'
         },
-        // Catch-all
-        'other': {
-          label: 'Other',
+        // Catch-all under Promo
+        'promo-global': {
+          label: 'Global Campaign',
+          contacts: [{ name: 'Robert Zlotogorsky', role: 'Marketing Ops' }],
+          requiresSKUs: true, locked: false, design: null,
+          designNote: 'Global \u2192 Adorama Design Team; Email-Exclusive \u2192 Alchemy Workx Designer.',
+          jira: { id: 'MKT-99009', label: 'Adorama Emails 2026', url: 'https://jira.adorama.com/browse/MKT-99009' },
+          jiraNote: 'You can also create directly in ClickUp if the designer is AW.',
+          recommendedFormat: 'static-products',
+          routeTo: 'Heather Nichols, Relevant Merchants',
+          approvers: 'Heather Nichols, Relevant Merchants',
+          suggestedSegments: ['_365-clickers-openers', '_180-day-responders', '_180-day-responders-plus-likelihood', '_90-day-responders', '_90-day-responders-plus-likelihood'],
+          segmentNote: 'Pick only one segment from this list per send. Default targeting for site-wide Promo campaigns.'
+        },
+        'promo-other': {
+          label: 'Other Promo',
           contacts: [],
           requiresSKUs: true, locked: false, design: null,
-          designNote: 'Routing depends on Campaign Type. Global \u2192 Adorama Design; Email-Exclusive \u2192 AW Designer.',
+          designNote: 'Routing depends on Campaign Type. Global \u2192 Adorama Design Team; Email-Exclusive \u2192 Alchemy Workx Designer.',
           jira: null,
           recommendedFormat: null,
           routeTo: 'Marketing Ops, Site Merchandiser, Merchants',
@@ -5697,24 +6474,25 @@
           typical: 'Mystery Sale, Flash Sale, Multi-touch'
         },
         'categories': {
-          label: 'With Categories',
+          label: 'Categories',
           typical: 'Open Box, Weekend Deals'
         },
         'brands': {
-          label: 'With Brands',
+          label: 'Brands',
           typical: 'Photo Rebates, Brand Promos'
         },
         'static-products': {
-          label: 'With Static Products',
+          label: 'Static Products',
           typical: 'Top Picks, Curated Promos'
         },
         'dynamic-products': {
-          label: 'With Dynamic Products',
+          label: 'Dynamic Products',
           typical: 'Warehouse Sale, Final Hours'
         }
       };
 
       var CATEGORIES = {
+        'all-categories': { label: 'All Categories', merchants: [] },
         'photo': { label: 'Photo', merchants: [{ name: 'Josh Lefkowits', email: 'joshl@adorama.com' }, { name: 'Arthur Hershkovitz', email: 'arthurh@adorama.com' }] },
         'video': { label: 'Video', merchants: [{ name: 'Israel Herschkowit', email: 'israelh@adorama.com' }, { name: 'Sarah Ryan', email: 'sryan@adorama.com' }, { name: 'Aron Grossman', email: 'arong@adorama.com' }] },
         'memory-storage': { label: 'Memory / Storage', merchants: [{ name: 'Shloimy Singer', email: 'shloimys@adorama.com' }] },
@@ -5758,7 +6536,93 @@
         return 'SKUs Request | ' + formatShortDate(sendDate) + ' ' + name + ' (Submission Due: ' + formatDayShortDate(dueDate) + ')';
       }
 
-      function buildMilestoneGroups(cadence, category, requiresSKUs, requiresMerchantApproval, campaignName, sendDate) {
+      // Seedlist mapping (drawn from Section 08 seedlists list)
+      // Returns the seedlist that should be included in the audience for a given cadence
+      function getSeedlistForCadence(cadenceKey) {
+        if (!cadenceKey) return null;
+        // Specific seedlists per main page
+        if (cadenceKey === 'svc-edu') return 'SEEDLIST | EDU';
+        if (cadenceKey === 'events') return 'SEEDLIST | Events Emails';
+        if (cadenceKey === 'loyalty' || cadenceKey === 'plcc') return 'SEEDLIST | Loyalty/Credit + Email Marketing';
+        if (cadenceKey === 'nl-pb') return 'SEEDLIST | Private Brands Newsletter';
+        if (cadenceKey === 'npa' || cadenceKey === 'npa-recap') return 'NPA Seedlist';
+        // Default: BAU seedlist for all other regular emails
+        return 'BAU | Marketing Seed List NEW';
+      }
+
+      // Standard exclusions (drawn from Section 08 "Standard Exclusions to Apply")
+      function getExclusionsForCadence(cadenceKey) {
+        return [
+          {
+            name: 'Exclusion_Private-Brands-BH-Godox',
+            note: 'apply to all emails'
+          },
+          {
+            name: '_Purchasers-in-the-last-48-hours',
+            note: 'apply only to multi-touch campaigns'
+          }
+        ];
+      }
+
+      // Build a list of cadence/format-specific warnings drawn from Section 06 card notes
+      // and Section 12 (When Things Go Wrong). Only returns warnings that apply to the
+      // current cadence + format combination.
+      function buildWarnings(cadenceKey, formatKey, requiresSKUs, postcardEmailExclusive) {
+        var w = [];
+
+        // === Cadence-specific warnings (from Section 06 card notes) ===
+        if (cadenceKey === 'promo-mystery') {
+          w.push('Heather Nichols &amp; Zoriana Kos &mdash; request updating of the Mystery Sale GLP and products before send.');
+        }
+        if (cadenceKey === 'promo-flash') {
+          w.push('Heather Nichols &amp; Zoriana Kos &mdash; request updating of the Flash Sale GLP and products before send.');
+        }
+        if (cadenceKey === 'loyalty' || cadenceKey === 'plcc') {
+          w.push('Julio Carrillo creates the Jira ticket + copy brief, then assigns to designer. You don\u2019t create the brief for this cadence.');
+        }
+        if (cadenceKey === 'events') {
+          w.push('Theresa Raffetto enters event details on the Events tab in the Marketing Submissions sheet \u2014 confirm before briefing.');
+        }
+        if (cadenceKey === 'nl-creators') {
+          w.push('Content and email brief comes from Daniel Norton &amp; Cristina Santelises. Don\u2019t draft copy from scratch.');
+        }
+        if (cadenceKey === 'npa' || cadenceKey === 'npa-recap') {
+          w.push('Robert Zlotogorsky provides the Jira ticket and SKUs for NPAs. Confirm with him + the specific brand merchant before kickoff.');
+        }
+        if (cadenceKey === 'nl-photo') {
+          w.push('If featuring brands, get the brand list from Robert Zlotogorsky. If using rebates, confirm pricing on the Photo-Video Jira.');
+        }
+        if (cadenceKey === 'nl-pb') {
+          w.push('Confirm the % OFF with Heather Nichols before brief. Approval requires Daniel Norton, Cristina Santelises, and Susan Stripling.');
+        }
+        if (cadenceKey === 'svc-edu') {
+          w.push('EDU sends use the dedicated EDU Seedlist, not the BAU seedlist. Audience is education-verified contacts only.');
+        }
+        if (cadenceKey === 'svc-trade' || cadenceKey === 'svc-used') {
+          w.push('Trade and Used campaigns sometimes need merchant approval beyond Heather \u2014 confirm with Alla Igolnikova.');
+        }
+        if (cadenceKey === 'store-nl') {
+          w.push('Store Newsletter content comes from Keith McCord; final approval Mary Yam-Wong. Allow extra time for both.');
+        }
+
+        // === Format-specific warnings ===
+        if (formatKey === 'static-products' || formatKey === 'dynamic-products') {
+          w.push('Pricing accuracy is critical. Confirm live prices via Time Machine before final QA \u2014 the tool shows what the price will be at the scheduled send time.');
+        }
+        if (postcardEmailExclusive) {
+          w.push('Email-Exclusive Postcard: SKUs are still required for back-end qualification (audience targeting), even though the email itself doesn\u2019t list them.');
+        }
+
+        // === Universal long-form warnings ===
+        var isNewsletter = (cadenceKey || '').indexOf('nl-') === 0 || cadenceKey === 'events' || cadenceKey === 'store-nl';
+        if (isNewsletter) {
+          w.push('Newsletters and long-form emails are more likely to clip in Gmail (>100KB). Remove the PFU first if size is tight; switch to the shorter Value Proposition footer if needed.');
+        }
+
+        return w;
+      }
+
+      function buildMilestoneGroups(cadence, cadenceKey, category, requiresSKUs, requiresMerchantApproval, campaignName, sendDate, formatKey) {
         var groups = [];
         var routeStakeholders = requiresMerchantApproval && cadence.routeTo
           ? cadence.routeTo
@@ -5793,6 +6657,24 @@
           return '<div class="gen-sidecar-tip">' + text + '</div>';
         }
 
+        // Render an "If something goes wrong" expandable block in a sidecar
+        // Takes an array of {issue, fix} objects from Section 12 (When Things Go Wrong)
+        function sidecarTroubleshoot(items) {
+          if (!items || !items.length) return '';
+          var html = '<details class="gen-sidecar-troubleshoot">';
+          html += '<summary><span class="gen-tr-icon" aria-hidden="true">\u26a0</span> If something goes wrong <span class="gen-tr-count">' + items.length + '</span></summary>';
+          html += '<div class="gen-tr-body">';
+          items.forEach(function (item) {
+            html += '<div class="gen-tr-item">';
+            html += '<div class="gen-tr-issue">' + item.issue + '</div>';
+            html += '<div class="gen-tr-fix">' + item.fix + '</div>';
+            html += '</div>';
+          });
+          html += '</div>';
+          html += '</details>';
+          return html;
+        }
+
         // Parse a "Name, Name" string into [{name, role}] pairs (best-effort)
         function parseStakeholders(str) {
           if (!str) return [];
@@ -5800,9 +6682,29 @@
         }
 
         if (requiresSKUs) {
-          // Submission due = at least 5 business days AFTER the request date.
-          // Request goes out at T-10, so submission due = T-5 (5 business days before send).
-          var skuDueDate = subtractBusinessDays(sendDate, 5);
+          // Deadline depends on format:
+          //   Static Products  → 5-day deadline (designer needs exact SKUs before they start)
+          //   Dynamic Products → 7-day deadline (SKUs pull from feed at click)
+          //   Postcard EE      → 7-day deadline (Evergreen LP — SKUs for back-end qualification only)
+          var skuDeadlineDays;
+          var skuDeadlineRationale;
+          if (formatKey === 'static-products') {
+            skuDeadlineDays = 5;
+            skuDeadlineRationale = '5 business days before send \u2014 designer needs exact SKUs before starting';
+          } else if (formatKey === 'dynamic-products') {
+            skuDeadlineDays = 3;
+            skuDeadlineRationale = '3 business days before send (7-day deadline) \u2014 SKUs pull from product feed at click, design doesn\u2019t block on them';
+          } else if (formatKey === 'postcard') {
+            // Postcard Email-Exclusive (Mystery / Flash) — Evergreen LP, SKUs for back-end only
+            skuDeadlineDays = 3;
+            skuDeadlineRationale = '3 business days before send (7-day deadline) \u2014 Evergreen LP, SKUs are used for back-end audience qualification only';
+          } else {
+            // Fallback (shouldn't typically hit since requiresSKUs gates this)
+            skuDeadlineDays = 5;
+            skuDeadlineRationale = '5 business days before send';
+          }
+
+          var skuDueDate = subtractBusinessDays(sendDate, skuDeadlineDays);
           var skuSubject = buildSKUSubject(campaignName, sendDate, skuDueDate);
           // Build merchant list for the SKU action — pull from the selected category if available
           var merchantPhrase = 'merchants';
@@ -5833,7 +6735,21 @@
               skuSidecar += renderContactPills(merchantOnly);
             }
           }
-          skuSidecar += sidecarTip('<strong>If they don\u2019t respond:</strong> Escalate same-day. Re-send the request and CC <strong>Heather Nichols</strong>. If still no response by T-5, surface to Marketing Ops on Teams. See <em>When Things Go Wrong</em> for the full escalation path.');
+          skuSidecar += sidecarTip('<strong>If they don\u2019t respond:</strong> Escalate same-day. Re-send the request and CC <strong>Heather Nichols</strong>. If still no response by the deadline, surface to Marketing Ops on Teams. See <em>When Things Go Wrong</em> for the full escalation path.');
+          skuSidecar += sidecarTroubleshoot([
+            {
+              issue: 'Merchant hasn\u2019t sent SKUs by the deadline / Not enough SKUs',
+              fix: 'Send a reminder on the morning of the due date stating it is due by <strong>EOD</strong>. You may send another reminder the morning after the due date, allowing last-minute submissions until <strong>noon</strong>. After that, stop. If still not enough, reach out to <strong>Heather</strong> or <strong>Marketing Ops</strong>, or pull top SKUs from <strong>Looker YTD</strong>. For Evergreen LP campaigns, <strong>Heather</strong> and <strong>Zoriana</strong> will set up the remaining SKUs to pull dynamically.'
+            },
+            {
+              issue: 'SKU submitted is incorrect (out of stock, mispriced, no discount)',
+              fix: 'Confirm what\u2019s live on the website using <strong>Time Machine</strong>. You can also append <code>?emailprice=t</code> to the product URL to surface the email-specific price. If still incorrect, ask the merchant to confirm the correct price or replace the SKU.'
+            },
+            {
+              issue: 'Merchant sends SKUs after the deadline',
+              fix: 'Check if there\u2019s still time to update the email. If not, inform the merchant the SKU will be included in the next suitable email.'
+            }
+          ]);
 
           groups.push({
             offset: 10,
@@ -5842,7 +6758,7 @@
               'Send SKU request to ' + merchantPhrase + ' \u2014 use this subject:'
             ],
             template: { label: 'SKU Request Subject', text: skuSubject, copyId: 'skuSubject' },
-            subActions: ['Submission deadline: ' + formatDayShortDate(skuDueDate) + ' (5 business days before send)'],
+            subActions: ['Submission deadline: ' + formatDayShortDate(skuDueDate) + ' (' + skuDeadlineRationale + ')'],
             sidecar: skuSidecar
           });
         }
@@ -5885,23 +6801,70 @@
         // T-3: Design + Segments
         var t3Sidecar = '';
         if (cadence.suggestedSegments && cadence.suggestedSegments.length) {
-          t3Sidecar += sidecarHeading('Suggested segments');
+          var segCount = cadence.suggestedSegments.length;
+          t3Sidecar += '<details class="gen-segments-expand">';
+          t3Sidecar += '<summary><span class="gen-segments-summary-text">Suggested segments</span> <span class="gen-segments-count">' + segCount + '</span></summary>';
           t3Sidecar += '<div class="gen-sidecar-segments">';
           cadence.suggestedSegments.forEach(function (seg) {
-            t3Sidecar += '<span class="gen-sidecar-seg">' + escapeHtml(seg) + '</span>';
+            t3Sidecar += '<span class="gen-sidecar-seg"><span class="gen-seg-name">' + escapeHtml(seg) + '</span><button class="copy-btn seg-inline-copy" type="button" data-copy="' + escapeHtml(seg) + '" aria-label="Copy ' + escapeHtml(seg) + '">Copy</button></span>';
           });
           t3Sidecar += '</div>';
+          if (cadence.segmentNote) {
+            t3Sidecar += '<div class="gen-sidecar-note">' + escapeHtml(cadence.segmentNote) + '</div>';
+          }
+
+          // Seedlist for this cadence (drawn from Section 08 seedlists data)
+          var seedlist = getSeedlistForCadence(cadenceKey);
+          if (seedlist) {
+            t3Sidecar += '<div class="gen-segments-section-label">Seedlist (always include)</div>';
+            t3Sidecar += '<div class="gen-sidecar-segments">';
+            t3Sidecar += '<span class="gen-sidecar-seg gen-seg-seedlist"><span class="gen-seg-name">' + escapeHtml(seedlist) + '</span><button class="copy-btn seg-inline-copy" type="button" data-copy="' + escapeHtml(seedlist) + '" aria-label="Copy ' + escapeHtml(seedlist) + '">Copy</button></span>';
+            t3Sidecar += '</div>';
+          }
+
+          // Standard exclusions
+          var exclusions = getExclusionsForCadence(cadenceKey);
+          if (exclusions.length) {
+            t3Sidecar += '<div class="gen-segments-section-label">Standard exclusions</div>';
+            t3Sidecar += '<div class="gen-sidecar-segments">';
+            exclusions.forEach(function (ex) {
+              t3Sidecar += '<span class="gen-sidecar-seg gen-seg-exclusion"><span class="gen-seg-name">' + escapeHtml(ex.name) + '</span>' + (ex.note ? '<span class="gen-seg-exclusion-note">' + escapeHtml(ex.note) + '</span>' : '') + '<button class="copy-btn seg-inline-copy" type="button" data-copy="' + escapeHtml(ex.name) + '" aria-label="Copy ' + escapeHtml(ex.name) + '">Copy</button></span>';
+            });
+            t3Sidecar += '</div>';
+          }
+
+          t3Sidecar += '<div class="gen-segments-help">See <strong>Section 08 \u2014 Audience Segments</strong> in the main guide for full segment definitions, audience counts, and exclusion logic.</div>';
+          t3Sidecar += '</details>';
         }
-        if (cadence.segmentNote) {
-          t3Sidecar += '<div class="gen-sidecar-note">' + escapeHtml(cadence.segmentNote) + '</div>';
-        }
-        t3Sidecar += sidecarTip('<strong>Segments approval:</strong> Always proposed to <strong>Gerber</strong>. He confirms before AW Builder applies them in Bluecore.');
+        t3Sidecar += sidecarTip('<strong>Segments approval:</strong> Always proposed to <strong>Gerber Rivera</strong>. He confirms before AW Builder applies them in Bluecore.');
+        t3Sidecar += sidecarTroubleshoot([
+          {
+            issue: 'ADR designer is at capacity (1\u20132/day maxed)',
+            fix: 'Send the request to <strong>AW</strong> instead. If there\u2019s an existing global asset, provide the PSD so AW can match the design system.'
+          },
+          {
+            issue: 'AW designer is also at capacity (3\u20134/week, 1/day maxed)',
+            fix: 'If both <strong>ADR</strong> and <strong>AW</strong> are at full capacity, push the design due date back \u2014 ensuring the new date still fits within the overall send timeline.'
+          },
+          {
+            issue: 'Design comes back incorrect',
+            fix: 'If it\u2019s a <strong>major issue</strong>, ask the designer to revise it. If it\u2019s <strong>minor</strong> and you can fix it yourself, do so for faster turnaround. Always request the <strong>PSD</strong> for flexibility.'
+          },
+          {
+            issue: 'Email audience is lower than expected',
+            fix: 'Check frequency cap, suppression logic, segment exclusions, engagement filters, and whether Bluecore classified the campaign as lower value. Or submit a ticket with <strong>Bluecore Support</strong>.'
+          },
+          {
+            issue: 'Frequency cap blocks the send',
+            fix: 'For <strong>Promo emails</strong>, override frequency capping when scheduling.'
+          }
+        ]);
 
         groups.push({
           offset: 3,
           actions: [
             'Final design due \u2014 review and QA',
-            'Propose audience segments to Gerber for approval'
+            'Propose audience segments to Gerber Rivera for approval'
           ],
           sidecar: t3Sidecar
         });
@@ -5911,6 +6874,20 @@
         var routePeople = parseStakeholders(routeStakeholders);
         t2Sidecar += renderContactPills(routePeople);
         t2Sidecar += sidecarTip('<strong>QA gate:</strong> 100KB max email size, no Gmail clipping, all UTMs verified, pricing confirmed via Time Machine.');
+        t2Sidecar += sidecarTroubleshoot([
+          {
+            issue: 'Email exceeds 100KB / clips in Gmail',
+            fix: 'For <strong>newsletters, events, store newsletters, and other long-form emails</strong>: remove the PFU. For other email types: switch to the shorter Value Proposition footer, or remove it entirely if needed.'
+          },
+          {
+            issue: 'Dynamic product block not displaying correctly',
+            fix: 'Ensure product rules are properly set up. Reach out to <strong>Bluecore support</strong> if needed.'
+          },
+          {
+            issue: 'Link is not working',
+            fix: 'Verify that the link matches what was provided. Confirm with <strong>Heather</strong> for the correct URL if needed.'
+          }
+        ]);
 
         groups.push({ offset: 2, actions: [
           'AW Builder builds email in Bluecore',
@@ -5931,7 +6908,7 @@
         var hasHeather = approverPeople.some(function (p) { return /heather/i.test(p.name); });
         if (!hasHeather) approverPeople.push({ name: 'Heather Nichols', role: 'Link approval' });
         else approverPeople = approverPeople.map(function (p) { return /heather/i.test(p.name) ? { name: p.name, role: 'Link approval' } : p; });
-        approverPeople.push({ name: 'Gerber', role: 'Segments approval' });
+        approverPeople.push({ name: 'Gerber Rivera', role: 'Segments approval' });
         t1Sidecar += renderContactPills(approverPeople);
 
         groups.push({
@@ -5947,17 +6924,13 @@
 
         // T-0: Send + Post-send
         var t0Sidecar = sidecarHeading('Reporting');
-        t0Sidecar += '<div class="gen-sidecar-note">Use <strong>Looker</strong> dashboards (Year-over-Year Sales, Last Week Summary by Channel) to verify clicks, revenue, and engagement post-send.</div>';
-        // Surface "other" cadence-level contacts here if any non-merchant ones exist
-        if (cadence.contacts && cadence.contacts.length) {
-          var other = cadence.contacts.filter(function (c) {
-            return !c.role || !/merchant|category/i.test(c.role);
-          });
-          if (other.length) {
-            t0Sidecar += sidecarHeading('Other contacts for this cadence');
-            t0Sidecar += renderContactPills(other);
+        t0Sidecar += '<div class="gen-sidecar-note">Use <strong>Looker</strong> dashboards (Year-over-Year Sales, Last Week Summary by Channel) to verify clicks and revenue. Check on <strong>Bluecore</strong> for actual delivered numbers and engagement post-send. Confirm that it went out to the expected audience.</div>';
+        t0Sidecar += sidecarTroubleshoot([
+          {
+            issue: 'Product feed is broken / dynamic block is empty on send day',
+            fix: 'Notify <strong>Gerber Rivera</strong> immediately. Contact <strong>Bluecore chat support</strong> and submit a support ticket right away.'
           }
-        }
+        ]);
 
         groups.push({ offset: 0, actions: [
           'Send confirmation \u2014 verify campaign sent at scheduled time',
@@ -5991,6 +6964,84 @@
         });
       }
 
+      // Glossary terms (drawn from Section 13). Wrap occurrences in HTML strings
+      // with <abbr title="..."> so users can hover for the expansion.
+      var GLOSSARY = {
+        'ADR': 'Adorama Design Team \u2014 internal design team for ADR-routed campaigns',
+        'AW': 'Alchemy Workx \u2014 external agency for email build, design, copywriting, QA, and scheduling',
+        'PB': 'Private Brands \u2014 Adorama-owned brands like Flashpoint, Godox, Glow, Clar',
+        'EDU': 'Education / Classroom Connect \u2014 institutional education segment',
+        'NPA': 'New Product Announcement \u2014 emails sent when a brand launches a new product',
+        'PLCC': 'Private Label Credit Card \u2014 Adorama\u2019s store credit card; financing, statement credit, applications',
+        'VIP': 'Loyalty / VIP Rewards \u2014 high-value customer program emails',
+        'BAU': 'Business as Usual \u2014 recurring/regular campaign type',
+        'BFCM': 'Black Friday / Cyber Monday \u2014 the seasonal Q4 segment set',
+        'SL': 'Subject Line',
+        'PH': 'Preheader \u2014 the preview text shown after the subject line',
+        'CTA': 'Call to Action \u2014 the button or link that drives the click',
+        'SKU': 'Stock Keeping Unit \u2014 a product\u2019s unique identifier',
+        'SKUs': 'Stock Keeping Units',
+        'UTM': 'Urchin Tracking Module \u2014 URL parameters used to track campaign performance',
+        'LP': 'Landing Page \u2014 the destination page when someone clicks through',
+        'GLP': 'Generic Landing Page \u2014 the evergreen Adorama landing page reused across campaigns',
+        'MTD': 'Month-to-Date',
+        'YTD': 'Year-to-Date',
+        'PCLV': 'Predicted Customer Lifetime Value \u2014 Bluecore\u2019s estimate of total customer worth',
+        'Bluecore': 'Email platform for building, QA, and scheduling',
+        'ClickUp': 'Task management tool used for AW Builder/Designer requests',
+        'Jira': 'Task management tool used for ADR design requests',
+        'Attentive': 'SMS marketing platform',
+        'Looker': 'Data analytics platform for performance reporting',
+        'Time Machine': 'Internal tool to confirm live product price/availability for a scheduled time'
+      };
+
+      // Build regex once: matches whole-word glossary terms outside HTML tags/attributes.
+      // We process text-only segments: split the string on tags and only operate on text.
+      var GLOSSARY_KEYS = Object.keys(GLOSSARY).sort(function (a, b) { return b.length - a.length; });
+      var GLOSSARY_REGEX = new RegExp('\\b(' + GLOSSARY_KEYS.map(function (k) {
+        return k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      }).join('|') + ')\\b', 'g');
+
+      function glossarize(html) {
+        if (!html) return html;
+        // Skip if the input has no glossary terms at all
+        if (!GLOSSARY_REGEX.test(html)) return html;
+        GLOSSARY_REGEX.lastIndex = 0;
+        // Tokenize: split into HTML tags and text segments
+        var out = '';
+        var i = 0;
+        while (i < html.length) {
+          if (html[i] === '<') {
+            // Skip an entire tag including attributes
+            var tagEnd = html.indexOf('>', i);
+            if (tagEnd === -1) { out += html.substring(i); break; }
+            // Special case: skip contents of <abbr> entirely (don't double-wrap)
+            if (html.substring(i, i + 5) === '<abbr') {
+              var abbrEnd = html.indexOf('</abbr>', tagEnd);
+              if (abbrEnd === -1) { out += html.substring(i); break; }
+              out += html.substring(i, abbrEnd + 7);
+              i = abbrEnd + 7;
+              continue;
+            }
+            out += html.substring(i, tagEnd + 1);
+            i = tagEnd + 1;
+          } else {
+            // Read text up to next '<'
+            var textEnd = html.indexOf('<', i);
+            if (textEnd === -1) textEnd = html.length;
+            var text = html.substring(i, textEnd);
+            // Replace glossary terms in plain text
+            text = text.replace(GLOSSARY_REGEX, function (match) {
+              var def = GLOSSARY[match];
+              return '<abbr class="gen-gloss" title="' + def.replace(/"/g, '&quot;') + '">' + match + '</abbr>';
+            });
+            out += text;
+            i = textEnd;
+          }
+        }
+        return out;
+      }
+
       function addDays(date, days) {
         var d = new Date(date.getTime());
         d.setDate(d.getDate() + days);
@@ -6014,6 +7065,134 @@
         var today = new Date();
         today.setHours(0, 0, 0, 0);
         return date < today;
+      }
+
+      function isSameDay(a, b) {
+        return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
+      }
+
+      // Build inline mini-calendar showing milestones
+      // Map milestone offset → icon (visual cue per milestone type)
+      function getMilestoneIcon(m) {
+        if (m.sendDay) return '\ud83d\ude80'; // 🚀
+        var o = m.offset;
+        if (o >= 10) return '\ud83d\udce6'; // 📦 SKUs request
+        if (o === 7) return '\ud83d\udcdd'; // 📝 Brief / tickets
+        if (o === 5) return '\u23f0'; // ⏰ SKU due
+        if (o === 3) return '\ud83c\udfa8'; // 🎨 Design + segments
+        if (o === 2) return '\ud83d\udee0\ufe0f'; // 🛠 Build + route
+        if (o === 1) return '\ud83d\udcc5'; // 📅 Schedule
+        return '\u2022'; // bullet for unknown
+      }
+
+      function renderCalendar(milestones, sendDate) {
+        if (!milestones || milestones.length === 0) return '';
+
+        // Find earliest milestone date
+        var dates = milestones.map(function (m) { return m.date; }).slice();
+        dates.push(sendDate);
+        dates.sort(function (a, b) { return a - b; });
+        var earliest = dates[0];
+
+        // Calendar should span from the Sunday-of-earliest-week through Saturday-of-send-week
+        var gridStart = new Date(earliest.getFullYear(), earliest.getMonth(), earliest.getDate());
+        gridStart.setDate(gridStart.getDate() - gridStart.getDay()); // back to Sunday
+
+        var gridEnd = new Date(sendDate.getFullYear(), sendDate.getMonth(), sendDate.getDate());
+        gridEnd.setDate(gridEnd.getDate() + (6 - gridEnd.getDay())); // forward to Saturday
+
+        // Build a map: dateKey -> [milestones for that date]
+        var byDate = {};
+        milestones.forEach(function (m) {
+          var key = m.date.getFullYear() + '-' + m.date.getMonth() + '-' + m.date.getDate();
+          if (!byDate[key]) byDate[key] = [];
+          byDate[key].push(m);
+        });
+
+        var today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        var html = '<div class="gen-calendar">';
+        html += '<div class="gen-calendar-head">';
+        html += '<div class="gen-calendar-title"><span class="gen-cal-title-icon">\ud83d\uddd3\ufe0f</span> Timeline calendar</div>';
+        html += '<div class="gen-calendar-legend">';
+        html += '<span class="gen-calendar-legend-item"><span class="gen-calendar-legend-dot" style="background: var(--teal);"></span>Milestone</span>';
+        html += '<span class="gen-calendar-legend-item"><span class="gen-calendar-legend-dot" style="background: var(--highlight);"></span>Past due</span>';
+        html += '<span class="gen-calendar-legend-item"><span class="gen-calendar-legend-dot" style="background: var(--adorama-blue);"></span>Send day</span>';
+        html += '</div>';
+        html += '</div>';
+
+        html += '<div class="gen-cal-grid">';
+        // Weekday headers
+        var dows = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        dows.forEach(function (d) { html += '<div class="gen-cal-dow">' + d + '</div>'; });
+
+        // Build cells
+        var monthName = function (m) { return ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][m]; };
+        var cur = new Date(gridStart);
+        var cellIndex = 0;
+        while (cur <= gridEnd) {
+          var key = cur.getFullYear() + '-' + cur.getMonth() + '-' + cur.getDate();
+          var isWeekend = cur.getDay() === 0 || cur.getDay() === 6;
+          var isToday = isSameDay(cur, today);
+          var isSend = isSameDay(cur, sendDate);
+          var dayMilestones = byDate[key] || [];
+
+          var classes = ['gen-cal-day'];
+          if (isWeekend) classes.push('is-weekend');
+          if (isToday) classes.push('is-today');
+          if (isSend) classes.push('is-send');
+          if (dayMilestones.length > 0) classes.push('has-milestone');
+
+          // First day of month: show abbreviated month name
+          var dayLabel = cur.getDate() === 1 ? (monthName(cur.getMonth()) + ' 1') : String(cur.getDate());
+
+          // Tooltip: include full date + milestone summary
+          var tipParts = [formatDate(cur)];
+          if (dayMilestones.length) {
+            var labels = dayMilestones.map(function (m) { return m.sendDay ? 'Send day' : 'T-' + m.offset; });
+            tipParts.push(labels.join(', '));
+          }
+          if (isToday) tipParts.push('Today');
+          var tip = tipParts.join(' \u2014 ');
+
+          // Stagger the entrance animation
+          var delay = (cellIndex * 12);
+          html += '<div class="' + classes.join(' ') + '" title="' + escapeHtml(tip) + '" style="animation-delay: ' + delay + 'ms;">';
+
+          // Today label overlay
+          if (isToday) {
+            html += '<div class="gen-cal-today-pill">TODAY</div>';
+          }
+
+          html += '<div class="gen-cal-daynum">' + dayLabel + '</div>';
+
+          if (dayMilestones.length > 0) {
+            html += '<div class="gen-cal-dots">';
+            dayMilestones.forEach(function (m) {
+              var dotClasses = ['gen-cal-dot'];
+              if (m.pastDue) dotClasses.push('past-due');
+              if (m.sendDay) dotClasses.push('is-send-dot');
+              var label = m.sendDay ? 'SEND' : 'T-' + m.offset;
+              var icon = getMilestoneIcon(m);
+              html += '<span class="' + dotClasses.join(' ') + '"><span class="gen-cal-dot-icon" aria-hidden="true">' + icon + '</span><span class="gen-cal-dot-label">' + label + '</span></span>';
+            });
+            html += '</div>';
+          }
+
+          // Send day flourish
+          if (isSend) {
+            html += '<div class="gen-cal-send-shine" aria-hidden="true"></div>';
+          }
+
+          html += '</div>';
+          cur.setDate(cur.getDate() + 1);
+          cellIndex++;
+        }
+        html += '</div>';
+        html += '</div>';
+
+        return html;
       }
 
       // ----- Element refs -----
@@ -6069,6 +7248,33 @@
       });
 
       // ----- Cadence change updates hints (Campaign Type stays enabled in all cases) -----
+      // Per-cadence smart defaults for auto-fill when cadence is selected
+      // Only fills empty fields — never overwrites user input.
+      var CADENCE_DEFAULTS = {
+        'promo-rebates':   { category: 'photo',           campaignType: 'global',          name: 'Photo Rebates' },
+        'promo-mystery':   { category: 'all-categories',  campaignType: 'email-exclusive', name: 'Mystery Sale' },
+        'promo-weekend':   { category: '',                campaignType: 'global',          name: 'Weekend Deals' },
+        'promo-flash':     { category: 'all-categories',  campaignType: 'email-exclusive', name: 'Flash Sale' },
+        'promo-top':       { category: '',                campaignType: 'global',          name: 'Top Deals' },
+        'promo-global':    { category: 'all-categories',  campaignType: 'global',          name: 'Global Campaign' },
+        'promo-other':     { category: '',                campaignType: 'global',          name: '' },
+        'svc-openbox':     { category: '',                campaignType: 'global',          name: 'Open Box' },
+        'svc-trade':       { category: '',                campaignType: 'global',          name: 'Trade' },
+        'svc-used':        { category: '',                campaignType: 'global',          name: 'Used' },
+        'svc-edu':         { category: 'n-a',             campaignType: 'global',          name: 'EDU Classroom Connect' },
+        'svc-pb':          { category: 'private-brands',  campaignType: 'global',          name: 'Private Brands' },
+        'npa':             { category: '',                campaignType: 'global',          name: 'NPA' },
+        'npa-recap':       { category: '',                campaignType: 'global',          name: 'New Arrivals / NPA Recap' },
+        'nl-creators':     { category: 'n-a',             campaignType: 'global',          name: "Creators' Huddle" },
+        'nl-photo':        { category: 'photo',           campaignType: 'global',          name: 'Photo Newsletter' },
+        'nl-video':        { category: 'video',           campaignType: 'global',          name: 'Video Newsletter' },
+        'nl-pb':           { category: 'private-brands',  campaignType: 'global',          name: 'Private Brands Newsletter' },
+        'events':          { category: 'n-a',             campaignType: 'global',          name: 'Events' },
+        'store-nl':        { category: 'n-a',             campaignType: 'global',          name: 'Store Newsletter' },
+        'loyalty':         { category: 'n-a',             campaignType: 'global',          name: 'Loyalty / VIP' },
+        'plcc':            { category: 'n-a',             campaignType: 'global',          name: 'PLCC' }
+      };
+
       cadenceSelect.addEventListener('change', function () {
         var key = cadenceSelect.value;
         if (!key) {
@@ -6086,20 +7292,32 @@
           cadenceHint.textContent = cadence.designNote || 'Design routing depends on Format + Campaign Type.';
           campaignTypeHint.textContent = 'Global \u2192 Adorama Design \u2022 Email-Exclusive \u2192 AW Designer.';
         }
-        // Auto-suggest the recommended format if user hasn't picked one yet
-        if (cadence.recommendedFormat && !formatSelect.value) {
+
+        // Cadence-driven auto-fill: overwrite Format, Category, Campaign Type, Campaign Name
+        // to match the newly-selected cadence's defaults. Send Date is always preserved.
+        var defaults = CADENCE_DEFAULTS[key];
+        if (defaults) {
+          // Format: use cadence's recommendedFormat if available, otherwise clear
+          formatSelect.value = cadence.recommendedFormat || '';
+          // Category: use defaults if specified, otherwise clear
+          categorySelect.value = defaults.category || '';
+          // Campaign Type: defaults always provide one — fall back to 'global' if not set
+          campaignTypeSelect.value = defaults.campaignType || 'global';
+          // Campaign Name: replace with cadence-specific default (empty for cadences with no clean default like 'Other Promo')
+          nameInput.value = defaults.name || '';
+        } else if (cadence.recommendedFormat) {
+          // Fallback: cadence not in defaults map — just set format if provided
           formatSelect.value = cadence.recommendedFormat;
         }
-        // Smart placeholder for Campaign Name — strip prefixes for cleaner suggestion
+
+        // Update placeholder for Campaign Name (visible when field is empty, e.g. 'Other Promo')
         if (nameInput) {
-          var hint = cadence.label
-            .replace(/^Promo:\s*/i, '')
-            .replace(/^Services:\s*/i, '')
-            .replace(/^Newsletter:\s*/i, 'Newsletter ')
-            .replace(/\s*\([^)]*\)$/, '');  // Drop trailing parentheticals
+          var hint = cadence.label.replace(/\s*\([^)]*\)$/, '');
           nameInput.placeholder = 'e.g., ' + hint;
         }
         updateFormatHint();
+        // Re-validate since fields were updated
+        if (typeof updateGenerateButtonState === 'function') updateGenerateButtonState();
       });
 
       // ----- Format hint reflects format + campaign type combo -----
@@ -6164,13 +7382,93 @@
         dateHint.classList.remove('suggest');
         output.classList.remove('is-shown');
         output.innerHTML = '';
+        if (typeof updateGenerateButtonState === 'function') updateGenerateButtonState();
       });
 
       // ----- Generate -----
+      // ===== Live form validation =====
+      // Determine which fields are required based on current cadence selection
+      function getRequiredFields() {
+        var fields = ['cadence', 'format', 'sendDate'];
+        var cadenceKey = cadenceSelect.value;
+        if (cadenceKey && EMAIL_CADENCES[cadenceKey]) {
+          var cadence = EMAIL_CADENCES[cadenceKey];
+          var formatKey = formatSelect.value;
+          var formatNeedsSKUs = (formatKey === 'static-products' || formatKey === 'dynamic-products');
+          var postcardEE = (formatKey === 'postcard' && campaignTypeSelect.value === 'email-exclusive');
+          var willRequireSKUs = cadence.requiresSKUs && (formatNeedsSKUs || postcardEE);
+          if (willRequireSKUs) {
+            fields.push('category');
+            fields.push('campaignName');
+          }
+        }
+        return fields;
+      }
+
+      function getMissingFields() {
+        var required = getRequiredFields();
+        var missing = [];
+        required.forEach(function (f) {
+          if (f === 'cadence' && !cadenceSelect.value) missing.push('Email Cadence');
+          else if (f === 'format' && !formatSelect.value) missing.push('Email Format');
+          else if (f === 'sendDate' && !dateInput.value) missing.push('Send Date');
+          else if (f === 'category' && !categorySelect.value) missing.push('Category');
+          else if (f === 'campaignName' && !nameInput.value.trim()) missing.push('Campaign Name');
+        });
+        return missing;
+      }
+
+      function updateGenerateButtonState() {
+        var missing = getMissingFields();
+        var btn = generateBtn;
+        if (missing.length === 0) {
+          btn.disabled = false;
+          btn.removeAttribute('aria-disabled');
+          btn.title = '';
+          // Clear hint
+          var hint = document.getElementById('genValidationHint');
+          if (hint) hint.textContent = '';
+        } else {
+          btn.disabled = true;
+          btn.setAttribute('aria-disabled', 'true');
+          btn.title = 'Missing: ' + missing.join(', ');
+          var hint = document.getElementById('genValidationHint');
+          if (hint) hint.textContent = 'Missing: ' + missing.join(', ');
+        }
+
+        // Mark each missing field with a subtle indicator
+        var fieldEls = {
+          cadence: cadenceSelect,
+          format: formatSelect,
+          sendDate: dateInput,
+          category: categorySelect,
+          campaignName: nameInput
+        };
+        Object.keys(fieldEls).forEach(function (key) {
+          var el = fieldEls[key];
+          var labelMap = { cadence: 'Email Cadence', format: 'Email Format', sendDate: 'Send Date', category: 'Category', campaignName: 'Campaign Name' };
+          var fieldLabel = labelMap[key];
+          if (missing.indexOf(fieldLabel) !== -1) {
+            el.classList.add('field-missing');
+          } else {
+            el.classList.remove('field-missing');
+          }
+        });
+      }
+
+      // Wire change listeners on every relevant field
+      [cadenceSelect, formatSelect, categorySelect, campaignTypeSelect, dateInput].forEach(function (el) {
+        el.addEventListener('change', updateGenerateButtonState);
+        el.addEventListener('input', updateGenerateButtonState);
+      });
+      nameInput.addEventListener('input', updateGenerateButtonState);
+      // Initial state
+      updateGenerateButtonState();
+
       generateBtn.addEventListener('click', function () {
-        if (!cadenceSelect.value) { alert('Please select an Email Cadence.'); cadenceSelect.focus(); return; }
-        if (!formatSelect.value) { alert('Please select an Email Format.'); formatSelect.focus(); return; }
-        if (!dateInput.value) { alert('Please select a Send Date.'); dateInput.focus(); return; }
+        if (generateBtn.disabled) return;
+        var missing = getMissingFields();
+        if (missing.length > 0) return; // safety net
         renderOutput();
       });
 
@@ -6189,7 +7487,7 @@
 
         // 4. SKU request (only if needed)
         if (requiresSKUs) {
-          nodes.push({ type: 'task', label: 'Request SKUs from merchants', sub: 'T-10 business days \u00b7 deadline T-5' });
+          nodes.push({ type: 'task', label: 'Request SKUs from merchants', sub: '10 business days before \u00b7 deadline 5 business days before' });
           nodes.push({ type: 'file', label: 'Merchant SKU Submission', sub: 'Reviewed via Time Machine' });
         }
 
@@ -6224,10 +7522,10 @@
         nodes.push({ type: 'file', label: 'Final Design', sub: 'Reviewed against the brief' });
 
         // 9. Build in Bluecore
-        nodes.push({ type: 'task', label: 'Build email in Bluecore', sub: 'AW Builder \u00b7 propose segments to Gerber' });
+        nodes.push({ type: 'task', label: 'Build email in Bluecore', sub: 'AW Builder \u00b7 propose segments to Gerber Rivera' });
 
         // 10. Audience approval
-        nodes.push({ type: 'file', label: 'Audience Approval', sub: 'Gerber signs off on segments' });
+        nodes.push({ type: 'file', label: 'Audience Approval', sub: 'Gerber Rivera signs off on segments' });
 
         // 11. Route proof
         var proofTo = cadence.routeTo || 'Marketing Ops + Site Merchandiser';
@@ -6304,7 +7602,7 @@
         // (Static/Dynamic Products). Postcard EE skips this since merchants have nothing to review.
         var requiresMerchantApproval = cadence.requiresSKUs && formatNeedsSKUs;
 
-        var milestoneGroups = buildMilestoneGroups(cadence, category, requiresSKUs, requiresMerchantApproval, campaignName, sendDate);
+        var milestoneGroups = buildMilestoneGroups(cadence, cadenceKey, category, requiresSKUs, requiresMerchantApproval, campaignName, sendDate, formatKey);
         var milestones = milestoneGroups.map(function (g) {
           var date = g.offset === 0 ? sendDate : subtractBusinessDays(sendDate, g.offset);
           return {
@@ -6329,29 +7627,50 @@
           html += '<div class="gen-warning"><strong>\u26a0\ufe0f Tight timeline.</strong> ' + pastDueCount + ' milestone' + (pastDueCount > 1 ? 's are' : ' is') + ' already past the recommended start date for a ' + escapeHtml(formatDate(sendDate)) + ' send. Plan to compress steps, escalate to AW Builder/Designer, or push the send date.</div>';
         }
 
+        // Cadence + format-specific watch-out warnings
+        var warnings = buildWarnings(cadenceKey, formatKey, requiresSKUs, postcardEmailExclusive);
+        if (warnings.length > 0) {
+          html += '<div class="gen-watchouts">';
+          html += '<div class="gen-watchouts-head"><span class="gen-watchouts-icon">\u26a0</span> Watch out for</div>';
+          html += '<ul class="gen-watchouts-list">';
+          warnings.forEach(function (w) { html += '<li>' + w + '</li>'; });
+          html += '</ul>';
+          html += '</div>';
+        }
+
+        // Inline calendar showing all milestones in context
+        html += renderCalendar(milestones, sendDate);
+
         // Summary tiles
         html += '<div class="gen-summary">';
         html += '<div class="gen-summary-cell"><div class="gen-summary-label">Campaign</div><div class="gen-summary-value">' + escapeHtml(campaignName || cadence.label + ' \u2014 ' + format.label) + '</div></div>';
         html += '<div class="gen-summary-cell"><div class="gen-summary-label">Send Date</div><div class="gen-summary-value">' + escapeHtml(formatDate(sendDate)) + '</div></div>';
         html += '</div>';
 
-        // Timeline rendered as a 2-column workflow: left = process steps, right = sidecar specifics
+        // Timeline rendered as a 3-column flow: marker rail | process step | sidecar
         html += '<div class="gen-section gen-workflow-section"><h4>Timeline</h4>';
         html += '<div class="gen-tl-grid">';
         milestones.forEach(function (m, idx) {
-          var classes = ['gen-tl-pill'];
-          if (m.sendDay) classes.push('send-day');
-          if (m.pastDue) classes.push('past-due');
+          var pillClasses = ['gen-tl-pill'];
+          if (m.sendDay) pillClasses.push('send-day');
+          if (m.pastDue) pillClasses.push('past-due');
 
-          var offsetLabel = m.sendDay ? 'Send day' : 'T-' + m.offset + ' business day' + (m.offset === 1 ? '' : 's');
+          var stepClasses = ['gen-tl-step'];
+          if (m.sendDay) stepClasses.push('is-send');
+          if (m.pastDue) stepClasses.push('is-past-due');
 
-          // Row container: 2 columns on desktop, stacked on mobile
-          html += '<div class="gen-tl-row">';
-          // ---- Left column: process pill ----
-          html += '<div class="' + classes.join(' ') + '">';
+          var offsetLabel = m.sendDay ? '' : (m.offset + ' business day' + (m.offset === 1 ? '' : 's') + ' before');
+          var markerLabel = m.sendDay ? 'SEND' : String(idx + 1);
+
+          // Step container
+          html += '<div class="' + stepClasses.join(' ') + '">';
+          // ---- Marker (numbered disc on the rail) ----
+          html += '<div class="gen-tl-marker" aria-hidden="true">' + markerLabel + '</div>';
+          // ---- Process pill (middle column) ----
+          html += '<div class="' + pillClasses.join(' ') + '">';
           html += '<div class="gen-tl-head">';
           html += '<div class="gen-tl-date">' + escapeHtml(formatDate(m.date)) + '</div>';
-          html += '<div class="gen-tl-offset">' + offsetLabel + '</div>';
+          if (offsetLabel) html += '<div class="gen-tl-offset">' + offsetLabel + '</div>';
           if (m.pastDue) html += '<span class="gen-tl-flag past">Past due</span>';
           if (m.sendDay) html += '<span class="gen-tl-flag send">Send</span>';
           html += '</div>';
@@ -6370,20 +7689,11 @@
             html += '<div class="gen-tl-warning"><strong>Note:</strong> ' + escapeHtml(m.warning) + '</div>';
           }
           html += '</div>';
-          // ---- Right column: sidecar ----
+          // ---- Sidecar (right column) ----
           html += '<div class="gen-tl-sidecar">';
           if (m.sidecar) html += m.sidecar;
           html += '</div>';
-          html += '</div>'; // close .gen-tl-row
-
-          // Arrow row between milestones
-          if (idx < milestones.length - 1) {
-            html += '<div class="gen-tl-arrow-row" aria-hidden="true">' +
-              '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">' +
-              '<path d="M12 5v14M5 12l7 7 7-7"></path>' +
-              '</svg>' +
-              '</div>';
-          }
+          html += '</div>'; // close .gen-tl-step
         });
         html += '</div></div>';
 
@@ -6438,12 +7748,12 @@
           });
         }
 
-        // Build Approval bucket: cadence.approvers + always-on Heather (links) and Gerber (segments)
+        // Build Approval bucket: cadence.approvers + always-on Heather (links) and Gerber Rivera (segments)
         var approvalBucket = parseNamesString(cadence.approvers, 'Approver').filter(function (p) {
           return p.name !== 'Heather Nichols';
         });
         approvalBucket.push({ name: 'Heather Nichols', role: 'Link approval' });
-        approvalBucket.push({ name: 'Gerber', role: 'Segment approval' });
+        approvalBucket.push({ name: 'Gerber Rivera', role: 'Segment approval' });
 
         // Build Other bucket: people mentioned in notes + cadence non-merchant contacts
         var otherBucket = extractNamesFromNotes(cadence.notes);
@@ -6459,7 +7769,7 @@
         html += '<button id="genCopyBtn" class="btn-secondary" type="button">\ud83d\udccb Copy Full Process to Clipboard</button>';
         html += '</div>';
 
-        output.innerHTML = html;
+        output.innerHTML = glossarize(html);
         output.classList.add('is-shown');
 
         // Wire Copy Full Process
@@ -6515,7 +7825,7 @@
         lines.push('');
         lines.push('\u2501\u2501\u2501 TIMELINE \u2501\u2501\u2501');
         milestones.forEach(function (m) {
-          var label = m.sendDay ? 'Send day' : 'T-' + m.offset;
+          var label = m.sendDay ? 'Send day' : (m.offset + ' business day' + (m.offset === 1 ? '' : 's') + ' before');
           var marker = m.pastDue ? ' [PAST DUE]' : (m.sendDay ? ' [SEND]' : '');
           lines.push('');
           lines.push('\u2022 ' + formatDate(m.date) + ' (' + label + ')' + marker);
@@ -6563,7 +7873,7 @@
           });
         }
         lines.push('  \u2022 Heather Nichols (Link approval)');
-        lines.push('  \u2022 Gerber (Segment approval)');
+        lines.push('  \u2022 Gerber Rivera (Segment approval)');
 
         // Other bucket
         var otherLines = [];
